@@ -1,0 +1,108 @@
+/* The stage takes the space left on the slide; the diagram scales to fit it */
+.pipe-stage {
+  flex: 1;
+  min-height: 0;
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
+
+.pipeline {
+  --u: min(100cqw / 8.2, 100cqh / 5.45);
+
+  --pipe-img:    calc(var(--u) * 1);      /* sprite images */
+  --pipe-mod-w:  calc(var(--u) * 1.5);    /* module images (blue boxes) */
+  --pipe-mod-h:  calc(var(--u) * 1);
+  --pipe-arrow:  calc(var(--u) * 0.55);   /* arrows */
+  --pipe-gap:    calc(var(--u) * 0.15);
+  --pipe-cap:    calc(var(--u) * 0.25);   /* room for the labels under the images */
+
+  display: grid;
+  grid-template-columns:
+    var(--pipe-mod-w) var(--pipe-arrow) var(--pipe-img)
+    var(--pipe-arrow) var(--pipe-mod-w) var(--pipe-arrow) var(--pipe-mod-w);
+  /* rows 2 and 4 (the down arrows) also hold the labels of the row above */
+  grid-template-rows:
+    auto calc(var(--pipe-arrow) + var(--pipe-cap))
+    auto calc(var(--pipe-arrow) + var(--pipe-cap)) auto;
+  gap: var(--pipe-gap);
+  padding-bottom: var(--pipe-cap);        /* labels of the last row */
+  align-items: center;
+  justify-items: center;
+}
+
+/* every step shares the parent's tracks */
+.pipe-step {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: subgrid;
+  align-items: center;
+  justify-items: center;
+}
+
+/* where each step sits (columns / rows it covers) */
+.pipe-inputs  { grid-column: 1 / 6; grid-row: 1;     justify-self: start; display: flex; gap: var(--pipe-gap); align-items: center; }
+.pipe-model   { grid-column: 1;     grid-row: 2 / 4; }
+.pipe-gen     { grid-column: 2 / 4; grid-row: 3; }
+.pipe-post    { grid-column: 4 / 6; grid-row: 3; }
+.pipe-result  { grid-column: 6 / 8; grid-row: 3; }
+.pipe-metrics { grid-column: 5 / 8; grid-row: 4 / 6; }
+
+/* placing items inside a step (columns/rows counted inside the step) */
+.pipe-model   > :nth-child(1) { grid-row: 1; }               /* ↓ */
+.pipe-model   > :nth-child(2) { grid-row: 2; }               /* module */
+.pipe-metrics > .pipe-down    { grid-column: 3; grid-row: 1; }
+.pipe-metrics > .pipe-truth   { grid-column: 1; grid-row: 2; }
+.pipe-metrics > .pipe-right   { grid-column: 2; grid-row: 2; }
+.pipe-metrics > .pipe-target  { grid-column: 3; grid-row: 2; }
+
+/* ---------- pieces ---------- */
+.pipe-arrow {
+  display: block;
+  width: var(--pipe-arrow);
+  height: var(--pipe-arrow);
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.pipe-arrow.right { rotate: 90deg; }    /* arrow.png points up */
+.pipe-arrow.down  { rotate: 180deg; align-self: end; }   /* below the labels */
+
+.pipe-img {
+  display: block;
+  width: var(--pipe-img);
+  height: var(--pipe-img);
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.pipe-img.small { width: calc(var(--pipe-img) * 0.8); height: calc(var(--pipe-img) * 0.8); }
+
+/* module images (Fine-tuned, Post Processing, Metrics) */
+.pipe-module {
+  display: block;
+  width: var(--pipe-mod-w);
+  height: var(--pipe-mod-h);
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+
+.pipe-item {
+  position: relative;
+  margin: 0;
+}
+.pipe-item > figcaption {
+  font-family: "Pixelify Sans", sans-serif;
+  color: black;
+  position: absolute;
+  top: calc(100% + var(--u) * 0.05);
+  left: 50%;
+  translate: -50% 0;
+  white-space: nowrap;
+  font-size: clamp(16px, calc(var(--u) * 0.15), 25px);
+  line-height: 1.2;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Fragments: fade in without the slide-up (it would shift the grid) */
+.pipe-step.fragment { transform: none; }

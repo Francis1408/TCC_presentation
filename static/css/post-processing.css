@@ -1,0 +1,31 @@
+/* palette cubes */
+#palette {
+  display: grid;
+  grid-template-columns: repeat(4, 26px);
+  gap: 6px;
+  padding: 4px;
+}
+.cube {
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  transition: transform 0.1s;
+}
+.cube.on {
+  transform: scale(1.35);
+  outline: 3px solid #d35f00;
+  outline-offset: 1px;
+  z-index: 1;
+}
+
+.swatches { display: flex; gap: 24px; margin-top: 20px; font-size: 15px; align-items: center; }
+.swatches i {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-left: 6px;
+  vertical-align: middle;
+  border: 1px solid #b5b5ba;
+  background: #808080;
+}

@@ -1,0 +1,215 @@
+<section data-title="Avaliação" class="column">
+
+  <!-- Row 1: title -->
+  <h2 class="heading">Influência por legenda</h2>
+
+  <!-- Row 2: top left = your content · top right = charts (fills the free height) -->
+  <div class="grid-2 fill eval-top">
+
+    <div style="background-color: antiquewhite;" class="chart-switcher card" data-folder="eval_cap">
+      <button class="cs-prev" aria-label="Gráfico anterior"><img src="images/arrow-reduced.png" alt=""></button>
+
+      <div class="chart-page" data-chart="position-mix" data-type="caption" data-file="best_1x_caption.csv">
+        <h3>Distribuição por qualidade de legenda (1x)</h3>
+        <div class="chart-box"><canvas></canvas></div>
+      </div>
+
+      <div class="chart-page" data-chart="position-mix" data-type="caption" data-file="best_4x_caption.csv">
+        <h3>Distribuição por qualidade de legenda (4x)</h3>
+        <div class="chart-box"><canvas></canvas></div>
+      </div>
+
+      <button class="cs-next" aria-label="Próximo gráfico"><img src="images/arrow-reduced.png" alt=""></button>
+    </div>
+
+
+    <div class="card column">
+      <p class="accent text-large center no-margin-top">OBSERVAÇÕES</p>
+      <ul class="bullets">
+       <li class="text-large">Maior distribuição de boas legendas (good) no melhor quarto em ambas.</li>
+       <li class="text-large">Legendas ruins também se concentram na melhor metade.</li>
+      </ul>
+
+      <div class="center">
+        <img class="img img-sm rot-180 pixelated md-margin-top" src="images/arrow.png" alt="">
+      </div>
+
+      <ol>
+        <li class="text-large">Baixa influência das legendas.</li>
+        <li class="text-large">Modelo foi treinado com inconsistências.</li>
+        <li class="text-large">Modelo 'aprendeu' a não priorizar legendas.</li>
+      </ol>
+    </div>
+
+
+    <!-- OVERLAY 1 -->
+    <div class="cap-edit fragment">
+      <div class="ce-body">
+
+        <!-- 3 columns: generated image on top, its caption below -->
+        <div class="ce-grid">
+          <!-- row 1: generated images + metrics -->
+          <figure class="ce-gen">
+            <img src="images/dataset_caption/generated.png" alt="Gerado com a legenda original">
+            <figcaption>LPIPS 0.386<br>MAE 0.163</figcaption>
+          </figure>
+          <figure class="ce-gen best">
+            <img src="images/dataset_caption/corrected.png" alt="Gerado com a legenda editada">
+            <figcaption>LPIPS 0.288<br>MAE 0.122</figcaption>
+          </figure>
+          <figure class="ce-gen">
+            <img src="images/dataset_caption/no-caption.png" alt="Gerado sem legenda">
+            <figcaption>LPIPS 0.569<br>MAE 0.297</figcaption>
+          </figure>
+
+          <!-- row 2: captions -->
+          <div class="ce-text">
+            <h4>Legenda original</h4>
+            <p class="ce-caption">
+              pxchar, pixel art sprite sheet, male humanoid, pale skin,
+              dark gray suit jacket, white collar, red tie,
+              <span class="ce-removed">brown hair</span>,
+              <span class="ce-removed">green hair</span>,
+              <span class="ce-removed">teal hair</span>,
+              red eyes, brown pupils, white sclera, dark gray pants, blue accents, brown shoes
+            </p>
+          </div>
+          <div class="ce-text">
+            <h4>Legenda editada</h4>
+            <p class="ce-caption">
+              pxchar, pixel art sprite sheet, male humanoid, pale skin,
+              dark gray suit jacket, white collar, red tie,
+              <span class="ce-added">bald head</span>,
+              red eyes, brown pupils, white sclera, dark gray pants, blue accents, brown shoes
+            </p>
+          </div>
+          <div class="ce-text">
+            <h4>Sem legenda</h4>
+            <p class="ce-caption empty">(sem legenda)</p>
+          </div>
+        </div>
+
+        <!-- outside the grid: truth + sprite sheet -->
+        <div class="ce-refs">
+          <figure class="ce-ref">
+            <figcaption>Imagem prova</figcaption>
+            <img src="images/dataset_caption/truth.png" alt="Ground truth, vista de costas">
+          </figure>
+          <figure class="ce-ref">
+            <figcaption>Sprite sheet</figcaption>
+            <img src="images/dataset_caption/fullsheet.png" alt="Sprite sheet de entrada">
+          </figure>
+        </div>
+      </div>
+
+      <div class="ce-legend">
+        <span><i class="ce-removed-swatch"></i>Removido da legenda orignal</span>
+        <span><i class="ce-added-swatch"></i>Adicionado à legenda original</span>
+      </div>
+    </div>
+
+
+    <!-- OVERLAY 2 -->
+    <div class="cap-edit fragment">
+      <div class="ce-body">
+
+        <div class="ce-grid">
+          <!-- row 1: generated images + metrics -->
+          <figure class="ce-gen">
+            <img src="images/dataset_caption/generated1.png" alt="">
+            <figcaption>LPIPS 0.319<br>MAE 0.102</figcaption>
+          </figure>
+          <figure class="ce-gen best">
+            <img src="images/dataset_caption/corrected1.png" alt="">
+            <figcaption>LPIPS 0.312<br>MAE 0.105</figcaption>
+          </figure>
+          <figure class="ce-gen">
+            <img src="images/dataset_caption/no-caption1.png" alt="">
+            <figcaption>LPIPS 0.655<br>MAE 0.228</figcaption>
+          </figure>
+
+          <!-- row 2: captions -->
+          <div class="ce-text">
+            <h4>Legenda original</h4>
+            <p class="ce-caption">
+              pxchar, pixel art sprite sheet, humanoid, pale skin,
+              purple sleeveless material, gold trim, gold pauldrons,
+              gold chest plate, gold shoulder guard, gold collar,
+              <span class="ce-removed">short magenta hair</span>, 
+              <span class="ce-removed">pink trident symbol</span>,
+              green eyes, 
+              <span class="ce-removed">black pupils</span>,
+              <span class="ce-removed">white sword with gold hilt</span>
+            </p>
+          </div>
+          <div class="ce-text">
+            <h4>Legenda editada</h4>
+            <p class="ce-caption">
+              pxchar, pixel art sprite sheet, humanoid, pale skin,
+              purple sleeveless material, gold trim, gold pauldrons,
+              gold chest plate, gold shoulder guard, gold collar, 
+              <span class="ce-added">magenta hair</span>,
+              <span class="ce-added">pink hair</span>,
+              green eyes, purple robe
+            </p>
+          </div>
+          <div class="ce-text">
+            <h4>Sem legenda</h4>
+            <p class="ce-caption empty">(sem legenda)</p>
+          </div>
+        </div>
+
+        <!-- outside the grid: truth + sprite sheet -->
+        <div class="ce-refs">
+          <figure class="ce-ref">
+            <figcaption>Imagem prova</figcaption>
+            <img src="images/dataset_caption/truth1.png" alt="Ground truth, vista de costas">
+          </figure>
+          <figure class="ce-ref">
+            <figcaption>Sprite sheet</figcaption>
+            <img src="images/dataset_caption/fullsheet1.png" alt="Sprite sheet de entrada">
+          </figure>
+        </div>
+      </div>
+
+      <div class="ce-legend">
+        <span><i class="ce-removed-swatch"></i>Removido da legenda orignal</span>
+        <span><i class="ce-added-swatch"></i>Adicionado à legenda original</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Row 3: samples -->
+  <div class="eval-samples lg-margin-top card">
+    <figure>
+      <div id="truth-rgba-truth" class="image-show square"></div>
+      <figcaption>Imagem prova</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-inpainting" class="image-show square"></div>
+      <figcaption>4x Inpainting</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-lineart-nohint" class="image-show square"></div>
+      <figcaption>4x Lineart</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-lineart-hint" class="image-show square"></div>
+      <figcaption>4x Lineart (Espelhamento)</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-inpainting" class="image-show square"></div>
+      <figcaption>1x Inpainting</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-lineart-nohint" class="image-show square"></div>
+      <figcaption>1x Lineart</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-lineart-hint" class="image-show square"></div>
+      <figcaption>1x Lineart (Espelhamento)</figcaption>
+    </figure>
+  </div>
+
+</section>

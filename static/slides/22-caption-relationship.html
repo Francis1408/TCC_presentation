@@ -1,0 +1,81 @@
+<section data-title="Avaliação" class="column">
+
+  <!-- Row 1: title -->
+  <h2 class="heading">Influência por legenda</h2>
+
+  <!-- Row 2: top left = your content · top right = charts (fills the free height) -->
+  <div class="grid-2 fill eval-top">
+
+    <div style="background-color: antiquewhite;" class="chart-switcher card" data-folder="caption_qual">
+      
+      <div class="chart-page" data-chart="caption-quality" data-file="caption_quality.csv">
+        <h3>Qualidade das legendas</h3>
+        <div class="chart-box"><canvas></canvas></div>
+      </div>
+
+    </div>
+
+    <div class="card column">
+      
+      <p class="accent text-large center no-margin-top no-margin-bottom">DESCRIÇÃO</p>
+      <ul class="bullets">
+        <li class="text-large"><u>Good</u>
+          <ul>
+            <li class="text-large">Precisa ou quase precisa</li>
+            <li class="text-large">Não é prolixo e repetitivo</li>
+            <li class="text-large">Identifica pequenos detalhes</li>
+          </ul>
+        </li>
+
+        <li class="text-large"><u>Regular</u>
+          <ul>
+            <li class="text-large">Parcialmente precisa</li>
+            <li class="text-large">Pode conter partes verbosas e repetitivas</li>
+          </ul>
+        </li>
+
+        <li class="text-large"><u>Bad</u>
+          <ul>
+            <li class="text-large">Na sua maioria imprecisa</li>
+            <li class="text-large">Altamente prolixo e repetitivo</li>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- Row 3: samples -->
+  <div class="eval-samples lg-margin-top card">
+    <figure>
+      <div id="truth-rgba-truth" class="image-show square"></div>
+      <figcaption>Imagem prova</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-inpainting" class="image-show square"></div>
+      <figcaption>4x Inpainting</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-lineart-nohint" class="image-show square"></div>
+      <figcaption>4x Lineart</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-lineart-hint" class="image-show square"></div>
+      <figcaption>4x Lineart (Espelhamento)</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-inpainting" class="image-show square"></div>
+      <figcaption>1x Inpainting</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-lineart-nohint" class="image-show square"></div>
+      <figcaption>1x Lineart</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-lineart-hint" class="image-show square"></div>
+      <figcaption>1x Lineart (Espelhamento)</figcaption>
+    </figure>
+  </div>
+
+</section>

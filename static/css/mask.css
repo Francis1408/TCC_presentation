@@ -1,0 +1,87 @@
+mask-snapped/* ---------- MASK DISPLAY ----------
+ * Panel size: style="--mask-size: 220px" on .mask-display
+ */
+.mask-display {
+  --mask-size: clamp(200px, 24vw, 400px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* the panels in a row */
+.mask-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(12px, 1.6vw, 28px);
+}
+
+.mask-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.mask-panel > h3 {
+  margin: 0;
+  font-size: clamp(15px, 1.3vw, 22px);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.mask-panel canvas {
+  display: block;
+  width: var(--mask-size);
+  height: auto;
+  aspect-ratio: 1;
+  image-rendering: pixelated;
+  border: 2px solid #9a9a9a;
+  transition: outline-color 150ms steps(2);
+  outline: 4px solid transparent;
+  outline-offset: 3px;
+}
+.mask-note {
+  min-height: 1.4em;
+  font-size: clamp(13px, 1vw, 16px);
+  color: var(--text);
+}
+
+/* hover targets */
+#mask-snapped, #mask-truth { cursor: crosshair; }
+
+/* ring around the panels of the highlighted mask */
+.mask-display[data-highlight="output"] #mask-snapped { outline-color: #0072b2; }
+.mask-display[data-highlight="truth"]  #mask-truth   { outline-color: #d55e00; }
+.mask-display[data-highlight]:not([data-highlight=""]) #mask-compare { outline-color: var(--text); }
+
+/* legend */
+.mask-legend {
+  display: grid;
+  font-family: "Pixelify Sans", sans-serif;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px 40px;
+  font-size: clamp(25px, 1.5vw, 25px);
+  font-weight: 700;
+  margin: 0px 30%;
+  color: #e0ae09;
+   -webkit-text-stroke: 0.7px black;
+}
+.mask-legend [data-cat] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 2px 6px;
+  cursor: default;
+}
+.mask-legend [data-cat]:hover { background: var(--surface-2); }
+.mask-swatch {
+  flex: 0 0 auto;
+  width: 50px;
+  height: 24px;
+}
+.mask-swatch.both      { background: #bdbdbd; }
+.mask-swatch.missing   { background: #d55e00; }
+.mask-swatch.extra     { background: #0072b2; }
+.mask-swatch.crop      { border: 2px dashed var(--text); }

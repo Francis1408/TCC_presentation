@@ -1,0 +1,78 @@
+<section data-title="Pipeline" class="column">
+  <h2 class="heading">Pipeline de teste</h2>
+
+  <!-- The stage takes the space left on the slide; the diagram scales to fit it -->
+  <div class="pipe-stage">
+    <!-- Each .pipe-step is ONE fragment: press → to reveal the next one.
+         Each image + its label is ONE <figure class="pipe-item">. -->
+    <div class="pipeline">
+
+      <!-- 1. Inputs: inpainting sheet, lineart, caption -->
+      <div class="pipe-step pipe-inputs fragment">
+        <figure class="pipe-item">
+          <img class="pipe-img" src="images/dataset_testing/inpaint_front.png" alt="Sprite sheet para inpainting">
+          <figcaption>Inpainting</figcaption>
+        </figure>
+        <figure class="pipe-item">
+          <img class="pipe-img" src="images/dataset_testing/lineart_hint_front.png" alt="Lineart">
+          <figcaption>Lineart</figcaption>
+        </figure>
+        <figure class="pipe-item">
+          <img class="pipe-img small" src="images/text.png" alt="Legenda (.txt)">
+          <figcaption>Legenda</figcaption>
+        </figure>
+      </div>
+
+      <!-- 2. Fine-tuned model -->
+      <div class="pipe-step pipe-model fragment">
+        <img class="pipe-arrow down" src="images/arrow.png" alt="">
+        <figure class="pipe-item">
+          <img class="pipe-module" src="images/Finetuned-module.png" alt="Fine-tuned Architecture">
+          <figcaption>SD v1-5 + ControlNet + LoRA</figcaption>
+        </figure>
+      </div>
+
+      <!-- 3. Generated sheet -->
+      <div class="pipe-step pipe-gen fragment">
+        <img class="pipe-arrow right" src="images/arrow.png" alt="">
+        <figure class="pipe-item">
+          <img class="pipe-img" src="images/dataset_testing/generated.png" alt="Sprite sheet gerada">
+          <figcaption>Sprite sheet gerada</figcaption>
+        </figure>
+      </div>
+
+      <!-- 4. Post-processing -->
+      <div class="pipe-step pipe-post fragment">
+        <img class="pipe-arrow right" src="images/arrow.png" alt="">
+        <figure class="pipe-item">
+          <img class="pipe-module" src="images/postprocessing-module.png" alt="Post Processing">
+          <figcaption>Downscaling + Snap + Remoção de fundo</figcaption>
+        </figure>
+      </div>
+
+      <!-- 5. Result -->
+      <div class="pipe-step pipe-result fragment">
+        <img class="pipe-arrow right" src="images/arrow.png" alt="">
+        <figure class="pipe-item">
+          <img class="pipe-img" src="images/dataset_testing/post_processed.png" alt="Sprite final">
+          <figcaption>Pose gerada</figcaption>
+        </figure>
+      </div>
+
+      <!-- 6. Truth → Metrics (and result ↓ Metrics) -->
+      <div class="pipe-step pipe-metrics fragment">
+        <img class="pipe-arrow down pipe-down" src="images/arrow.png" alt="">
+        <figure class="pipe-item pipe-truth">
+          <img class="pipe-img" src="images/dataset_testing/truth.png" alt="Ground truth">
+          <figcaption>Imagem prova</figcaption>
+        </figure>
+        <img class="pipe-arrow right pipe-right" src="images/arrow.png" alt="">
+        <figure class="pipe-item pipe-target">
+          <img class="pipe-module" src="images/metrics.png" alt="Metrics">
+          <figcaption>LPIPS e MAE</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>

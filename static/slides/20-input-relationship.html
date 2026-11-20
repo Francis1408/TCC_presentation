@@ -1,0 +1,175 @@
+<section data-title="Avaliação" class="column">
+
+  <!-- Row 1: title -->
+  <h2 class="heading">Comparação por configuração de input</h2>
+
+  <!-- Row 2: two columns side by side · overlay-host: the overlay below covers this row -->
+  <div class="cols overlay-host">
+
+    <!-- Column B -->
+     <div class="card" style="background-color: antiquewhite;">
+      <figure class="table-figure" style="--table-font: clamp(25px, 1.5vw, 25px)">
+        <figcaption class="text-extra-large">Tabela 9 – Variação dos resultados entre as escalas 1x e 4x</figcaption>
+        <table class="table-academic">
+          <thead>
+            <tr>
+              <th rowspan="2">Configuração</th>
+              <th class="group" colspan="3">LPIPS</th>
+              <th class="group" colspan="3">MAE</th>
+            </tr>
+            <tr>
+              <th class="num">1x</th>
+              <th class="num">4x</th>
+              <th class="num">Δ (%)</th>
+              <th class="num">1x</th>
+              <th class="num">4x</th>
+              <th class="num">Δ (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Inpainting</td>
+              <td class="num">0.52767</td><td class="num">0.33470</td><td class="num"><mark class="highlighted">−36.57</mark></td>
+              <td class="num">0.22740</td><td class="num">0.15140</td><td class="num">−33.42</td>
+            </tr>
+            <tr>
+              <td>Inpainting, lineart</td>
+              <td class="num">0.52052</td><td class="num">0.34500</td><td class="num">−33.72</td>
+              <td class="num">0.24463</td><td class="num">0.16069</td><td class="num"><mark class="highlighted">−34.31</mark></td>
+            </tr>
+            <tr>
+              <td>Inpainting, lineart (espelhamento)</td>
+              <td class="num">0.54582</td><td class="num">0.36331</td><td class="num">−33.44</td>
+              <td class="num">0.24252</td><td class="num">0.17325</td><td class="num">−28.56</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="table-source" style="font-size: 20px;">
+          Fonte: Do autor (2026).
+        </p>
+      </figure>
+    </div>
+
+    <!-- Column A -->
+    <div class="card column">
+      <p class="accent text-large center no-margin-top no-margin-bottom">OBSERVAÇÕES - ESCALAS</p>
+      <ul class="bullets">
+        <li class="text-large">A escala 4x obteve melhor resultado em todas as abordagens comparado ao 1x</li>
+      </ul>
+
+      <div class="center">
+        <img class="img img-sm rot-180 pixelated md-margin-top" src="images/arrow.png" alt="">
+      </div>
+
+      <ol>
+        <li class="text-large"><mark class="highlighted">SD v1-5 VAE: </mark>Compressão de cada bloco de pixels 8 x 8 em uma única célula latente</li>
+        <li class="text-large">Alta perda de informação</li>
+      </ol>
+
+    </div>
+
+
+    <!-- OVERLAY (fragment): press → to cover the table and the text, ← to remove it -->
+    <div class="overlay plain fragment">
+      <div class="cols">
+        <figure class="table-figure card" style="--table-font: clamp(25px, 1.5vw, 25px); background-color: antiquewhite;">
+          <figcaption class="text-large">Tabela 10 – Variação dos resultados entre configurações de input</figcaption>
+          <table class="table-academic">
+            <thead>
+              <tr>
+                <th rowspan="2">Configuração</th>
+                <th class="group" colspan="2">1x</th>
+                <th class="group" colspan="2">4x</th>
+              </tr>
+              <tr>
+                <th class="num">LPIPS</th>
+                <th class="num">MAE</th>
+                <th class="num">LPIPS</th>
+                <th class="num">MAE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Inpainting <span class="delta">(referência)</span></td>
+                <td class="num">0.52767</td>
+                <td class="num"><mark class="highlighted">0.22740</mark></td>
+                <td class="num"><mark class="highlighted">0.33470</mark></td>
+                <td class="num"><mark class="highlighted">0.15140</mark></td>
+              </tr>
+              <tr>
+                <td>Inpainting, lineart</td>
+                <td class="num"><mark class="highlighted">0.52052</mark><span class="delta better">−1.36%</span></td>
+                <td class="num">0.24463<span class="delta worse">+7.58%</span></td>
+                <td class="num">0.34500<span class="delta worse">+3.08%</span></td>
+                <td class="num">0.16069<span class="delta worse">+6.14%</span></td>
+              </tr>
+              <tr>
+                <td>Inpainting, lineart (espelhamento)</td>
+                <td class="num">0.54582<span class="delta worse">+3.44%</span></td>
+                <td class="num">0.24252<span class="delta worse">+6.65%</span></td>
+                <td class="num">0.36331<span class="delta worse">+8.55%</span></td>
+                <td class="num">0.17325<span class="delta worse">+14.43%</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-source" style="font-size: 20px;">
+            Fonte: Do autor (2026).
+          </p>
+        </figure>
+
+        <div class="card column">
+          <p class="accent text-large center no-margin-top no-margin-bottom">OBSERVAÇÕES - CONFIGURAÇÕES</p>
+          <ul class="bullets">
+            <li class="text-large">Inpainting sozinho obteve o melhor resultado nas duas escalas.</li>
+            <li class="text-large">Lineart e espelhamento pioraram o MAE em todos os casos.</li>
+          </ul>
+
+          <div class="center">
+            <img class="img img-sm rot-180 pixelated" src="images/arrow.png" alt="">
+          </div>
+
+          <ol>
+            <li class="text-large">O inpainting já fornece todas as informações necessárias.</li>
+            <li class="text-large">No lineart puro, ControlNet interpreta região como vazia.</li>
+            <li class="text-large">ControlNet foi treinado com line-drawing de imagens reais.</li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="eval-samples lg-margin-top card">
+    <figure>
+      <div id="truth-rgba-truth" class="image-show square"></div>
+      <figcaption>Imagem prova</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-inpainting" class="image-show square"></div>
+      <figcaption>4x Inpainting</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-lineart-nohint" class="image-show square"></div>
+      <figcaption>4x Lineart</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-lineart-hint" class="image-show square"></div>
+      <figcaption>4x Lineart (Espelhamento)</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-inpainting" class="image-show square"></div>
+      <figcaption>1x Inpainting</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-lineart-nohint" class="image-show square"></div>
+      <figcaption>1x Lineart</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-lineart-hint" class="image-show square"></div>
+      <figcaption>1x Lineart (Espelhamento)</figcaption>
+    </figure>
+  </div>
+
+</section>

@@ -1,0 +1,69 @@
+<section data-title="Avaliação" class="column">
+
+  <!-- Row 1: title -->
+  <h2 class="heading">Trabalhos Futuros</h2>
+
+  <!-- Bulletin board: each note is a fragment (→ pins the next one) -->
+  <div class="board fill">
+    <div class="board-notes">
+
+      <!-- top row: 4 notes (quarter) -->
+      <div class="note note-yellow pin quarter tilt-l fragment">
+        <p class="accent text-large center">MUDANÇA DO MODELO BASE</p>
+        <ul class="bullets">
+          <li class="text-large">Fineart <a href="https://example.com" target="_blank">(SAHARIA et al, 2022)</a></li>
+          <li class="text-large">SDXL <a href="https://example.com" target="_blank">(PODELL et al, 2024)</a></li>
+          <li class="text-large">Stable Diffusion 3 <a href="https://example.com" target="_blank">(ESSER et al, 2024)</a></li>
+        </ul>
+      </div>
+
+      <div class="note note-white tape quarter tilt-r fragment">
+        <p class="accent text-large center">INFLUÊNCIA TAMANHO DO DATASET</p>
+        <ul class="bullets">
+          <li class="text-large">Aumento do dataset</li>
+          <li class="text-large">Abordagem com diferentes tamanhos</li>
+        </ul>
+      </div>
+
+      <div class="note note-paper pin quarter tilt-r2 fragment">
+        <p class="accent text-large center">MELHORIA DO CAPTIONER</p>
+        <ul class="bullets">
+          <li class="text-large">Fine-tuning Vision Pass</li>
+        </ul>
+      </div>
+
+      <div class="note note-yellow pin quarter tilt-l2 fragment">
+        <p class="accent text-large center">FINE-TUNING</p>
+        <ul class="bullets">
+          <li class="text-large">DreamBooth <a href="https://example.com" target="_blank">(RUIZ et al, 2023)</a></li>
+        </ul>
+      </div>
+
+      <!-- bottom: one wide note with an image, at most 900px wide -->
+      <div class="note note-white tape wide tilt-r fragment" style="--note-max: 1200px;">
+        <p class="accent text-large center">MELHORIA DA REMOÇÃO DO BACKGROUND</p>
+        <ul class="bullets">
+          <li class="text-large">Encontrar melhores algoritmos de segmentação</li>
+        </ul>
+
+        <div class="center">
+          <div class="line">
+  
+            <div>
+              <div id="snapped" class="image-show square" style="--show-h: 300px;"></div>
+              <p class="center text-medium">Imagem gerada + snapped</p>
+            </div>
+  
+            <div>
+              <div id="snapped-rgba" class="image-show square" style="--show-h: 300px;"></div>
+              <p class="center text-medium">Imagem após GrabCut</p>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>

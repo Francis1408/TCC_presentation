@@ -1,0 +1,583 @@
+<section data-title="Tratamento do Dataset" class="start gap-lg">
+  <h2 class="heading" style="margin-bottom: 10%; text-align: center; width: 100%;">Tratamento do Dataset</h2>
+
+  <div class="island">
+    <img class="island-map" src="images/island.png" alt="Etapas do tratamento do dataset">
+
+    <button class="island-button" data-window="dataset-remover" data-label="Remoção"
+            style="--x: 10.4%; --y: 48.8%">
+      <img src="images/island-button.png" alt="Remoção de imagens">
+    </button>
+    <button class="island-button" data-window="background" data-label="Fundo"
+            style="--x: 30%; --y: 54.7%">
+      <img src="images/island-button.png" alt="Remoção de fundo">
+    </button>
+    <button class="island-button" data-window="sprite-sheet" data-label="Sprite sheet"
+            style="--x: 49.8%; --y: 59.5%">
+      <img src="images/island-button.png" alt="Sprite sheet">
+    </button>
+    <button class="island-button" data-window="upscale" data-label="Upscale"
+            style="--x: 70.6%; --y: 57.0%">
+      <img src="images/island-button.png" alt="Upscale">
+    </button>
+    <button class="island-button" data-window="captioner" data-label="Legendas"
+            style="--x: 90.0%; --y: 49.0%">
+      <img src="images/island-button.png" alt="Captioner">
+    </button>
+  </div>
+
+  <div class="pw-backdrop" hidden>
+
+    <div class="pw-window" id="dataset-remover">
+      <h3 class="pw-title center">Remoção de imagens</h3>
+
+
+      <div class="pw-page">
+  
+        <div class="grid-2 fill">
+
+          <div class="column">
+            <div class="card">
+              <div class="center">
+                <p class="accent title-medium no-margin-bottom no-margin-top">O que foi removido</p>
+              </div>
+              <ul class="bullets">
+                <li class="text-large">Frames de animação de um mesmo personagem</li>
+                <li class="text-large">Personagens não humanos (amimais, veículos e objetos)</li>
+                <li class="text-large">Personagens cortados de maneira errada</li>
+                <li class="text-large">Personagens com partes faltantes</li>
+              </ul> 
+            </div>
+            
+            <div>
+              <figure class="table-figure">
+                <figcaption>Tabela 3 – Descrição dos exemplos removidos</figcaption>
+                <table class="table-academic">
+                  <thead style="font-size: 35px;">
+                    <tr>
+                      <th rowspan="2">Partição</th>
+                      <th rowspan="2">Exemplos</th>
+                      <th rowspan="2">Removido</th>
+                      <th rowspan="2">Restante</th>
+                    </tr>
+                  </thead>
+                  <tbody style="font-size: 30px;">
+                    <tr><td>TREINO</td><td class="num">12.074</td><td class="num">7.703</td><td class="num">4.371</td></tr>
+                    <tr><td>TESTE</td><td class="num">2.128</td><td class="num">1.382</td><td class="num">746</td></tr>
+                    <tr class="rule best"><td>Total</td><td class="num">14.202</td><td class="num">9085</td><td class="num">5.117</td></tr>
+                  </tbody>
+                </table>
+                <p class="table-source">Fonte: Criado pelo autor (2026).</p>
+              </figure>
+            </div>
+
+          </div>
+          
+          <div class="self-center center middle">
+            <img class="pixelated" src="images/removed.png" alt="">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="pw-window" id="background">
+
+      <h3 class="pw-title center">Composição do canal Alpha</h3>
+
+      <div class="pw-page">
+
+        <div class="cols">
+          <div class="card problem">
+            <p class="accent title-medium no-margin-top center">Problema</p>
+            <ul class="bullets">
+              <li class="" style="font-size: 40px;"><u>Stable Diffusion</u>
+                <ul>
+                  <li>VAE Autoencoder: downsamples <mark class="highlighted">\( H \times W \times 3 \)</mark></li>
+                </ul>
+              </li>
+              <li class="" style="font-size: 40px;"><u>Qwen3-VL-8B-Instruct</u>
+                <ul>
+                  <li> SigLIP-2 Vision Transformer (ViT): pré-treinada e otimizada em <mark class="highlighted">3</mark> canais</mark></li>
+                </ul>
+              </li>
+            </ul> 
+          </div>
+
+          <div class="shrink self-center">
+            <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+          </div>
+
+          <div class="card solution">
+            <p class="accent title-medium no-margin-top center">Abordagem</p>
+            <ul class="bullets">
+              <li class="text-large" style="font-size: 40px;">Tradução de pixels (A = 0) para uma cor predefinida (#808080)
+                <div class="color-card">
+                  <div class="color-swatch" style="background-color: #808080;"></div>
+                </div>
+              </li>
+              <li class="text-large" style="font-size: 40px;">Bom contraste com o contorno dos personagens</li>
+            </ul> 
+          </div>
+        </div>
+
+        <div class="line justify-center middle lg-margin-top gap-lg">
+          <div id="background-before" class="image-show square"></div>
+
+          <img class="img img-md pixelated rot-90" src="images/arrow.png" alt="">
+
+          <div id="background-after" class="image-show square" style="background: #808080;"></div>
+        </div>
+    
+      </div>
+    </div>   
+   
+
+  
+    <div class="pw-window" id="upscale">
+      <h3 class="pw-title center">Upscale dos personagens</h3>
+
+      <div class="pw-page">
+        
+        <p class="title-large no-margin-top no-margin-bottom">Tradução para espaço latente</p>
+
+        <div class="figure justify-center middle">
+            <div class="truth">
+              <h2 class="subtitle">Quadrante posição direita</h2>
+              <div class="center"> 
+                <canvas id="truth" width="384" height="384"></canvas>
+                <p>256x256 pixels</p>
+              </div>
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-xl pixelated"  src="images/vae.png" alt="">
+              <p style="font-size: 35px;">\( \frac{H}{8} \times \frac{W}{8} \times 4 \)</p>
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+            </div>
+        
+            <div class="rows">
+              <div class="row">
+                <span></span>
+                <h2 class="subtitle">Zoom + células latentes</h2>
+                <h2></h2>
+                <h2 class="subtitle">Uma célula latente</h2>
+              </div>
+              <div class="row">
+                <div class="scale">1x</div>
+                <div><canvas id="zoom1" width="320" height="320"></canvas><p>16×16 sprite pixels = 4 células latentes</p></div>
+                <div class="shrink center">
+                  <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+                </div>
+                <div><canvas id="cell1" class="cell" width="320" height="320"></canvas><p>1 célula latente = 8×8 = 64 sprite pixels</p></div>
+              </div>
+              <div class="row">
+                <div class="scale">4x</div>
+                <div><canvas id="zoom4" width="320" height="320"></canvas><p>16×16 sprite pixels = 64 células latentes</p></div>
+                <div class="shrink center">
+                  <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+                </div>
+                <div><canvas id="cell4" class="cell" width="320" height="320"></canvas><p>1 célula latente = 2×2 = 4 sprite pixels</p></div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="pw-page">
+
+        <div class="grid-2 middle lg-margin-top">
+
+          <div class="card">
+            <p class="accent title-medium center no-margin-top">Abordagem</p>
+            <ul class="bullets">
+              <li class="" style="font-size: 40px">Utilização do dataset com imagens em 2 tipos de redimensionamento:
+                <ul>
+                  <li><mark class="highlighted">1x</mark> o tamanho original</li>
+                  <li><mark class="highlighted">4x</mark> o tamanho original</li>
+                </ul>
+              </li>
+              <li class="" style="font-size: 40px">Redimensionamento utilizando <i>nearest-neighbour interpolation</i> (vizinho mais próximo)</li>
+            </ul>
+          </div>
+
+          <div class="line justify-center middle lg-margin-top gap-lg">
+            <div class="center">
+              <p class="title-medium">1x</p>
+              <div id="upscale-1x" class="image-show square" style="--show-h: 500px"></div>
+            </div>
+
+            <div class="center">
+              <p class="title-medium">4x</p>
+              <div id="upscale-4x" class="image-show square" style="--show-h: 500px"></div>
+            </div>
+          </div>
+
+        </div>
+
+        
+      </div>
+    </div>
+
+    <div class="pw-window" id="sprite-sheet">
+      <h3 class="pw-title center">Sprite sheet</h3>
+
+      <div class="pw-page">
+
+        <div class="cols">
+          <div class="card">
+            <p class="accent title-medium no-margin-top center">Problema</p>
+            <ul class="bullets" style="font-size: 30px;">
+              <li class=""><u>Stable Diffusion v1-5</u>
+                <ul>
+                  <li>Treinado em <i>595k steps</i> em uma resolução de <mark class="highlighted">512x512</mark> pixels.<a href="https://example.com" target="_blank">(ROMBACH <i>et al.</i>, 2022)</a></li>
+                </ul>
+              </li>
+               
+              <li class=""><u>ControlNet</u>
+                <ul>
+                  <li>Fornecer contexto das poses conhecidas na mesma imagem</li>
+                </ul>
+              </li>
+            </ul> 
+          </div>
+
+          <div class="shrink self-center">
+            <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+          </div>
+
+          <div class="card">
+            <p class="accent title-medium no-margin-top center">Abordagem</p>
+            <ul class="bullets"  style="font-size: 30px;">
+              <li class=""> Junção das 4 poses do personagem em uma sprite sheet <mark class="highlighted">512x512</mark> px.</li>
+              <li class="">Divisão em quadrantes de 256x256 px <img class="img img-lg pixelated"  src="images/sheet.png" style="display: inline-block; vertical-align: middle; margin-left: 10px;">
+              </li>
+            </ul> 
+          </div>
+        </div>
+
+        <div class="line justify-center middle lg-margin-top gap-lg no-shrink no-wrap">
+         
+          <div class="line">
+
+            <div>
+              <div id="full_sheet_front" class="image-show square" style="--show-h: 250px; background: #808080;"></div>
+              <p class="center text-large">Front</p>
+            </div>
+
+            <div>
+              <div id="full_sheet_back" class="image-show square" style="--show-h: 250px; background: #808080;"></div>
+              <p class="center text-large">Back</p>
+            </div>
+
+            <div>
+              <div id="full_sheet_right" class="image-show square" style="--show-h: 250px; background: #808080;"></div>
+              <p class="center text-large">Right</p>
+            </div>
+
+            <div>
+              <div id="full_sheet_left" class="image-show square" style="--show-h: 250px; background: #808080;"></div>
+              <p class="center text-large">Left</p>
+            </div>
+
+          </div>
+
+          <img class="img img-md pixelated rot-90" src="images/arrow.png" alt="">
+
+          <div>
+            <div id="full_sheet" class="image-show square" style="background: #808080;"></div>
+            <p class="center text-large">Sprite sheet</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="pw-window" id="captioner">
+      <h3 class="pw-title">5. Captioner</h3>
+      <div class="pw-page"><p class="text">
+        <div class="center">
+          <p class="title-large no-margin-top no-margin-bottom">Captioner Pipeline</p>
+        </div>
+
+        <div class="figure justify-center middle" style="margin-top: 5%;">
+            <div class="truth">
+              <img src="images/dataset_captioner/776.png" alt="">
+              <p style="font-size: 35px;">Sprite sheet</p>
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-xl pixelated"  src="images/dataset_captioner/view-extraction-module.png" alt="">
+              <p style="font-size: 35px;">Extração da imagem</p>
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-xl pixelated"  src="images/dataset_captioner/view-pass-module.png" alt="">
+              <p style="font-size: 35px;">Obserbação da imagem</p>
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">  
+            </div>
+            
+            <div class="shrink self-center">
+              <img class="img img-xl pixelated"  src="images/dataset_captioner/language-pass-module.png" alt="">
+              <p style="font-size: 35px;">Interpretação textual</p>
+            </div>
+
+            <div class="shrink self-center">
+              <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
+            </div>
+            
+            <div class="shrink self-center">
+              <img class="img img-xl pixelated"  src="images/dataset_captioner/caption.png" alt="">
+              <p style="font-size: 35px;">Legenda Final</p>
+            </div>
+            
+            
+        </div>
+      </div>
+
+      <!-- Paste these three pages inside <div class="pw-window" id="captioner">,
+     right after your first page (the pipeline overview). -->
+
+      <!-- ===================== PAGE 2: VIEW EXTRACTION ===================== -->
+      <div class="pw-page">
+        <p class="title-large center no-margin-top no-margin-bottom">1. View Extraction</p>
+
+        <div class="cp-stage">
+          <div class="cp-diagram">
+
+            <svg class="cp-wires" viewBox="0 0 1600 700" aria-hidden="true">
+              <defs>
+                <marker id="cp-arrow-1" viewBox="0 0 10 10" refX="7" refY="5"
+                        markerWidth="4" markerHeight="4" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 z"/>
+                </marker>
+              </defs>
+              <!-- sprite sheet → extractor.py -->
+              <path pathLength="1" style="--i:1" marker-end="url(#cp-arrow-1)" d="M200,350 L200,420"/>
+              <!-- extractor.py → crops (straight) and → full sheet (curve up) -->
+              <path pathLength="1" style="--i:3" marker-end="url(#cp-arrow-1)" d="M285,505 L500,505"/>
+              <path pathLength="1" style="--i:3" marker-end="url(#cp-arrow-1)" d="M390,505 C450,505 440,185 500,185"/>
+              <!-- both outputs → View Pass -->
+              <path pathLength="1" style="--i:6" d="M1215,185 C1290,185 1270,365 1340,365"/>
+              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-1)" d="M1215,525 C1290,525 1270,365 1340,365"/>
+            </svg>
+
+            <figure class="cp-el cp-fig" style="--x:70; --y:40; --w:260; --h:300; --i:0">
+              <img src="images/dataset_captioner/776.png" alt="Sprite sheet">
+              <figcaption>Sprite sheet</figcaption>
+            </figure>
+
+            <figure class="cp-el cp-fig" style="--x:130; --y:435; --w:140; --h:200; --i:2; --fs:22">
+              <img src="images/dataset_captioner/python.png" alt="">
+              <figcaption class="cp-code">extractor.py</figcaption>
+            </figure>
+
+            <div class="cp-el cp-bundle" style="--x:515; --y:60; --w:700; --h:250; --i:4">
+              <p class="cp-bundle-title no-margin-top no-margin-bottom">Full sheet + prompt</p>
+              <div class="cp-bundle-row">
+                <img src="images/dataset_captioner/776.png" alt="Sprite sheet completo">
+                <span class="cp-plus">+</span>
+                <img src="images/text.png" alt="Prompt" style="height: 55%;">
+              </div>
+            </div>
+
+            <div class="cp-el cp-bundle" style="--x:515; --y:380; --w:700; --h:290; --i:5">
+              <p class="cp-bundle-title no-margin-top no-margin-bottom">Position crops + prompts</p>
+              <div class="cp-bundle-row">
+                <div class="cp-pair">
+                  <img src="images/dataset_captioner/crop_front.png" alt="Frente">
+                  <img src="images/text.png" alt="Prompt">
+                </div>
+                <div class="cp-pair">
+                  <img src="images/dataset_captioner/crop_back.png" alt="Costas">
+                  <img src="images/text.png" alt="Prompt">
+                </div>
+                <div class="cp-pair">
+                  <img src="images/dataset_captioner/crop_left.png" alt="Esquerda">
+                  <img src="images/text.png" alt="Prompt">
+                </div>
+                <div class="cp-pair">
+                  <img src="images/dataset_captioner/crop_right.png" alt="Direita">
+                  <img src="images/text.png" alt="Prompt">
+                </div>
+              </div>
+            </div>
+
+            <img class="cp-el cp-img" style="--x:1345; --y:294; --w:200; --h:142; --i:7"
+                 src="images/dataset_captioner/view-pass-module.png" alt="Próxima etapa: View Pass">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ======================== PAGE 3: VIEW PASS ======================== -->
+      <div class="pw-page">
+        <p class="title-large center no-margin-top no-margin-bottom">2. View Pass</p>
+
+        <div class="cp-stage">
+          <div class="cp-diagram">
+
+            <svg class="cp-wires" viewBox="0 0 1600 700" aria-hidden="true">
+              <defs>
+                <marker id="cp-arrow-2" viewBox="0 0 10 10" refX="7" refY="5"
+                        markerWidth="4" markerHeight="4" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 z"/>
+                </marker>
+              </defs>
+              <!-- images → SigLIP-2, prompts → Text Encoder -->
+              <path pathLength="1" style="--i:2" marker-end="url(#cp-arrow-2)" d="M190,165 L290,165"/>
+              <path pathLength="1" style="--i:2" marker-end="url(#cp-arrow-2)" d="M175,385 L290,385"/>
+              <!-- encoders → fusion layer -->
+              <path pathLength="1" style="--i:3" class="thin" marker-end="url(#cp-arrow-2)" d="M530,165 C640,165 740,150 740,195"/>
+              <path pathLength="1" style="--i:3" class="thin" marker-end="url(#cp-arrow-2)" d="M530,385 C640,385 740,395 740,345"/>
+              <!-- fusion → Positions / Spritesheet -->
+              <path pathLength="1" style="--i:4" marker-end="url(#cp-arrow-2)" d="M860,270 L950,270"/>
+              <!-- palette row -->
+              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-2)" d="M390,585 L430,585"/>
+              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-2)" d="M570,585 L612,585"/>
+              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-2)" d="M815,585 L858,585"/>
+              <!-- formatter.py → Pallete file -->
+              <path pathLength="1" style="--i:7" marker-end="url(#cp-arrow-2)" d="M1000,585 C1150,585 1320,585 1320,358"/>
+              <!-- files → Language Pass -->
+              <path pathLength="1" style="--i:8" marker-end="url(#cp-arrow-2)" d="M1395,270 L1440,270"/>
+            </svg>
+
+            <!-- inputs (from the View Extraction) -->
+            <figure class="cp-el cp-fig" style="--x:40; --y:95; --w:140; --h:180; --i:0; --fs:22">
+              <img src="images/dataset_captioner/776.png" alt="">
+              <figcaption>Imagens</figcaption>
+            </figure>
+            <figure class="cp-el cp-fig" style="--x:65; --y:335; --w:100; --h:140; --i:0; --fs:22">
+              <img src="images/text.png" alt="">
+              <figcaption>Prompts</figcaption>
+            </figure>
+
+            <!-- qwen3-vl -->
+            <div class="cp-el cp-group" style="--x:250; --y:45; --w:650; --h:445; --i:1">
+              <span class="cp-tag">qwen3-vl:8b-instruct</span>
+            </div>
+            <div class="cp-el cp-block" style="--x:300; --y:110; --w:230; --h:110; --i:2; --fs:30">SigLIP-2</div>
+            <div class="cp-el cp-block" style="--x:300; --y:330; --w:230; --h:110; --i:2">Text Encoder</div>
+            <div class="cp-el cp-block" style="--x:620; --y:205; --w:240; --h:130; --i:3">Multimodal fusion layer</div>
+
+            <!-- outputs -->
+            <img class="cp-el cp-img" style="--x:960; --y:200; --w:130; --h:142; --i:5"
+                 src="images/dataset_captioner/positions.png" alt="Positions">
+            <img class="cp-el cp-img" style="--x:1105; --y:200; --w:130; --h:142; --i:5"
+                 src="images/dataset_captioner/spritesheet.png" alt="Spritesheet">
+            <img class="cp-el cp-img" style="--x:1255; --y:200; --w:130; --h:142; --i:7"
+                 src="images/dataset_captioner/pallete.png" alt="Pallete">
+
+            <!-- palette row -->
+            <img class="cp-el cp-img" style="--x:290; --y:535; --w:90; --h:100; --i:6"
+                 src="images/dataset_captioner/776.png" alt="Sprite sheet">
+            <figure class="cp-el cp-fig" style="--x:420; --y:525; --w:170; --h:165; --i:6; --fs:20">
+              <img src="images/dataset_captioner/python.png" alt="">
+              <figcaption class="cp-code">pallete_extractor.py</figcaption>
+            </figure>
+            <div class="cp-el cp-swatches" style="--x:625; --y:565; --w:180; --h:40; --i:6">
+              <span style="--sw:#f2c79a"></span>
+              <span style="--sw:#9fd4f2"></span>
+              <span style="--sw:#5aa0e6"></span>
+              <span style="--sw:#2f6fd6"></span>
+              <span style="--sw:#1d3f9a"></span>
+            </div>
+            <figure class="cp-el cp-fig" style="--x:870; --y:525; --w:120; --h:165; --i:6; --fs:20">
+              <img src="images/dataset_captioner/python.png" alt="">
+              <figcaption class="cp-code">formatter.py</figcaption>
+            </figure>
+
+            <img class="cp-el cp-img" style="--x:1450; --y:219; --w:145; --h:102; --i:8"
+                 src="images/dataset_captioner/language-pass-module.png" alt="Próxima etapa: Language Pass">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ====================== PAGE 4: LANGUAGE PASS ====================== -->
+      <div class="pw-page">
+        <p class="title-large center no-margin-top no-margin-bottom">3. Language Pass</p>
+
+        <div class="cp-stage">
+          <div class="cp-diagram">
+
+            <svg class="cp-wires" viewBox="0 0 1600 700" aria-hidden="true">
+              <defs>
+                <marker id="cp-arrow-3" viewBox="0 0 10 10" refX="7" refY="5"
+                        markerWidth="4" markerHeight="4" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 z"/>
+                </marker>
+              </defs>
+              <!-- three files → Synthesizer -->
+              <path pathLength="1" style="--i:1" d="M180,105 C240,105 240,300 295,300"/>
+              <path pathLength="1" style="--i:1" d="M180,455 C240,455 240,300 295,300"/>
+              <path pathLength="1" style="--i:1" marker-end="url(#cp-arrow-3)" d="M180,280 C240,280 240,300 295,300"/>
+              <!-- Synthesizer → Detailed → Compressor → Condensed → editor.py -->
+              <path pathLength="1" style="--i:3" marker-end="url(#cp-arrow-3)" d="M495,300 L585,300"/>
+              <path pathLength="1" style="--i:4" marker-end="url(#cp-arrow-3)" d="M755,300 L825,300"/>
+              <path pathLength="1" style="--i:5" marker-end="url(#cp-arrow-3)" d="M1025,300 L1110,300"/>
+              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-3)" d="M1280,300 L1337,300"/>
+              <!-- editor.py → final caption -->
+              <path pathLength="1" style="--i:7" marker-end="url(#cp-arrow-3)" d="M1410,425 L1410,482"/>
+            </svg>
+
+            <!-- inputs (from the View Pass) -->
+            <img class="cp-el cp-img" style="--x:50; --y:40;  --w:120; --h:130; --i:0"
+                 src="images/dataset_captioner/positions.png" alt="Positions">
+            <img class="cp-el cp-img" style="--x:50; --y:215; --w:120; --h:130; --i:0"
+                 src="images/dataset_captioner/spritesheet.png" alt="Spritesheet">
+            <img class="cp-el cp-img" style="--x:50; --y:390; --w:120; --h:130; --i:0"
+                 src="images/dataset_captioner/pallete.png" alt="Pallete">
+
+            <!-- qwen3 · Synthesizer -->
+            <div class="cp-el cp-group lm" style="--x:270; --y:70; --w:260; --h:460; --i:2">
+              <span class="cp-tag">qwen3:14b</span>
+            </div>
+            <div class="cp-el cp-block llm" style="--x:305; --y:235; --w:190; --h:130; --i:2">Synthesizer</div>
+
+            <img class="cp-el cp-img" style="--x:595; --y:232; --w:150; --h:136; --i:3"
+                 src="images/dataset_captioner/detailed.png" alt="Legenda detalhada">
+
+            <!-- qwen3 · Compressor -->
+            <div class="cp-el cp-group lm" style="--x:800; --y:70; --w:260; --h:460; --i:4">
+              <span class="cp-tag">qwen3:14b</span>
+            </div>
+            <div class="cp-el cp-block llm" style="--x:835; --y:235; --w:190; --h:130; --i:4">Compressor</div>
+
+            <img class="cp-el cp-img" style="--x:1120; --y:226; --w:150; --h:148; --i:5"
+                 src="images/dataset_captioner/condensed.png" alt="Legenda condensada">
+
+            <figure class="cp-el cp-fig" style="--x:1345; --y:230; --w:130; --h:185; --i:6; --fs:22">
+              <img src="images/dataset_captioner/python.png" alt="">
+              <figcaption class="cp-code">editor.py</figcaption>
+            </figure>
+
+            <div class="cp-el cp-caption" style="--x:1170; --y:492; --w:420; --h:140; --i:7; --fs:26">
+              pxchar, pixel art sprite sheet, ...
+            </div>
+            <p class="cp-el cp-label" style="--x:1170; --y:648; --w:420; --h:40; --i:7">Legenda final</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

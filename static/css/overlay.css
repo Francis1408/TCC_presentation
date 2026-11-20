@@ -1,0 +1,175 @@
+.overlay-host,
+.eval-top {
+  position: relative;
+}
+
+.overlay-host > .overlay,
+.eval-top > .cap-edit {
+  position: absolute;
+  inset: 0;                   /* exactly the host's box */
+  z-index: 5;
+}
+
+.overlay,
+.cap-edit {
+  container-type: size;       /* children size themselves from the overlay (cqh / cqw) */
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5cqh;
+  padding: 2.5cqh 2cqw;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+/* a hidden overlay must not block clicks on what is underneath */
+:is(.overlay, .cap-edit).fragment:not(.visible) { pointer-events: none; }
+:is(.overlay, .cap-edit).fragment { transform: none; }
+
+
+/* ---------- plain overlay: <div class="overlay plain fragment"> ----------
+   No card look: just the slide's background (hides what is underneath).
+   Its content uses the same classes and sizes as the normal slide content,
+   so it looks exactly like it (e.g. table + card side by side). */
+.overlay.plain {
+  container-type: normal;   /* sizes come from the normal classes, not the overlay */
+  bottom: auto;             /* at least the host's height; grows if its content is taller */
+  min-height: 100%;
+  padding: 0;
+  gap: 0;
+  background: var(--bg);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.overlay.plain > .cols {
+  flex: 1;
+  min-height: 0;
+}
+
+/* grid (left) + references (right) */
+.ce-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 3cqw;
+}
+
+/* ---------- grid: 3 columns × 2 rows ---------- */
+.ce-grid {
+  --ce-img: min(46cqh, 18cqw);     /* generated images */
+
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto minmax(0, 1fr);   /* images | captions */
+  column-gap: 2.5cqw;
+  row-gap: 2.5cqh;
+}
+
+/* row 1: generated image with its metrics beside it */
+.ce-gen {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1cqw;
+}
+.ce-gen img {
+  display: block;
+  width: var(--ce-img);
+  height: var(--ce-img);
+  object-fit: contain;
+  image-rendering: pixelated;
+  background: #808080;
+}
+.ce-gen figcaption {
+  font-size: clamp(10px, 3cqh, 20px);
+  line-height: 1.3;
+  white-space: nowrap;
+  color: var(--text);
+}
+.ce-gen.best figcaption { font-weight: 700; color: var(--accent); }
+
+/* row 2: caption blocks */
+.ce-text {
+  min-height: 0;
+  overflow: hidden;
+}
+.ce-text h4 {
+  margin: 0 0 0.8cqh;
+  font-size: clamp(10px, 3.3cqh, 22px);
+  font-weight: 700;
+}
+.ce-caption {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 2.7cqh, 18px);
+  line-height: 1.4;
+  color: var(--text);
+}
+.ce-caption.empty { font-style: italic; color: var(--muted); }
+
+/* highlighted words */
+.ce-removed, .ce-added {
+  padding: 0.05em 0.25em;
+  border-radius: 3px;
+  color: var(--text);
+}
+.ce-removed { background: rgba(232, 128, 92, 0.45); }
+.ce-added   { background: rgba(110, 165, 225, 0.45); }
+
+/* ---------- references: truth + sprite sheet (outside the grid) ---------- */
+.ce-refs {
+  --ce-ref: min(36cqh, 15cqw);
+
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2cqh;
+  padding-left: 3cqw;
+  border-left: 1px dashed var(--border);
+}
+.ce-ref {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6cqh;
+}
+.ce-ref figcaption { font-size: clamp(10px, 3cqh, 20px); }
+.ce-ref img {
+  display: block;
+  width: var(--ce-ref);
+  height: var(--ce-ref);
+  object-fit: contain;
+  image-rendering: pixelated;
+  background: #fff;
+  border: 1px solid #9a9a9a;
+}
+
+/* ---------- legend ---------- */
+.ce-legend {
+  display: flex;
+  justify-content: center;
+  gap: 4cqw;
+  font-size: clamp(10px, 2.6cqh, 17px);
+}
+.ce-legend span { display: flex; align-items: center; gap: 0.6em; }
+.ce-legend i { display: inline-block; width: 2.2em; height: 0.9em; border-radius: 2px; }
+.ce-legend .ce-removed-swatch { background: rgba(232, 128, 92, 0.75); }
+.ce-legend .ce-added-swatch   { background: rgba(110, 165, 225, 0.75); }
+
+
+/* Small change under a value: <span class="delta better">−1.36%</span> */
+.table-academic .delta {
+  display: block;
+  font-size: 0.7em;
+  line-height: 1.2;
+  color: var(--muted);
+}
+.table-academic .delta.better { color: #5cb85c; }   /* lower = improvement */
+.table-academic .delta.worse  { color: #d9534f; }   /* higher = worse */

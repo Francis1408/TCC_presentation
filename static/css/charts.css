@@ -1,0 +1,181 @@
+/* ==========================================================================
+   CHARTS: styles for every graph in charts.js
+     1. Single graphs     .graph            (e.g. SteamDB)
+     2. Chart switcher    .chart-switcher   (◀ chart ▶ + dots)
+     3. Training curves   .tg-grid          (3 rows × LPIPS | MAE)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. SINGLE GRAPHS
+   ========================================================================== */
+
+/* Chart block: title, chart, credit stacked; grows to fill the free height.
+   The colours live here so they only affect the chart, not the whole deck. */
+.graph {
+  --grid: #2c3038;
+  --bar: #4aaff0;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.graph > h1 {
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 28px);
+  margin: 0 0 12px;
+}
+.graph > h1 b { font-weight: 700; }
+
+/* The box around the <canvas>: takes all height left by the title and credit.
+   Chart.js needs: options: { responsive: true, maintainAspectRatio: false } */
+.graph > div.chart {   /* div only: an <h1 class="chart"> must not grow */
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.credit {
+  text-align: right;
+  color: var(--muted);
+  font-size: 30px;
+  margin-top: 8px;
+}
+
+
+/* ==========================================================================
+   2. CHART SWITCHER
+        [◀]  title   [▶]
+             chart
+             ● ○ ○
+   ========================================================================== */
+
+.chart-switcher {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px 10px;
+  height: 100%;
+  min-height: 0;
+}
+
+.chart-page {
+  grid-column: 2;
+  grid-row: 1;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  min-height: 0;
+}
+.chart-page.current { display: flex; animation: cs-in 250ms steps(4) both; }
+@keyframes cs-in { from { opacity: 0; } to { opacity: 1; } }
+
+.chart-page > h3 {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(18px, 1.5vw, 23px);
+  font-weight: 600;
+}
+.chart-page > .chart-box {
+  position: relative;          /* Chart.js sizes the canvas to this box */
+  flex: 1;
+  min-height: 0;
+}
+
+/* ◀ ▶ buttons (pixel arrow image, arrow.png points up) */
+.cs-prev, .cs-next {
+  grid-row: 1;
+  padding: 4px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.cs-prev { grid-column: 1; }
+.cs-next { grid-column: 3; }
+.cs-prev img, .cs-next img {
+  display: block;
+  width: clamp(32px, 3vw, 52px);
+  height: auto;
+  image-rendering: pixelated;
+  transition: translate 120ms steps(2);
+}
+.cs-prev img { rotate: -90deg; }
+.cs-next img { rotate: 90deg; }
+.cs-prev:hover img { translate: -4px 0; }
+.cs-next:hover img { translate: 4px 0; }
+.cs-prev:focus-visible, .cs-next:focus-visible { outline: 2px dashed var(--accent); }
+
+/* dots */
+.cs-dots {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.cs-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  background: var(--border);
+  cursor: pointer;
+}
+.cs-dot.current { background: var(--accent); }
+
+/* slide layout: two areas on top, samples below */
+.eval-top { min-height: 0; }
+
+
+/* ==========================================================================
+   3. TRAINING CURVES: data-chart="training-grid"
+   ========================================================================== */
+
+.tg-grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));   /* LPIPS | MAE */
+  grid-auto-rows: minmax(0, 1fr);                     /* rows share the height equally */
+  gap: 4px 18px;
+}
+.tg-cell {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.tg-title {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(20px, 1.5vw, 20px);
+  line-height: 1.2;
+}
+.tg-best { color: #e0301e; white-space: nowrap; }
+.tg-box {
+  position: relative;          /* Chart.js sizes the canvas to this box */
+  flex: 1;
+  min-height: 0;
+}
+
+/* legend under the 6 charts */
+.tg-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  margin: 0;
+  font-size: clamp(20px, 1.5vw, 20px);
+}
+.tg-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.tg-legend i { display: inline-block; flex: none; }
+.tg-legend .lpips { width: 22px; height: 3px; background: #3a78b5; }
+.tg-legend .mae   { width: 22px; height: 3px; background: #f08a24; }
+.tg-legend .best  { width: 12px; height: 12px; border: 2.5px solid #e0301e; border-radius: 50%; }
+.tg-legend .comb  { width: 0; height: 16px; border-left: 2px dashed #888; }

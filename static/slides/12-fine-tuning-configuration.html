@@ -1,0 +1,86 @@
+<section data-title="Fine-tuning" class="column">
+
+  <!-- Row 1: title -->
+  <div class="cols">
+    <div class="card">
+      <p class="accent title-medium no-margin-top center">Módulos</p>
+      <ol style="font-size: 30px;">
+        <li class=""><u>Modelo base:</u> <mark class="highlighted">Stable Diffusion v1-5</mark>
+          <ul>
+            <li class="">Restrições de Hardware</li>
+            <li class="">Maior suporte de desenvolvedores</li>
+          </ul>
+        </li>
+        <li class=""><u>Técnica:</u> <mark class="highlighted">Low ranking adaptation (LoRA)</mark>
+          <ul>
+              <li class="">Restrições de Hardware</li>
+              <li class="">Modularização dos checkpoints</li>
+          </ul>
+        </li>
+        <li class=""><u>Complementos:</u> <mark class="highlighted">ControlNets</mark>
+          <ul>
+              <li class="">Condicionamento de imagens</li>
+              <li class="">Inpainting: Inferência + padrão de cores</li>
+              <li class="">Lineart: Formato + contorno</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card center">
+      <p class="accent title-medium no-margin-top center">Configurações (Inputs)</p>
+
+      <div class="line justify-center middle">
+        <div class="card">
+          <p class="accent title-small no-margin-top center">Redimensionamentos</p>
+          <ol style="font-size: 35px;">
+            <li class="">1X scale</li>
+            <li class="">4X scale</li>
+          </ol>
+        </div>
+     
+        <img class="img img-sm pixelated" src="images/multiply.png" alt="">
+
+        <div class="card">
+          <p class="accent title-small no-margin-top center">ControlNet</p>
+          <ol style="font-size: 35px;">
+            <li class="">Inpainting</li>
+            <li class="">Inpainting + Lineart</li>
+            <li class="">Inpainting + Lineart com espelhamento</li>
+          </ol>
+        </div>
+      
+      </div>
+
+      <p class="middle" style="font-size: 40px;"><u>Total:</u> fine-tuning em <mark class="highlighted">6</mark> arquiteturas distintas</p>
+    </div>
+  </div>
+
+  <div class="line justify-center middle lg-margin-top gap-lg no-shrink no-wrap">
+    
+    <div class="line">
+
+      <div>
+        <div id="sheet" class="image-show square" style="--show-h: 350px; background: #808080;"></div>
+        <p class="center text-large">Sprite sheet</p>
+      </div>
+
+      <div>
+        <div id="inpaint" class="image-show square" style="--show-h: 350px; background: #808080;"></div>
+        <p class="center text-large">Inpainting</p>
+      </div>
+
+      <div>
+        <div id="lineart" class="image-show square" style="--show-h: 350px; background: #808080;"></div>
+        <p class="center text-large">Lineart</p>
+      </div>
+
+      <div>
+        <div id="lineart-hint" class="image-show square" style="--show-h: 350px; background: #808080;"></div>
+        <p class="center text-large">Lineart com espelhamento</p>
+      </div>
+
+    </div>
+  </div>
+
+</section>

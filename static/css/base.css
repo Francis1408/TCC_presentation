@@ -1,0 +1,574 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+
+@font-face {
+  font-family: 'Fat-pixel';
+  src: url('../fonts/pixel-fat.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+:root {
+  --surface: oklab(92.502% 0.00415 0.00118);
+  --surface-2: #222631;
+  --text: #000000;
+  --muted: #000000;
+  --accent: lch(34.46% 54.51 133.26);
+  --accent-2: rgb(4, 16, 57);
+  --border: hsl(0, 0%, 4%);
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
+
+  --header-h: 56px;
+  --footer-h: 56px;
+  --pad: clamp(16px, 4vw, 64px);
+  --gap: 24px;
+  --radius: 12px;
+  --transition: 350ms cubic-bezier(.2, .7, .2, 1);
+}
+
+/* ---------- Slide background ----------*/
+.deck-stage {
+  --sky-top: rgb(62, 143, 224);      
+  --sky-bottom: #ffffff;   
+  /* overflow: hidden; */
+}
+
+.deck-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    url("../images/background.png") center bottom / cover no-repeat,
+    linear-gradient(to top, var(--sky-bottom), var(--sky-top));
+  image-rendering: pixelated;
+  pointer-events: none;
+  filter: contrast(0.7);
+  /* inset: -16px;
+  filter: blur(3px) saturate(0.8); */
+}
+
+
+/* ---------- Text colours on the sky ----------*/
+
+.slide { color: var(--text); }
+
+
+.deck-stage .overlay.plain { background: transparent; }
+.overlay-host:has(> .overlay.plain.visible) > :not(.overlay) { visibility: hidden; }
+
+
+/* 2. RESET --------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow: hidden;
+}
+img, video, iframe { max-width: 100%; display: block; }
+a { color: var(--accent); }
+code { font-family: var(--font-mono); background: var(--surface-2); padding: .1em .35em; border-radius: 4px; }
+
+p, li, h3, span {
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+
+
+h1, h2{
+  font-family: "Fat-pixel";
+  color: rgb(234, 172, 57);
+  -webkit-text-stroke: 2px black;
+}
+
+
+.subtitle {
+   font-size: 35px; 
+   font-weight: 500; 
+   text-align: center; 
+   margin: 0 0 8px; 
+   color: lab(77.52% 3.61 73.84); 
+   font-family: "Pixelify Sans", sans-serif;  
+   -webkit-text-stroke: 0.7px black;
+}
+
+/* 3. DECK TEMPLATE (header / stage / footer) ----------------------------- */
+.deck {
+  display: grid;
+  grid-template-rows: var(--header-h) 1fr var(--footer-h);
+  height: 100vh;
+  height: 100dvh;
+}
+
+.deck-header {
+  background-color: lab(83.29% -7.92 -12.78);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding: 0 var(--pad);
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--muted);
+}
+.deck-brand { font-weight: 700; color: var(--text); }
+.deck-slide-title { flex: 1; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.deck-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.deck-footer {
+  background-color: #9e8446;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 var(--pad);
+  border-top: 1px solid var(--border);
+}
+
+.deck-footer-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+}
+.deck-counter { font-variant-numeric: tabular-nums; color: var(--text); }
+
+.capsule-bar {
+  --capsule-h: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;                         /* capsules touch, forming one bar */
+}
+
+.deck-footer .capsule {
+  display: grid;                  /* outline and fill stacked in the same cell */
+  cursor: pointer;
+}
+
+.deck-footer .capsule > img {
+  grid-area: 1 / 1;
+  display: block;
+  height: var(--capsule-h);
+  width: auto;
+  max-width: none;
+  image-rendering: pixelated;
+}
+
+/* fill on top of the outline */
+.deck-footer .overlay-image {
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* slides not reached yet: no fill */
+.deck-footer .capsule > img.empty {
+  display: none;
+}
+
+/* hover: brighten the capsule you would jump to */
+.deck-footer .capsule:hover > img:first-child { filter: brightness(1.3); }
+
+
+
+/* A single rendered slide */
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: clamp(12px, 2.5vh, 32px) var(--pad) clamp(16px, 3vh, 40px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  animation: slide-in var(--transition) both;
+}
+.slide.from-left { animation-name: slide-in-left; }
+
+@keyframes slide-in      { from { opacity: 0; transform: translateX(40px);  } to { opacity: 1; transform: none; } }
+@keyframes slide-in-left { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
+
+.slide-error {
+  margin: auto;
+  max-width: 640px;
+  padding: 24px;
+  border: 1px solid #ff5b5b;
+  border-radius: var(--radius);
+  color: #ffb4b4;
+}
+
+/* 4. LAYOUT UTILITIES ---------------------------------------------------- */
+
+/* Direction */
+.column { display: flex; flex-direction: column; gap: var(--gap); }
+.line   { display: flex; flex-direction: row; gap: var(--gap); flex-wrap: wrap; }
+
+/* Fill the remaining slide height */
+.fill { flex: 1; min-height: 0; }
+.grow { flex: 1; min-width: 0; }
+
+/* Grids */
+.grid-2 { display: grid; gap: var(--gap); grid-template-columns: repeat(2, 1fr); }
+.grid-3 { display: grid; gap: var(--gap); grid-template-columns: repeat(3, 1fr); }
+.grid-4 { display: grid; gap: var(--gap); grid-template-columns: repeat(4, 1fr); }
+.split-1-2 { display: grid; gap: var(--gap); grid-template-columns: 1fr 2fr; }
+.split-2-1 { display: grid; gap: var(--gap); grid-template-columns: 2fr 1fr; }
+
+/* Grid cells may shrink below their content (stops big images/charts overflowing) */
+.grid-2 > *, .grid-3 > *, .grid-4 > *, .split-1-2 > *, .split-2-1 > * { min-width: 0; min-height: 0; }
+/* A grid with .fill takes all remaining slide height, and its row does too */
+.grid-2.fill, .grid-3.fill, .grid-4.fill, .split-1-2.fill, .split-2-1.fill { grid-template-rows: minmax(0, 1fr); }
+
+/* Image or video that fills its whole cell, keeping its proportions */
+.fit-media { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+
+/* Chart container that takes the remaining height of a .column.
+   With Chart.js set options: { responsive: true, maintainAspectRatio: false } */
+.chart-box { position: relative; flex: 1; min-height: 0; }
+
+/* Content-sized columns: each column is as wide as its content needs,
+   and the leftover space is shared. Use instead of grid-2/3/4 when
+   columns hold different amounts of content. */
+.cols {
+  display: flex;
+  gap: var(--gap);
+  align-items: flex-start;
+}
+.cols > * { flex: 1 1 auto; min-width: 0; }
+.cols > .shrink { flex: 0 0 auto; }   /* only as wide as its content (e.g. an arrow) */
+.cols > .grow-2 { flex-grow: 2; }     /* takes twice the leftover space */
+.cols.stretch { align-items: stretch; } /* all columns same height */
+
+/* Align a single child inside a flex/grid row */
+.self-center { align-self: center; }
+.self-start  { align-self: flex-start; }
+.self-end    { align-self: flex-end; }
+
+/* Alignment */
+.center   { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.start    { align-items: flex-start; justify-content: flex-start; }
+.end      { align-items: flex-end;   justify-content: flex-end; }
+.middle   { align-items: center; }
+.between  { justify-content: space-between; }
+.around   { justify-content: space-around; }
+.justify-center { justify-content: center; }
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/* Spacing */
+.gap-0  { gap: 0; }
+.gap-sm { gap: 8px; }
+.gap-md { gap: 20px; }
+.gap-lg { gap: 48px; }
+.mt-auto { margin-top: auto; }
+.w-full  { width: 100%; }
+.h-full  { height: 100%; }
+
+.no-margin-top{margin-top: 0;}
+.no-margin-bottom{margin-bottom: 0;}
+
+.sm-margin-top{margin-top: 10px;}
+.md-margin-top{margin-top: 20px;}
+.lg-margin-top{margin-top: 30px;}
+
+.sm-margin-left{margin-left: 10px;}
+.md-margin-left{margin-left: 20px;}
+.lg-margin-left{margin-left: 30px;}
+
+.sm-margin-right{margin-right: 10px;}
+.md-margin-right{margin-right: 20px;}
+.lg-margin-right{margin-right: 30px;}
+
+.sm-margin-bottom{margin-bottom: 10px;}
+.md-margin-bottom{margin-bottom: 20px;}
+.lg-margin-bottom{margin-bottom: 30px;}
+
+/* text size */
+.text-small {font-size: 15px;}
+.text-medium {font-size: 20px;}
+.text-large {font-size: 30px;}
+.text-medium-large {font-size: 35px;}
+.text-extra-large {font-size: 50px;}
+
+/* title size */
+.title-small {font-size: 30px;}
+.title-medium {font-size: 40px;}
+.title-large {font-size: 50px;}
+
+
+
+/* 6. Images ----------------------------------------------------------*/
+.img {
+  display: block;
+  width:  var(--w, var(--size, auto));
+  height: var(--h, var(--size, auto));
+  max-width: 100%;
+  object-fit: contain;
+  rotate: var(--rotate, 0deg);
+  transition: rotate var(--transition);
+}
+
+/* Sizes */
+.img-xs { --size: 32px; }
+.img-sm { --size: 64px; }
+.img-md { --size: 128px; }
+.img-lg { --size: 200px; }
+.img-xl { --size: 320px; }
+.img-xxl { --size: 550px; }
+
+
+/* Rotations */
+.rot-45  { --rotate: 45deg; }
+.rot-90  { --rotate: 90deg; }
+.rot-180 { --rotate: 180deg; }
+.rot-270 { --rotate: 270deg; }
+
+/* Mirror */
+.flip-x { scale: -1 1; }
+.flip-y { scale: 1 -1; }
+
+/* Pixel art: keep pixels sharp when scaled up */
+.pixelated { image-rendering: pixelated; }
+
+
+/* 5. TYPOGRAPHY ---------------------------------------------------------- */
+.cover-title { 
+  font-size: clamp(60px, 9vw, 95px);
+  text-shadow: 8px 8px 12px rgba(0, 0, 0, 0.8);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.title {
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.subtitle {
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-weight: 400;
+  color: var(--muted);
+  margin: 0;
+}
+.heading {
+  font-size: clamp(40px, 4vw, 50px);
+  font-weight: 700;
+  margin: 0 0 30px;
+}
+.text  { font-size: clamp(16px, 1.6vw, 22px); margin: 0; }
+.small { font-size: 14px; color: var(--muted); margin: 0; }
+.muted { 
+  color: var(--muted);
+  font-size: 30px;
+ }
+.accent { 
+  color: var(--accent); 
+  font-weight: 700;
+  font-size: 25px;
+}
+
+
+.big-number { font-size: clamp(48px, 8vw, 120px); font-weight: 800; line-height: 1; color: var(--accent); }
+
+.bullets { font-size: clamp(16px, 1.8vw, 24px); margin: 0; padding-left: 1.2em; display: grid; gap: 12px; }
+.bullets li::marker { color: var(--accent); }
+
+.highlighted {color:red;font-weight: bold; background-color: transparent;}
+.highlighted42 {color:#0e7b06;font-weight: bold; background-color: transparent;}
+
+/* 6. COMPONENTS ---------------------------------------------------------- */
+.card {
+  background: var(--surface);
+  border: 5px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.card .accent { 
+  color: var(--accent-2); 
+  font-weight: 700;
+  font-size: 50px;
+}
+
+.card.goal {
+  position: relative;
+  margin: 0px 10%;
+  font-size: 50px;
+  text-align: center;
+  background-color: #f3da4f;
+  border: 10px solid hsl(51, 85%, 35%);
+  box-shadow: 10px 10px 10px #000000;
+} 
+
+/* img:not([src*="images/arrow.png"]) {
+  box-shadow: 10px 10px 10px #000000;
+  border-radius: var(--radius);
+} */
+
+.card img:not([src*="images/arrow.png"], [src*="images/multiply.png"], [src*="images/arrow-reduced.png"], [src*="images/diffusion.png"], [src*="images/laurel.png"]) {
+  box-shadow: 10px 10px 10px #000000;
+  border-radius: var(--radius);
+}
+
+/* Embedded web page (iframe) that fills its container */
+.embed {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.btn {
+  font: inherit;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn.ghost { background: transparent; color: var(--accent); }
+
+/* Fragments: hidden until revealed by → (see orchestrator) */
+.fragment { opacity: 0; transform: translateY(8px); transition: opacity var(--transition), transform var(--transition); }
+.fragment.visible { opacity: 1; transform: none; }
+
+/* Media that fills the remaining slide height (shrinks instead of overflowing) */
+.media-fill {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.media-fill > img,
+.media-fill > video,
+.media-fill > canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Small screens: stack grids */
+@media (max-width: 720px) {
+  .grid-2, .grid-3, .grid-4, .split-1-2, .split-2-1 { grid-template-columns: 1fr; }
+  .cols { flex-direction: column; }
+  .deck-hint { display: none; }
+}
+
+
+.flex-container {
+  display: flex;         /* Activates flexbox layout */
+  align-items: center;   /* Vertically aligns text and image in the middle */
+  gap: 15px;             /* Adds clean spacing between the image and text */
+}
+
+.aligned-image {
+  width: 70px;          /* Set whatever size you need */
+  height: auto;
+}
+
+
+/* 7. PALETTE ---------------------------------------------------------- */
+
+.palette-container {
+  display: flex;
+  gap: 16px;
+  font-family: sans-serif;
+}
+
+.color-card {
+  display: inline-block;   /* sit on the same line as the text */
+  vertical-align: middle;  /* center it on the text line */
+  width: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: #fff;
+}
+.color-swatch {
+  height: 60px;
+  width: 100%;
+}
+
+/* 8. RESULTS SHOWCASE ---------------------------------------------------------- */
+
+.eval-samples {
+  display: flex;
+  justify-content: center;
+  gap: clamp(8px, 1vw, 16px);
+}
+.eval-samples figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.eval-samples .image-show { --show-h: min(11.5vw, 17vh); }
+.eval-samples figcaption {
+  max-width: min(11.5vw, 17vh);
+  font-size: clamp(11px, 0.95vw, 16px);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.card.eval-samples{
+  font-family: "Pixelify Sans", sans-serif;
+  font-weight: 700;
+  background-color: lch(95.51% 20.9 96.04); 
+  margin-left: 10%; 
+  margin-right: 10%;
+  img {
+    box-shadow: 0px 0px 0px #000000;
+    border-radius: 0px;
+  };
+}
+
+/* two columns on top, one full-width row at the bottom */
+.layout-2-1 {
+  display: grid;
+  grid-template-columns: 3fr 2fr;      /* top row: left is wider */
+  grid-template-rows: minmax(0, 1fr) auto;   /* top takes the free height, bottom its content */
+  gap: var(--gap, 20px);
+  min-height: 0;
+}
+.layout-2-1 > .full-row { grid-column: 1 / -1; }   /* spans every column */
+
+/* a card whose video or image fills the space left above its caption */
+.media-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.media-card > :is(video, img) {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;        /* whole frame visible, never stretched */
+}
+
+.challanger {
+  position: absolute;
+}
+

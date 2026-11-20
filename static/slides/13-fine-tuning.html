@@ -1,0 +1,145 @@
+<section data-title="Fine-tuning" class="column">
+  
+  <div class="ft-stage">
+  <div class="ft-figure">
+    <img src="images/finetuning.png" alt="Diagrama do fine-tuning com LoRA e ControlNet">
+
+    <!-- Overlay in the image's pixel coordinates (861 × 535) -->
+    <svg class="ft-overlay" viewBox="0 0 861 535" aria-hidden="true">
+
+      <!-- COMPONENTS: spotlight areas (x, y, width, height in image pixels) -->
+      <rect class="ft-comp" id="c-x"          x="0"   y="111" width="135" height="134" rx="4"/>
+      <rect class="ft-comp" id="c-inpaint"    x="0"   y="254" width="135" height="137" rx="4"/>
+      <rect class="ft-comp" id="c-lineart"    x="0"   y="394" width="135" height="141" rx="4"/>
+      <rect class="ft-comp" id="c-vae"        x="176" y="195" width="63"  height="57"  rx="4"/>
+      <rect class="ft-comp" id="c-z0"         x="279" y="152" width="30"  height="146" rx="3"/>
+      <rect class="ft-comp" id="c-noise"      x="351" y="198" width="51"  height="70"  rx="3"/>
+      <rect class="ft-comp" id="c-zt"         x="407" y="153" width="29"  height="145" rx="3"/>
+      <rect class="ft-comp" id="c-txt"        x="458" y="255" width="48"  height="60"  rx="4"/>
+      <rect class="ft-comp" id="c-clip"       x="536" y="251" width="62"  height="60"  rx="4"/>
+      <rect class="ft-comp" id="c-unet"       x="649" y="146" width="132" height="132" rx="4"/>
+      <rect class="ft-comp" id="c-controlnet" x="648" y="281" width="133" height="132" rx="4"/>
+      <rect class="ft-comp" id="c-lora"       x="680" y="108" width="68"  height="48"  rx="4"/>
+      <rect class="ft-comp" id="c-epsilon"   x="500" y="20"  width="100" height="30"  rx="4"/>
+      <rect class="ft-comp" id="c-weight"     x="505" y="65"  width="50" height="30"  rx="4"/>
+      <rect class="ft-comp" id="c-loss"       x="695" y="0"   width="36"  height="89"  rx="16"/>
+      <rect class="ft-comp" id="c-latent"     x="165" y="89"  width="696" height="348" rx="4"/>
+
+      <!-- ARROWS: drawn in the direction of the flow (start → arrowhead) -->
+      <path class="ft-arrow" id="a-x-vae"        d="M135 178 H145 V226 H180"/>
+      <path class="ft-arrow" id="a-vae-z0"       d="M236 225 H282"/>
+      <path class="ft-arrow" id="a-z0-noise"     d="M305 224 H348"/>
+      <path class="ft-arrow" id="a-eps"          d="M376 198 V20 H696"/>
+      <path class="ft-arrow" id="a-wt"           d="M376 198 V67 H693"/>
+      <path class="ft-arrow" id="a-zt-unet"      d="M434 213 H454 V187 H640"/>
+      <path class="ft-arrow" id="a-zt-cn"        d="M434 213 H454 V327 H640"/>
+      <path class="ft-arrow" id="a-txt-clip"     d="M503 278 H538"/>
+      <path class="ft-arrow" id="a-clip-unet"    d="M598 279 H621 V243 H640"/>
+      <path class="ft-arrow" id="a-clip-cn"      d="M598 279 H621 V303 H640"/>
+      <path class="ft-arrow" id="a-inpaint-cn"   d="M135 320 H390 V362 H640"/>
+      <path class="ft-arrow" id="a-lineart-cn"   d="M137 469 H389 V390 H640"/>
+      <path class="ft-arrow thick" id="a-res-1"  d="M686 297 V262"/>
+      <path class="ft-arrow thick" id="a-res-2"  d="M738 298 V261"/>
+      <path class="ft-arrow" id="a-unet-epshat"  d="M779 217 H832 V18 H733"/>
+      <path class="ft-arrow" id="a-minus-x"      d="M712 31 V53"/>
+      <path class="ft-arrow" id="a-x-lora"       d="M713 86 V108"/>
+      <!-- LoRA → Q K V connections (no arrowhead) -->
+      <path class="ft-arrow no-head" id="a-lora-1" d="M684 139 H667 V174"/>
+      <path class="ft-arrow no-head" id="a-lora-2" d="M695 153 V174"/>
+      <path class="ft-arrow no-head" id="a-lora-3" d="M739 153 V174"/>
+      <path class="ft-arrow no-head" id="a-lora-4" d="M745 137 H766 V172"/>
+    </svg>
+
+    <!-- BALLOONS-->
+    <div class="ft-balloon" id="b-vae" data-x="25" data-y="270" data-side="bottom" >
+      <div class="balloon-title">
+        <b>VAE (congelado)</b><br>
+      </div>
+      Codifica a sprite sheet 512×512 no latente \( z_0 \) de 64×64×4.
+    </div>
+
+    <div class="ft-balloon" id="b-noise" data-x="260" data-y="310" data-side="bottom" data-tail="30%">
+      <div class="balloon-title">
+        <b>Difusão</b><br>
+      </div>
+      Sorteia um passo \( t \) e um ruído \( \epsilon \sim \mathcal{N}(0, I) \), gerando \( z_t \).
+    </div>
+
+    <div class="ft-balloon" id="b-clip" data-x="420" data-y="320" data-side="bottom" data-tail="40%">
+      <div class="balloon-title">
+        <b>Condicionamento por texto</b><br>
+      </div>
+      CLIP transforma a legenda da imagem em embeddings \( c \).
+    </div>
+
+    <div class="ft-balloon" id="b-controlnet" data-x="620" data-y="420" data-side="bottom">
+      <div class="balloon-title">
+        <b>ControlNet (congelado)</b><br>
+      </div>
+      Lineart e inpainting guiam as poses; os resíduos \( r \) são somados à UNet.
+    </div>
+
+    <div class="ft-balloon" id="b-unet" data-x="440" data-y="100" data-side="top" data-tail="85%">
+      <div class="balloon-title">
+        <b>UNet (congelada)</b><br>
+      </div>
+      Prevê o ruído \( \hat{\epsilon} \) a partir de \( z_t \), \( c \) e \( r \).
+    </div>
+
+    <div class="ft-balloon" id="b-loss" data-x="470" data-y="100" data-side="bottom" data-tail="85%">
+      <div class="balloon-title">
+        <b>Função de perda</b><br>
+      </div>
+      \( \mathcal{L} = w(t)\,\lVert \epsilon - \hat{\epsilon} \rVert^2 \)
+    </div>
+
+    <div class="ft-balloon" id="b-lora" data-x="420" data-y="100" data-side="left">
+      <div class="balloon-title">
+        <b>LoRA</b><br>
+      </div>
+      Só os adapters nas projeções Q, K, V recebem o gradiente e são atualizados.
+    </div>
+  </div>
+  </div>
+
+  <!-- Caption + progress under the figure -->
+  <div class="ft-caption-row">
+    <p class="ft-caption"></p>
+  </div>
+
+  <!-- STEPS: one per → press. Each one is a full state (not cumulative). -->
+  <span class="fragment ft-step" data-caption="Codificação no espaço latente"
+        data-arrows="a-x-vae a-vae-z0"
+        data-focus="c-x c-vae c-z0"
+        data-balloons="b-vae"></span>
+
+  <span class="fragment ft-step" data-caption="Adição de ruído"
+        data-arrows="a-z0-noise"
+        data-focus="c-z0 c-noise c-zt"
+        data-balloons="b-noise"></span>
+
+  <span class="fragment ft-step" data-caption="Condicionamento por texto"
+        data-arrows="a-txt-clip a-clip-unet a-clip-cn"
+        data-focus="c-txt c-clip"
+        data-balloons="b-clip"></span>
+
+  <span class="fragment ft-step" data-caption="Controle de pose (ControlNet)"
+        data-arrows="a-inpaint-cn a-lineart-cn a-zt-cn a-clip-cn a-res-1 a-res-2"
+        data-focus="c-lineart c-inpaint c-controlnet"
+        data-balloons="b-controlnet"></span>
+
+  <span class="fragment ft-step" data-caption="Predição do ruído"
+        data-arrows="a-zt-unet a-clip-unet a-res-1 a-res-2"
+        data-focus="c-unet"
+        data-balloons="b-unet"></span>
+
+  <span class="fragment ft-step" data-caption="Cálculo da perda"
+        data-arrows="a-eps a-wt a-unet-epshat a-minus-x"
+        data-focus="c-loss c-noise c-weight c-epsilon"
+        data-balloons="b-loss"></span>
+
+  <span class="fragment ft-step" data-caption="Atualização dos adapters LoRA"
+        data-arrows="a-x-lora a-lora-1 a-lora-2 a-lora-3 a-lora-4"
+        data-focus="c-lora c-unet"
+        data-balloons="b-lora"></span>
+</section>

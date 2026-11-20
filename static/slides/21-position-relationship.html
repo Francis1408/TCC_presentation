@@ -1,0 +1,128 @@
+<section data-title="Avaliação" class="column">
+
+  <!-- Row 1: title -->
+  <h2 class="heading">Relação por posição</h2>
+
+  <!-- Row 2: top left = your content · top right = charts (fills the free height) -->
+  <div class="grid-2 fill eval-top">
+
+    <div style="background-color: antiquewhite;" class="chart-switcher card" data-folder="eval_pos">
+      <button class="cs-prev" aria-label="Gráfico anterior"><img src="images/arrow-reduced.png" alt=""></button>
+
+      <div class="chart-page" data-chart="position-mix" data-file="best_1x_position.csv">
+        <h3>Distribuição por posição (1x)</h3>
+        <div class="chart-box"><canvas></canvas></div>
+      </div>
+
+      <div class="chart-page" data-chart="position-mix" data-file="best_4x_position.csv">
+        <h3>Distribuição por posição (4x)</h3>
+        <div class="chart-box"><canvas></canvas></div>
+      </div>
+
+      <button class="cs-next" aria-label="Próximo gráfico"><img src="images/arrow-reduced.png" alt=""></button>
+    </div>
+
+
+    <div class="card column">
+      <p class="accent text-large center no-margin-top">OBSERVAÇÕES</p>
+      <ul class="bullets">
+        <li class="text-large"><u>MELHOR METADE</u>
+          <ul>
+            <li class="text-large"><mark class="highlighted">66.5%</mark> (1x) e <mark class="highlighted">86%</mark> (4x) são de posições <mark class="highlighted">right</mark> e <mark class="highlighted">left</mark></li>
+          </ul>
+        </li>
+
+        <li class="text-large"><u>PIOR METADE</u>
+          <ul>
+            <li class="text-large"><mark class="highlighted">83%</mark> (1x) e <mark class="highlighted">97%</mark> (4x) são de posições <mark class="highlighted">front</mark> e <mark class="highlighted">back</mark></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="center">
+        <img class="img img-sm rot-180 pixelated md-margin-top" src="images/arrow.png" alt="">
+      </div>
+
+      <ol>
+        <li class="text-large">Front e Back compartilhem menos informações que outras posições.</li>
+        <li class="text-large">Right e Left são pares idênticos.</li>
+        <li class="text-large">A legenda não descreve o personagem e posições específicas.</li>
+      </ol>
+    </div>
+
+
+    <div class="cap-edit fragment">
+      <div class="ce-body">
+        <!-- outside the grid: truth + sprite sheet -->
+        <div class="ce-refs" style="flex-direction: row;">
+
+          <figure class="ce-ref">
+            <figcaption>Sprite sheet</figcaption>
+            <img src="images/dataset_position/input.png" style="height: 80%; width: auto;">
+          </figure>
+
+          
+          <figure class="ce-ref">
+            <figcaption>Imagem prova</figcaption>
+            <img src="images/dataset_position/truth.png" style="height: 60%; width: auto;">
+          </figure>
+          <figure class="ce-ref">
+            <figcaption>Imagem gerada</figcaption>
+            <img src="images/dataset_position/generated.png" style="height: 60%; width: auto;">
+          </figure>
+        </div>
+
+        <div class="ce-text center" style="text-align: left;">
+          <h4>Legenda original</h4>
+          <p class="ce-caption" style="font-size: clamp(30px, 5.0cqh, 40px);">
+            pxchar, pixel art sprite sheet, male humanoid, pale skin, 
+            <span class="ce-removed">blue armor with silver accents</span>,
+            <span class="ce-added">brown cloak</span> with red trim, silver pauldrons,
+            silver bracers, silver gauntlets, brown belt with silver buckle, 
+            short blue-gray hair, green eyes, black pupils, gray armor,
+            purple boots 
+          </p>
+        </div>
+
+      </div>
+      <div class="ce-legend">
+        <span><i class="ce-removed-swatch"></i>Gerado dentro da região vermelha</span>
+        <span><i class="ce-added-swatch"></i>O que a região vermelha deve mostrar</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Row 3: samples -->
+  <div class="eval-samples lg-margin-top card">
+    <figure>
+      <div id="truth-rgba-truth" class="image-show square"></div>
+      <figcaption>Imagem prova</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-inpainting" class="image-show square"></div>
+      <figcaption>4x Inpainting</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-lineart-nohint" class="image-show square"></div>
+      <figcaption>4x Lineart</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-4x-lineart-hint" class="image-show square"></div>
+      <figcaption>4x Lineart (Espelhamento)</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-inpainting" class="image-show square"></div>
+      <figcaption>1x Inpainting</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-lineart-nohint" class="image-show square"></div>
+      <figcaption>1x Lineart</figcaption>
+    </figure>
+    <figure>
+      <div id="snapped-rgba-1x-lineart-hint" class="image-show square"></div>
+      <figcaption>1x Lineart (Espelhamento)</figcaption>
+    </figure>
+  </div>
+
+</section>

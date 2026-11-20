@@ -1,0 +1,85 @@
+<section data-title="Fine-tuning" class="column">
+
+  <h2 class="heading no-margin-bottom">Checkpoints</h2>
+  <div class="grid-2 fill" style="grid-template-columns: 2fr 3fr;">
+    <div class="column">
+
+      <div class="card">
+        <div class="center">
+          <p class="accent text-large no-margin-top no-margin-bottom">Abordagem</p>
+        </div>
+        <div class="line" >
+          <div>
+            <ul class="bullets">
+              <li class="text-large">Partição de <mark class="highlighted">120</mark> sprite sheets para desenvolvimento.</li>
+              <li class="text-large">Avaliação a cada <mark class="highlighted">500</mark> steps.</li>
+              <li class="text-large">Sistema de rankeamento entre MAE e LPIPS.</li>
+              <li class="text-large">Mesma noising seed <mark class="highlighted">(<mark class="highlighted42">42</mark> + index)</mark> e posição ocultada.</li>
+            </ul> 
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="background-color: antiquewhite;">
+        <figure class="table-figure">
+          <figcaption>Tabela 6 – Descrição dos datasets usados</figcaption>
+          <table class="table-academic">
+            <thead style="font-size: 35px;">
+              <tr>
+                <th rowspan="2">Configuração</th>
+                <th rowspan="2">Melhor checkpoint</th>
+       
+              </tr>
+            </thead>
+            <tbody style="font-size: 25px;">
+              <tr><td>1x inpainting</td><td  style="font-size: 32px;">7500</td></tr>
+              <tr><td>1x inpainting, lineart</td><td  style="font-size: 32px;">3500</td></tr>
+              <tr><td>1x inpainting, lineart (espelhamento)</td><td style="font-size: 32px;">7500</td></tr>
+              <tr><td>4x inpainting</td><td  style="font-size: 32px;">5500</td></tr>
+              <tr><td>4x inpainting, lineart</td><td style="font-size: 32px;">6500</td></tr>
+              <tr><td>4x inpainting, lineart (espelhamento)</td><td style="font-size: 32px;">8000</td></tr>
+            </tbody>
+          </table>
+          <p class="table-source">Fonte: Do autor (2026).</p>
+        </figure>
+      </div>
+    </div>
+
+    <div style="background-color: #ffffff; color: #000000;" class="chart-switcher card fill" data-folder="eval_train">
+      <button class="cs-prev" aria-label="Gráfico anterior"><img src="images/arrow-reduced.png" alt=""></button>
+
+      <!-- div 1: 1x-->
+      <div class="chart-page" data-chart="training-grid"
+          data-files="normalized_1x_inpainting.csv, normalized_1x_nohint.csv, normalized_1x_hint.csv"
+          data-names="Inpainting, Lineart, Lineart (Espelhamento)">
+        <h3>LPIPS e MAE por step (1x)</h3>
+        <div class="tg-grid"></div>
+        <p class="tg-legend">
+          <span><i class="lpips"></i> LPIPS</span>
+          <span><i class="mae"></i> MAE</span>
+          <span><i class="best"></i> melhor valor</span>
+          <span><i class="comb"></i> melhor combinado</span>
+        </p>
+      </div>
+
+      <!-- div 2: 4x  -->
+      <div class="chart-page" data-chart="training-grid"
+          data-files="normalized_4x_inpainting.csv, normalized_4x_nohint.csv, normalized_4x_hint.csv"
+          data-names="Inpainting, Lineart, Lineart (Espelhamento)">
+        <h3>LPIPS e MAE por step (4x)</h3>
+        <div class="tg-grid"></div>
+        <p class="tg-legend">
+          <span><i class="lpips"></i> LPIPS</span>
+          <span><i class="mae"></i> MAE</span>
+          <span><i class="best"></i> melhor valor</span>
+          <span><i class="comb"></i> melhor combinado</span>
+        </p>
+      </div>
+
+      <button class="cs-next" aria-label="Próximo gráfico"><img src="images/arrow-reduced.png" alt=""></button>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,74 @@
+<section data-title="Avaliação" class="column">
+
+  <!-- Row 1: title -->
+  <h2 class="heading">Pós-processamento</h2>
+
+  <!-- Row 2: two columns side by side -->
+  <div class="cols">
+    <!-- Column A -->
+    <div class="card column">
+      <p class="accent title-medium no-margin-top no-margin-bottom center">Mean Absolute Error</p>
+      <ul class="bullets">
+        <li class="text-large">Seleção do quadrante gerado.</li>
+        <li class="text-large">Redução em <mark class="highlighted">\(k\)</mark> vezes o tamanho do personagem <mark class="highlighted">\(k\)</mark> = constante de upscale).</li>
+        <li class="text-large">Aplicação de mediana sobre blocos de \(k\)x\(k\) px da imagem gerada.</li>
+      </ul>
+    </div>
+
+    <!-- Column B -->
+     <div class="card column">
+      <p class="accent title-medium no-margin-top no-margin-bottom center">3.Remoção do fundo</p>
+      <ul class="bullets">
+        <li class="text-large">Utilização do algoritmo<mark class="highlighted" > GrabCut</mark> <a href="https://example.com" target="_blank">(ROTHER et al., 2004)</a></li>
+        <li class="text-large">Adição de uma margem de 4px com a cor de plano de fundo padrão (#808080)</li>
+        <li class="text-large">Preservação da maior região (foreground) conectada</li>
+        <li class="text-large"><mark class="highlighted">Resultado:</mark> Sprite <mark class="highlighted">\(S\)</mark> definida por sua máscara booleana <mark class="highlighted">\(M\)</mark>, tal que:
+        <p>
+         <mark class="highlighted">\(S_{ij} = \begin{cases} \tilde{p}_{ij} & \text{if } M_{ij} = 1 \\ \text{background} & \text{if } M_{ij} = 0 \end{cases}\)</mark>
+
+        </p>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="snap-display center card">
+    <p class="accent title-medium no-margin-top no-margin-bottom center">2.Troca de palheta (pallete snapping)</p>
+    <div class="figure">
+      <div class="panel">
+        <h2>Imagem gerada <mark class="highlighted">\({I}_{ij} \)</mark></h2>
+        <canvas id="raw" width="384" height="384"></canvas>
+        <div class="line justify-center middle">
+          <p id="raw-note">256×256px</p>
+          <p><mark class="highlighted">\({p}_{ij}\)</mark></p>
+        </div>
+      </div>
+      
+      <div class="panel">
+        <h2>Palette <mark class="highlighted">\(P\)</mark></h2>
+        <div id="palette"></div>
+        <p id="palette-note"></p>
+        <p><mark class="highlighted">\(q\)</mark></p>
+      </div>
+
+      <p style="font-size: 35px;">\(\tilde{p}_{ij} = \arg\min_{q \in P} \lVert p_{ij} - q \rVert_2^2\)</p>
+
+      <img class="img img-md pixelated rot-90" src="images/arrow.png" alt="">
+      
+      <div class="panel">
+        <h2>Snapped</h2>
+        <canvas id="snapped" width="320" height="320"></canvas>
+        <p>64×64 native px</p>
+      </div>
+      
+      <div class="panel">
+        <h2>Imagem prova</h2>
+        <canvas id="truth" width="320" height="320"></canvas>
+        <p>64×64 native px</p>
+      </div>
+    </div>
+    
+  </div>
+
+</section>

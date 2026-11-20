@@ -1,0 +1,62 @@
+<section data-title="Máscaras" class="column">
+  <h2 class="heading">Comparação das máscaras</h2>
+  
+  <div class="cols">
+    <!-- Column A -->
+    <div class="card column">
+      <p class="accent title-medium no-margin-top no-margin-bottom center">Mean Absolute Error (MAE)</p>
+      <ul class="bullets" style="font-size: 30px;">
+        <li>Média da diferença entre pixels <mark class="highlighted">\(N\)</mark> da imagem gerada <mark class="highlighted">\(S\)</mark> e a imagem de prova <mark class="highlighted">\(T\)</mark>.</li>
+        <li>Média entre os 3 canais de cores <mark class="highlighted">\(c\)</mark> (red, green, blue) entre 0 a 256.</li>
+        <li>Resultado final normalizado entre [0,1].</li>
+        <div class="title-medium center">
+          <p><mark class="highlighted">\(\mathrm{MAE} = \frac{1}{3N} \sum_{i=1}^{N} \sum_{c=1}^{3}
+        \frac{\left| T_{i,c} - S_{i,c} \right|}{256} \)</mark></p>
+        </div>
+      </ul>
+    </div>
+
+    <!-- Column B -->
+     <div class="card column">
+      <p class="accent title-small no-margin-top no-margin-bottom center">LPIPS <a href="https://example.com" target="_blank">(ZHANG et al., 2018)</a></p>
+      <ul class="bullets" style="font-size: 30px;">
+        <li>Avalia o quanto as imagens são perceptualmente similares.</li>
+        <li>As imagens são passadas por uma Rede Neural Convolucional (CNN).</li>
+        <li>Cada camada avalia os mapas das imagens com diferentes métricas.</li>
+        <li>Utilização do AlexNet <a href="https://example.com" target="_blank">(KRIZHEVSKY et al., 2012).</a></li>
+        <li>Avaliado dentro de uma região (bounding-box).</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="mask-display fill justify-center lg-margin-top">
+    <div class="mask-row">
+      <div class="mask-panel">
+        <h3 style="font-size: 25px;">Imagem gerada + pos-processada</h3>
+        <canvas id="mask-snapped" width="350" height="350"></canvas>
+        <span class="mask-note"></span>
+      </div>
+
+      <div class="mask-panel">
+        <h3 style="font-size: 25px;">Imagem prova</h3>
+        <canvas id="mask-truth" width="350" height="350"></canvas>
+        <span class="mask-note"></span>
+      </div>
+
+      <div class="mask-panel">
+        <h3 style="font-size: 25px;">Comparação de pixels</h3>
+        <canvas id="mask-compare" width="350" height="350"></canvas>
+        <span class="mask-note" id="mask-compare-note"></span>
+      </div>
+    </div>
+
+    <!-- Legend: hovering an item highlights that category -->
+    <div class="mask-legend">
+      <div data-cat="both" ><span class="mask-swatch both"></span>pixel presente em ambas as máscaras</div>
+      <div data-cat="missing"><span class="mask-swatch missing"></span>pixel apenas na máscara de prova</div>
+      <div data-cat="extra"><span class="mask-swatch extra"></span>pixel apenas na máscara da saída</div>
+      <div data-cat="crop"><span class="mask-swatch crop"></span>região do LPIPS</div>
+    </div>
+  </div>
+</section>

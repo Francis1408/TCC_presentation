@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final Project Presentation</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/carousel.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="stylesheet" href="css/island.css">
+  <link rel="stylesheet" href="css/latent.css">
+  <link rel="stylesheet" href="css/fine-tuning.css">
+  <link rel="stylesheet" href="css/post-processing.css">
+  <link rel="stylesheet" href="css/mask.css">
+  <link rel="stylesheet" href="css/testing.css">
+  <link rel="stylesheet" href="css/charts.css">
+  <link rel="stylesheet" href="css/overlay.css">
+  <link rel="stylesheet" href="css/bulletin.css">
+  <link rel="stylesheet" href="css/castle.css">
+  <link rel="stylesheet" href="css/captioner.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+</head>
+<body>
+
+  <div class="deck">
+    <header class="deck-header">
+      <span class="deck-slide-title text-large" id="slide-title"></span>
+      <span class="deck-counter">
+          <span class="text-extra-large" id="slide-current">0</span>
+      </span>
+    </header>
+
+    <main class="deck-stage" id="stage" aria-live="polite"></main>
+
+    <footer class="deck-footer line">
+      <div class="center">
+        <img src="images/presentation.png" alt="">
+      </div>
+    </footer>
+  </div>
+
+  <!-- Slide list first, then the orchestrator that renders them -->
+  <script type="module" src="js/slides.config.js"></script>
+  <script type="module" src="js/orchestrator.js"></script>
+  <script type="module" src="js/carousel.js"></script>
+  <script type="module" src="js/island.js"></script>
+  <!-- MathJax: inline \( ... \), display $$ ... $$ -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+</body>
+</html>
