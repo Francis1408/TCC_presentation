@@ -22,12 +22,29 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python build_manifest.py          # fresh images/manifest.json
+
+      - name: Build images/manifest.json
+        run: |
+          python - <<'EOF'
+          import json, os
+          root = "static/images"
+          manifest = {
+              os.path.relpath(d, root).replace("\\", "/"): sorted(
+                  f"images/{os.path.relpath(d, root).replace(os.sep, '/')}/{f}"
+                  for f in files if f.lower().endswith((".png", ".jpg", ".jpeg", ".gif", ".webp")))
+              for d, _, files in os.walk(root)
+          }
+          json.dump(manifest, open("static/images/manifest.json", "w"), indent=1)
+          print(len(manifest), "folders listed")
+          EOF
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: static                         # this folder becomes the site
+
       - id: deployment
         uses: actions/deploy-pages@v4
