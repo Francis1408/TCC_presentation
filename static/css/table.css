@@ -34,11 +34,11 @@
   border-bottom: var(--table-rule-thin) solid var(--table-rule-color);
 }
 
-/* Extra breathing room after the top rule and before the bottom rule */
+
 .table-academic thead tr:first-child th { padding-top: calc(var(--table-pad-y) * 1.4); }
 .table-academic tbody tr:last-child td  { padding-bottom: calc(var(--table-pad-y) * 1.4); }
 
-/* Grouped header (colspan) with a short line under it, like \cmidrule */
+
 .table-academic thead th.group {
   text-align: center;
   border-bottom: none;
@@ -47,29 +47,34 @@
   background-position: center bottom;
   background-repeat: no-repeat;
 }
-/* Header rows above the last one: no full-width line */
+
 .table-academic thead tr:not(:last-child) th:not(.group):not([rowspan]) { border-bottom: none; }
-/* A header cell spanning all header rows sits at the bottom, next to the line */
+
 .table-academic thead th[rowspan] { vertical-align: bottom; }
 
-/* Cell alignment */
-.table-academic .num    { text-align: right; }
+.table-academic .num    { 
+  font-family: 'Courier New', Courier, monospace;
+  text-align: right; 
+}
+
 .table-academic .center { text-align: center; }
 
-/* Emphasis */
+.table-academic .nums    { 
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .table-academic .best,
 .table-academic tr.best td { font-weight: 700; }
 .table-academic tr.best td { color: var(--accent); }
 
-/* Thin line between groups of rows */
+
 .table-academic tr.rule td { border-top: var(--table-rule-thin) solid var(--table-rule-color); }
 
-/* Variants */
 .table-academic.compact { --table-pad-y: 0.3em; --table-pad-x: 0.75em; }
 .table-academic.full    { width: 100%; }
 .table-academic.striped tbody tr:nth-child(even) td { background: rgba(255, 255, 255, 0.03); }
 
-/* Caption above, source note below (ABNT style) */
+
 .table-figure {
   margin: 0;
   display: flex;
@@ -90,9 +95,9 @@
   align-self: stretch;
   text-align: center;
 }
-/* With a .full table the caption and source line up with the table edges */
+
 .table-figure:has(.table-academic.full) { align-items: stretch; }
 
-/* Fragments: reveal rows one by one with class="fragment" on <tr> */
+
 .table-academic tr.fragment { transform: none; }
 

@@ -1,6 +1,6 @@
 /* ---------- board ---------- */
 .board {
-  --board-px: 2;                                   /* pixel scale of the frame */
+  --board-px: 2;                                  
   min-height: 0;
   display: flex;
   border: solid transparent;
@@ -9,14 +9,13 @@
   image-rendering: pixelated;
 }
 
-/* notes: 12 columns → 3 per row (default), 4 per row (quarter),
-   2 per row (half) or a whole row (wide) */
+
 .board-notes {
   flex: 1;
   min-height: 0;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-content: safe center;          /* centred, but never pushed over the frame */
+  align-content: safe center;          
   align-items: start;
   gap: clamp(14px, 2.6vh, 52px) clamp(18px, 2.4vw, 44px);
   padding: clamp(12px, 2.5vh, 32px) clamp(12px, 1.5vw, 28px);
@@ -26,16 +25,14 @@
 .note.half    { grid-column: span 6; }   /* 2 notes per row */
 .note.wide    { grid-column: 1 / -1; }   /* whole row */
 
-/* Max width: style="--note-max: 900px" (or 60%, …). A note narrower than its
-   row is centred in it. */
+
 .note {
   width: 100%;
   max-width: var(--note-max, none);
   justify-self: center;
 }
 
-/* images on a note: shown at a set height (small pixel art is scaled up,
-   sharp). Change per image with style="--note-img-h: 25vh". */
+
 .note-img {
   display: block;
   align-self: center;
@@ -56,7 +53,7 @@
 
 /* ---------- notes ---------- */
 .note {
-  --note-px: 2;                                    /* pixel scale of the paper border */
+  --note-px: 2;                                    
   --note-img: url("../images/bulletin2.png");
 
   position: relative;
@@ -71,11 +68,10 @@
   image-rendering: pixelated;
   filter: drop-shadow(4px 6px 0 rgba(0, 0, 0, 0.35));
 }
-.note-paper  { --note-img: url("../images/bulletin1.png"); }   /* brown paper */
-.note-yellow { --note-img: url("../images/bulletin2.png"); }   /* sticky note */
-.note-white  { --note-img: url("../images/bulletin3.png"); }   /* white sheet */
+.note-paper  { --note-img: url("../images/bulletin1.png"); }  
+.note-yellow { --note-img: url("../images/bulletin2.png"); }  
+.note-white  { --note-img: url("../images/bulletin3.png"); }   
 
-/* a little tilt, like real notes (uses `rotate`, so it doesn't clash with fragments) */
 .note.tilt-l  { rotate: -1.5deg; }
 .note.tilt-r  { rotate: 1.2deg; }
 .note.tilt-l2 { rotate: -0.6deg; }
@@ -85,7 +81,7 @@
 .note .accent { color: #8e2b20; font-weight: 700; }
 .note a { color: #1f4fa8; }
 .note .bullets li::marker { color: #8e2b20; }
-.note .text-large { font-size: clamp(30px, min(3vw, 2.5vh), 70px); }   /* follows width AND height */
+.note .text-large { font-size: clamp(30px, min(3vw, 2.5vh), 70px); }   
 .note p { margin: 0; }
 
 /* ---------- pins and tape ---------- */
@@ -100,7 +96,6 @@
   pointer-events: none;
 }
 
-/* room at the top so the pin / tape doesn't cover the title */
 .note.pin  { padding-top: calc(clamp(28px, 2.4vw, 44px) * 0.45); }
 .note.tape { padding-top: calc(clamp(40px, 3.4vw, 64px) * 0.2); padding-inline: calc(clamp(40px, 3.4vw, 64px) * 0.35); }
 
@@ -126,8 +121,8 @@
   background-image: url("../images/sticker.png");
   opacity: 0.92;
 }
-.note.tape::before { left:  calc(var(--tape) * -0.42); scale: -1 1; }   /* mirrored: "\" */
-.note.tape::after  { right: calc(var(--tape) * -0.42); }                 /* "/" */
+.note.tape::before { left:  calc(var(--tape) * -0.42); scale: -1 1; } 
+.note.tape::after  { right: calc(var(--tape) * -0.42); }                
 
 /* ---------- appearing (fragments) ---------- */
 .note.fragment { transform: translateY(-14px) scale(1.04); }

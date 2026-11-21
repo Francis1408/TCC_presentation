@@ -1,10 +1,6 @@
 /* ---------- CAROUSEL ----------
- * Infinite, seamless image strip.
- * Tune per carousel from the HTML, e.g.:
- *   <div id="dataset-carousel" class="carousel" style="--carousel-h: 160px"></div>
- *   --carousel-h         image height (width follows each image's proportions)
- *   --carousel-gap       space between images
- *   --carousel-duration  set by carousel.js from the number of images
+
+
  */
 .carousel {
   --carousel-h: 480px;
@@ -13,19 +9,18 @@
   display: flex;
   width: 100%;
   overflow: hidden;
-  /* soft fade at both edges */
+
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 
 .carousel .group {
   display: flex;
-  flex: 0 0 auto;                     /* never shrink to the container width */
+  flex: 0 0 auto;                     
   gap: var(--carousel-gap);
-  padding-right: var(--carousel-gap); /* same space between the two copies */
+  padding-right: var(--carousel-gap); 
   animation: carousel-scroll var(--carousel-duration, 40s) linear infinite;
 }
 
-/* Pause when the mouse is over it */
 .carousel:hover .group { animation-play-state: paused; }
 
 .carousel-item {
@@ -33,7 +28,7 @@
   height: var(--carousel-h);
   width: auto;
   border-radius: 8px;
-  image-rendering: pixelated;         /* sharp pixel art; remove for photos */
+  image-rendering: pixelated;      
 }
 
 @keyframes carousel-scroll {
@@ -54,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1 1 0;                         /* side by side: share the row equally */
+  flex: 1 1 0;                         
   min-width: 0;
   width: 100%;
   height: var(--show-h);
@@ -66,22 +61,19 @@
   width: 100%;
   height: 100%;
   max-width: none;
-  object-fit: contain;                 /* scale up to the box, no stretching */
-  image-rendering: pixelated;          /* sharp pixels; remove for photos */
+  object-fit: contain;                
+  image-rendering: pixelated;         
   transition: opacity var(--show-fade) steps(4);
 }
 .image-show > img.hide { opacity: 0; }
 
-/* Optional frame: <div class="image-show framed"> */
+
 .image-show.framed {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
 
-/* Square box: <div class="image-show square" style="--show-h: 384px">
-   --show-h is then both the width and the height. On narrow screens it
-   shrinks to fit, staying square. */
 .image-show.square {
   flex: 0 0 auto;
   width: var(--show-h);

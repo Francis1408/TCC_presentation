@@ -1,8 +1,8 @@
 .ft-figure {
-  --ft-h: 80vh;                    /* max height of the figure */
-  --ft-ratio: calc(861 / 535);     /* image width / height (set to your image) */
-  --ft-hl: #ff7a00;                /* highlight color */
-  --ft-dim: #0000009e;/* dimming over non-focused parts */
+  --ft-h: 80vh;                   
+  --ft-ratio: calc(861 / 535);    
+  --ft-hl: #ff7a00;                
+  --ft-dim: #0000009e;
 
   position: relative;
   width: min(100%, calc(var(--ft-h) * var(--ft-ratio)));
@@ -18,8 +18,6 @@
 
 }
 
-/* Auto-fit: wrap the figure in <div class="ft-stage"> and it takes the
-   largest size that fits the space left on the slide (keeps proportions). */
 .ft-stage {
   flex: 1;
   min-height: 0;
@@ -31,7 +29,7 @@
   width: min(100cqw, calc(100cqh * var(--ft-ratio)));
 }
 
-/* SVG layer exactly on top of the image */
+
 .ft-overlay {
   position: absolute;
   inset: 0;
@@ -41,7 +39,6 @@
   pointer-events: none;
 }
 
-/* ---------- Dimming (spotlight) ---------- */
 .ft-dim-layer {
   fill: var(--ft-dim);
   opacity: 0;
@@ -49,7 +46,6 @@
 }
 .ft-dim-layer.on { opacity: 1; }
 
-/* ---------- Components (only visible when focused) ---------- */
 .ft-comp {
   fill: none;
   stroke: transparent;
@@ -59,7 +55,7 @@
 }
 .ft-comp.on { stroke: var(--ft-hl); }
 
-/* ---------- Arrows ---------- */
+
 .ft-arrow {
   fill: none;
   stroke: var(--ft-hl);
@@ -81,15 +77,10 @@
 /* dashes move along the path direction (start → end) */
 @keyframes ft-flow { to { stroke-dashoffset: -22; } }
 
-/* ---------- Speech balloons ----------
- * <div class="ft-balloon" id="b-vae" data-x="278" data-y="330" data-side="bottom">
- *   data-x / data-y  the point the tail touches (image pixels)
- *   data-side        where the balloon sits: top | bottom | left | right
- *   data-tail        where the tail is along the balloon edge (default 50%)
- */
+/* ---------- Speech balloons ----------*/
 .ft-balloon {
   --tail: 50%;
-  --gap: 16px;                     /* distance between point and balloon */
+  --gap: 16px;                     
   --b-bg: #d2d5dc;
   --b-border: #191919;
 
@@ -127,7 +118,7 @@
 
 
 /* ---------- Step markers, caption and dots ---------- */
-.ft-step { display: none; }        /* invisible: only drive the steps */
+.ft-step { display: none; }        
 
 .ft-caption-row {
   display: flex;
@@ -145,6 +136,6 @@
 .ft-dot { width: 10px; height: 10px; background: var(--border); }
 .ft-dot.done { background: var(--ft-hl, #ff7a00); }
 
-/* Calibration helper: <div class="ft-figure calibrate"> → click to print coordinates */
+
 .ft-figure.calibrate { cursor: crosshair; }
 .ft-figure.calibrate .ft-overlay { pointer-events: auto; }

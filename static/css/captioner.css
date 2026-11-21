@@ -1,25 +1,25 @@
 .cp-stage {
   flex: 1;
-  align-self: stretch;             /* a size container has no width of its own: */
-  width: 100%;                     /* take the page's full width even if it centres items */
-  min-height: min(62vh, 720px);    /* the window has no fixed height → give it room */
+  align-self: stretch;             
+  width: 100%;                    
+  min-height: min(62vh, 720px);   
   container-type: size;
   display: grid;
   place-items: center;
 }
 
 .cp-diagram {
-  --cp-ink: #14141c;                /* lines, borders, text */
-  --cp-block: #6ccfe0;              /* SigLIP / Text Encoder / fusion */
-  --cp-llm: #b4655e;                /* Synthesizer / Compressor */
-  --cp-vlm: #2f4a9a;                /* qwen3-vl dashed box */
-  --cp-lm: #c0392b;                 /* qwen3 dashed boxes */
+  --cp-ink: #14141c;                
+  --cp-block: #6ccfe0;            
+  --cp-llm: #b4655e;               
+  --cp-vlm: #2f4a9a;               
+  --cp-lm: #c0392b;                 
 
   position: relative;
-  container-type: inline-size;      /* children size themselves from the diagram */
+  container-type: inline-size;      
   aspect-ratio: 1600 / 700;
 }
-/* full width of the stage, but never taller than it */
+
 .cp-stage > .cp-diagram {
   width: 100%;
   max-width: calc(100cqh * 1600 / 700);
@@ -27,7 +27,7 @@
   color: var(--cp-ink);
 }
 
-/* 1 unit of the 1600 × 700 grid, in real pixels */
+
 .cp-diagram * { --u: calc(100cqw / 1600); }
 
 /* ---------- arrows ---------- */
@@ -63,7 +63,7 @@
 }
 .cp-el img { image-rendering: pixelated; }
 
-/* image + label under it (sprite sheet, python scripts, …) */
+
 .cp-fig {
   display: flex;
   flex-direction: column;
@@ -113,7 +113,7 @@
   white-space: nowrap;
 }
 
-/* dashed bundle (outputs of the view extraction) */
+
 .cp-bundle {
   display: flex;
   flex-direction: column;
@@ -166,19 +166,19 @@
 }
 .cp-label { text-align: center; }
 
-/* ---------- appearing one after another when the page opens ---------- */
+
 .pw-page.current .cp-el {
   animation: cp-pop 320ms steps(4) both;
   animation-delay: calc(var(--i, 0) * 220ms);
 }
 .pw-page.current .cp-wires > path {
-  stroke-dasharray: 1;                 /* paths have pathLength="1" */
+  stroke-dasharray: 1;                 
   animation: cp-draw 360ms steps(6) both;
   animation-delay: calc(var(--i, 0) * 220ms);
 }
 @keyframes cp-pop  { from { opacity: 0; translate: 0 calc(12 * var(--u)); } to { opacity: 1; translate: 0; } }
 @keyframes cp-draw {
-  0%   { opacity: 0; stroke-dashoffset: 1; }   /* hidden (with its arrowhead) until its turn */
+  0%   { opacity: 0; stroke-dashoffset: 1; }   
   1%   { opacity: 1; }
   100% { opacity: 1; stroke-dashoffset: 0; }
 }

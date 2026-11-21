@@ -7,7 +7,7 @@
   <div class="cols">
     <!-- Column A -->
     <div class="card column">
-      <p class="accent title-medium no-margin-top no-margin-bottom center">Mean Absolute Error</p>
+      <p class="accent title-medium no-margin-top no-margin-bottom center">1. Redimensionamento</p>
       <ul class="bullets">
         <li class="text-large">Seleção do quadrante gerado.</li>
         <li class="text-large">Redução em <mark class="highlighted">\(k\)</mark> vezes o tamanho do personagem <mark class="highlighted">\(k\)</mark> = constante de upscale).</li>
@@ -20,7 +20,7 @@
       <p class="accent title-medium no-margin-top no-margin-bottom center">3.Remoção do fundo</p>
       <ul class="bullets">
         <li class="text-large">Utilização do algoritmo<mark class="highlighted" > GrabCut</mark> <a href="https://example.com" target="_blank">(ROTHER et al., 2004)</a></li>
-        <li class="text-large">Adição de uma margem de 4px com a cor de plano de fundo padrão (#808080)</li>
+        <li class="text-large">Adição de uma margem de <span class="nums">4</span>px com a cor de plano de fundo padrão (#<span class="nums">808080</span>)</li>
         <li class="text-large">Preservação da maior região (foreground) conectada</li>
         <li class="text-large"><mark class="highlighted">Resultado:</mark> Sprite <mark class="highlighted">\(S\)</mark> definida por sua máscara booleana <mark class="highlighted">\(M\)</mark>, tal que:
         <p>

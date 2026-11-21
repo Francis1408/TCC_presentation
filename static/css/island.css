@@ -1,11 +1,11 @@
 /* ---------- Island (the map) ---------- */
 .island {
-  position: relative;            /* buttons are placed relative to this box */
-  width: min(100%, 2000px);      /* change to resize the whole island */
+  position: relative;           
+  width: min(100%, 2000px);      
   margin: 0 auto;
 }
 
-/* The island image defines the box size: width 100%, height follows */
+
 .island-map {
   display: block;
   width: 100%;
@@ -15,18 +15,18 @@
 
 /* ---------- Buttons ----------*/
 .island-button {
-  --size: 4%;                    /* button width, % of island width */
+  --size: 4%;                   
   position: absolute;
   left: var(--x, 50%);
   top: var(--y, 50%);
   width: var(--size);
-  translate: -50% -50%;          /* center the button on (x, y) */
+  translate: -50% -50%;         
 
   padding: 0;
   border: 0;
   background: none;
   cursor: pointer;
-  transition: transform 180ms steps(3);   /* stepped = pixel-art feel */
+  transition: transform 180ms steps(3);  
 }
 .island-button > img {
   display: block;
@@ -35,7 +35,6 @@
   image-rendering: pixelated;
 }
 
-/* Hover: jump up and keep hopping */
 .island-button:hover,
 .island-button:focus-visible {
   animation: island-hop 600ms steps(4) infinite;
@@ -43,7 +42,7 @@
 .island-button:active { transform: translateY(4%) scale(0.95); animation: none; }
 .island-button:focus-visible { outline: 3px dashed var(--accent); outline-offset: 4px; }
 
-/* Optional label shown on hover: <button ... data-label="Upscale"> */
+
 .island-button[data-label]::after {
   content: attr(data-label);
   position: absolute;
@@ -68,13 +67,12 @@
   50%      { transform: translateY(-25%); }
 }
 
-/* Calibration helper: add class="island calibrate" and click the map;
-   the console prints the --x/--y to paste on a button. */
+
 .island.calibrate { cursor: crosshair; }
 
 /* ---------- Window overlay ---------- */
 .pw-backdrop {
-  position: absolute;            /* covers the slide (header/footer stay visible) */
+  position: absolute;           
   inset: 0;
   z-index: 50;
   display: grid;
@@ -90,7 +88,7 @@
 .pw-window {
   --pw-bg: hsl(210, 100%, 75%);
   --pw-border: hsl(0, 0%, 0%);
-  --pw-px: 4px;                  /* "pixel" size of the border/corners */
+  --pw-px: 4px;                
 
   position: relative;
   display: none;
@@ -143,7 +141,7 @@
   border-bottom: var(--pw-px) solid var(--border);
 }
 
-/* Pages: only the current one is visible */
+
 .pw-page { display: none; overflow: auto; min-height: 0; }
 .pw-page.current { display: block; animation: pw-page-in 240ms steps(4) both; }
 .pw-page.current.from-left { animation-name: pw-page-in-left; }

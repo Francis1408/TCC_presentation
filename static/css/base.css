@@ -79,8 +79,10 @@ code { font-family: var(--font-mono); background: var(--surface-2); padding: .1e
 p, li, h3, span {
   font-family: "Pixelify Sans", sans-serif;
 }
-
-
+/*Font for number: better visually*/
+.nums {
+  font-family: 'Courier New', Courier, monospace;
+}
 
 h1, h2{
   font-family: "Fat-pixel";
@@ -150,11 +152,11 @@ h1, h2{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0;                         /* capsules touch, forming one bar */
+  gap: 0;                         
 }
 
 .deck-footer .capsule {
-  display: grid;                  /* outline and fill stacked in the same cell */
+  display: grid;                  
   cursor: pointer;
 }
 
@@ -167,23 +169,21 @@ h1, h2{
   image-rendering: pixelated;
 }
 
-/* fill on top of the outline */
+
 .deck-footer .overlay-image {
   z-index: 1;
   opacity: 0.8;
 }
 
-/* slides not reached yet: no fill */
+
 .deck-footer .capsule > img.empty {
   display: none;
 }
 
-/* hover: brighten the capsule you would jump to */
+
 .deck-footer .capsule:hover > img:first-child { filter: brightness(1.3); }
 
 
-
-/* A single rendered slide */
 .slide {
   position: absolute;
   inset: 0;
@@ -224,30 +224,25 @@ h1, h2{
 .split-1-2 { display: grid; gap: var(--gap); grid-template-columns: 1fr 2fr; }
 .split-2-1 { display: grid; gap: var(--gap); grid-template-columns: 2fr 1fr; }
 
-/* Grid cells may shrink below their content (stops big images/charts overflowing) */
+
 .grid-2 > *, .grid-3 > *, .grid-4 > *, .split-1-2 > *, .split-2-1 > * { min-width: 0; min-height: 0; }
-/* A grid with .fill takes all remaining slide height, and its row does too */
 .grid-2.fill, .grid-3.fill, .grid-4.fill, .split-1-2.fill, .split-2-1.fill { grid-template-rows: minmax(0, 1fr); }
 
-/* Image or video that fills its whole cell, keeping its proportions */
 .fit-media { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
 
-/* Chart container that takes the remaining height of a .column.
-   With Chart.js set options: { responsive: true, maintainAspectRatio: false } */
+
 .chart-box { position: relative; flex: 1; min-height: 0; }
 
-/* Content-sized columns: each column is as wide as its content needs,
-   and the leftover space is shared. Use instead of grid-2/3/4 when
-   columns hold different amounts of content. */
+
 .cols {
   display: flex;
   gap: var(--gap);
   align-items: flex-start;
 }
 .cols > * { flex: 1 1 auto; min-width: 0; }
-.cols > .shrink { flex: 0 0 auto; }   /* only as wide as its content (e.g. an arrow) */
-.cols > .grow-2 { flex-grow: 2; }     /* takes twice the leftover space */
-.cols.stretch { align-items: stretch; } /* all columns same height */
+.cols > .shrink { flex: 0 0 auto; }   
+.cols > .grow-2 { flex-grow: 2; }     
+.cols.stretch { align-items: stretch; } 
 
 /* Align a single child inside a flex/grid row */
 .self-center { align-self: center; }
@@ -420,12 +415,12 @@ h1, h2{
   border-radius: var(--radius);
 } */
 
-.card img:not([src*="images/arrow.png"], [src*="images/multiply.png"], [src*="images/arrow-reduced.png"], [src*="images/diffusion.png"], [src*="images/laurel.png"]) {
+.card img:not([src*="images/arrow.png"], [src*="images/multiply.png"], [src*="images/arrow-reduced.png"], [src*="images/diffusion.png"], [src*="images/laurel.png"], [src*="images/trumpet.png"]) {
   box-shadow: 10px 10px 10px #000000;
   border-radius: var(--radius);
 }
 
-/* Embedded web page (iframe) that fills its container */
+
 .embed {
   width: 100%;
   height: 100%;
@@ -447,11 +442,11 @@ h1, h2{
 .btn:hover { filter: brightness(1.1); }
 .btn.ghost { background: transparent; color: var(--accent); }
 
-/* Fragments: hidden until revealed by → (see orchestrator) */
+
 .fragment { opacity: 0; transform: translateY(8px); transition: opacity var(--transition), transform var(--transition); }
 .fragment.visible { opacity: 1; transform: none; }
 
-/* Media that fills the remaining slide height (shrinks instead of overflowing) */
+
 .media-fill {
   flex: 1;
   min-height: 0;
@@ -476,13 +471,13 @@ h1, h2{
 
 
 .flex-container {
-  display: flex;         /* Activates flexbox layout */
-  align-items: center;   /* Vertically aligns text and image in the middle */
-  gap: 15px;             /* Adds clean spacing between the image and text */
+  display: flex;         
+  align-items: center;   
+  gap: 15px;            
 }
 
 .aligned-image {
-  width: 70px;          /* Set whatever size you need */
+  width: 70px;         
   height: auto;
 }
 
@@ -496,8 +491,8 @@ h1, h2{
 }
 
 .color-card {
-  display: inline-block;   /* sit on the same line as the text */
-  vertical-align: middle;  /* center it on the text line */
+  display: inline-block;   
+  vertical-align: middle;  
   width: 60px;
   border-radius: 8px;
   overflow: hidden;
@@ -545,17 +540,17 @@ h1, h2{
   };
 }
 
-/* two columns on top, one full-width row at the bottom */
+
 .layout-2-1 {
   display: grid;
-  grid-template-columns: 3fr 2fr;      /* top row: left is wider */
-  grid-template-rows: minmax(0, 1fr) auto;   /* top takes the free height, bottom its content */
+  grid-template-columns: 3fr 2fr;      
+  grid-template-rows: minmax(0, 1fr) auto;   
   gap: var(--gap, 20px);
   min-height: 0;
 }
-.layout-2-1 > .full-row { grid-column: 1 / -1; }   /* spans every column */
+.layout-2-1 > .full-row { grid-column: 1 / -1; }   
 
-/* a card whose video or image fills the space left above its caption */
+
 .media-card {
   display: flex;
   flex-direction: column;
@@ -565,7 +560,7 @@ h1, h2{
   flex: 1;
   min-height: 0;
   width: 100%;
-  object-fit: contain;        /* whole frame visible, never stretched */
+  object-fit: contain;       
 }
 
 .challanger {

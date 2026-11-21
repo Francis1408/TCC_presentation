@@ -48,15 +48,15 @@ mask-snapped/* ---------- MASK DISPLAY ----------
   color: var(--text);
 }
 
-/* hover targets */
+
 #mask-snapped, #mask-truth { cursor: crosshair; }
 
-/* ring around the panels of the highlighted mask */
+
 .mask-display[data-highlight="output"] #mask-snapped { outline-color: #0072b2; }
 .mask-display[data-highlight="truth"]  #mask-truth   { outline-color: #d55e00; }
 .mask-display[data-highlight]:not([data-highlight=""]) #mask-compare { outline-color: var(--text); }
 
-/* legend */
+
 .mask-legend {
   display: grid;
   font-family: "Pixelify Sans", sans-serif;

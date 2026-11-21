@@ -1,17 +1,8 @@
-/* ==========================================================================
-   CHARTS: styles for every graph in charts.js
-     1. Single graphs     .graph            (e.g. SteamDB)
-     2. Chart switcher    .chart-switcher   (◀ chart ▶ + dots)
-     3. Training curves   .tg-grid          (3 rows × LPIPS | MAE)
-   ========================================================================== */
-
 
 /* ==========================================================================
    1. SINGLE GRAPHS
    ========================================================================== */
 
-/* Chart block: title, chart, credit stacked; grows to fill the free height.
-   The colours live here so they only affect the chart, not the whole deck. */
 .graph {
   --grid: #2c3038;
   --bar: #4aaff0;
@@ -32,9 +23,7 @@
 }
 .graph > h1 b { font-weight: 700; }
 
-/* The box around the <canvas>: takes all height left by the title and credit.
-   Chart.js needs: options: { responsive: true, maintainAspectRatio: false } */
-.graph > div.chart {   /* div only: an <h1 class="chart"> must not grow */
+.graph > div.chart {  
   position: relative;
   flex: 1;
   min-height: 0;
@@ -50,9 +39,6 @@
 
 /* ==========================================================================
    2. CHART SWITCHER
-        [◀]  title   [▶]
-             chart
-             ● ○ ○
    ========================================================================== */
 
 .chart-switcher {
@@ -84,12 +70,11 @@
   font-weight: 600;
 }
 .chart-page > .chart-box {
-  position: relative;          /* Chart.js sizes the canvas to this box */
+  position: relative;         
   flex: 1;
   min-height: 0;
 }
 
-/* ◀ ▶ buttons (pixel arrow image, arrow.png points up) */
 .cs-prev, .cs-next {
   grid-row: 1;
   padding: 4px;
@@ -142,8 +127,8 @@
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));   /* LPIPS | MAE */
-  grid-auto-rows: minmax(0, 1fr);                     /* rows share the height equally */
+  grid-template-columns: repeat(2, minmax(0, 1fr));   
+  grid-auto-rows: minmax(0, 1fr);                     
   gap: 4px 18px;
 }
 .tg-cell {
@@ -159,12 +144,11 @@
 }
 .tg-best { color: #e0301e; white-space: nowrap; }
 .tg-box {
-  position: relative;          /* Chart.js sizes the canvas to this box */
+  position: relative;          
   flex: 1;
   min-height: 0;
 }
 
-/* legend under the 6 charts */
 .tg-legend {
   display: flex;
   justify-content: center;
