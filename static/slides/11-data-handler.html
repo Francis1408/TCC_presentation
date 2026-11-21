@@ -99,7 +99,7 @@
               </li>
               <li class="" style="font-size: 40px;"><u>Qwen3-VL-8B-Instruct</u>
                 <ul>
-                  <li> SigLIP-2 Vision Transformer (ViT): pré-treinada e otimizada em <mark class="highlighted">3</mark> canais</mark></li>
+                  <li> SigLIP-2 Vision Transformer (ViT): pré-treinada e otimizada em <mark class="highlighted nums">3</mark> canais</mark></li>
                 </ul>
               </li>
             </ul> 
@@ -112,7 +112,7 @@
           <div class="card solution">
             <p class="accent title-medium no-margin-top center">Abordagem</p>
             <ul class="bullets">
-              <li class="text-large" style="font-size: 40px;">Tradução de pixels (A = 0) para uma cor predefinida (#808080)
+              <li class="text-large" style="font-size: 40px;">Tradução de pixels (A = 0) para uma cor predefinida (#<span class="nums">808080</span>)
                 <div class="color-card">
                   <div class="color-swatch" style="background-color: #808080;"></div>
                 </div>
@@ -147,7 +147,7 @@
               <h2 class="subtitle">Quadrante posição direita</h2>
               <div class="center"> 
                 <canvas id="truth" width="384" height="384"></canvas>
-                <p>256x256 pixels</p>
+                <p><span class="nums">256x256</span> pixels</p>
               </div>
             </div>
 
@@ -172,20 +172,20 @@
                 <h2 class="subtitle">Uma célula latente</h2>
               </div>
               <div class="row">
-                <div class="scale">1x</div>
-                <div><canvas id="zoom1" width="320" height="320"></canvas><p>16×16 sprite pixels = 4 células latentes</p></div>
+                <div class="scale nums">1x</div>
+                <div><canvas id="zoom1" width="320" height="320"></canvas><p><span class="nums">16×16</span> sprite pixels = <span class="nums">4</span> células latentes</p></div>
                 <div class="shrink center">
                   <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
                 </div>
-                <div><canvas id="cell1" class="cell" width="320" height="320"></canvas><p>1 célula latente = 8×8 = 64 sprite pixels</p></div>
+                <div><canvas id="cell1" class="cell" width="320" height="320"></canvas><p><span class="nums">1</span> célula latente = <span class="nums">8×8</span> = <span class="nums">64</span> sprite pixels</p></div>
               </div>
               <div class="row">
                 <div class="scale">4x</div>
-                <div><canvas id="zoom4" width="320" height="320"></canvas><p>16×16 sprite pixels = 64 células latentes</p></div>
+                <div><canvas id="zoom4" width="320" height="320"></canvas><p><span class="nums">16×16</span> sprite pixels = <span class="nums">64</span> células latentes</p></div>
                 <div class="shrink center">
                   <img class="img img-md pixelated rot-90"  src="images/arrow.png" alt="">
                 </div>
-                <div><canvas id="cell4" class="cell" width="320" height="320"></canvas><p>1 célula latente = 2×2 = 4 sprite pixels</p></div>
+                <div><canvas id="cell4" class="cell" width="320" height="320"></canvas><p><span class="nums">1</span> célula latente = <span class="nums">2×2</span> = <span class="nums">4</span> sprite pixels</p></div>
               </div>
             </div>
         </div>
@@ -210,12 +210,12 @@
 
           <div class="line justify-center middle lg-margin-top gap-lg">
             <div class="center">
-              <p class="title-medium">1x</p>
+              <p class="title-medium nums">1x</p>
               <div id="upscale-1x" class="image-show square" style="--show-h: 500px"></div>
             </div>
 
             <div class="center">
-              <p class="title-medium">4x</p>
+              <p class="title-medium nums">4x</p>
               <div id="upscale-4x" class="image-show square" style="--show-h: 500px"></div>
             </div>
           </div>
@@ -237,7 +237,7 @@
             <ul class="bullets" style="font-size: 30px;">
               <li class=""><u>Stable Diffusion v1-5</u>
                 <ul>
-                  <li>Treinado em <i>595k steps</i> em uma resolução de <mark class="highlighted">512x512</mark> pixels.<a href="https://example.com" target="_blank">(ROMBACH <i>et al.</i>, 2022)</a></li>
+                  <li>Treinado em <i><span class="nums">595</span>k steps</i> em uma resolução de <mark class="highlighted nums">512x512</mark> pixels.<a href="https://example.com" target="_blank">(ROMBACH <i>et al.</i>, 2022)</a></li>
                 </ul>
               </li>
                
@@ -256,8 +256,8 @@
           <div class="card">
             <p class="accent title-medium no-margin-top center">Abordagem</p>
             <ul class="bullets"  style="font-size: 30px;">
-              <li class=""> Junção das 4 poses do personagem em uma sprite sheet <mark class="highlighted">512x512</mark> px.</li>
-              <li class="">Divisão em quadrantes de 256x256 px <img class="img img-lg pixelated"  src="images/sheet.png" style="display: inline-block; vertical-align: middle; margin-left: 10px;">
+              <li class=""> Junção das 4 poses do personagem em uma sprite sheet <mark class="highlighted nums">512x512</mark> px.</li>
+              <li class="">Divisão em quadrantes de <span class="nums">256x256</span> px <img class="img img-lg pixelated"  src="images/sheet.png" style="display: inline-block; vertical-align: middle; margin-left: 10px;">
               </li>
             </ul> 
           </div>
