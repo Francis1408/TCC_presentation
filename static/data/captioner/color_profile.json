@@ -1,0 +1,440 @@
+{
+    "#FFD699": {
+        "views": {
+            "front": {
+                "upper": 0.019,
+                "middle": 0.028
+            }
+        }
+    },
+    "#B4F6FF": {
+        "views": {
+            "front": {
+                "upper": 0.019,
+                "middle": 0.024,
+                "lower": 0.065
+            },
+            "back": {
+                "upper": 0.029,
+                "middle": 0.026,
+                "lower": 0.084
+            },
+            "left": {
+                "upper": 0.029,
+                "middle": 0.015,
+                "lower": 0.057
+            },
+            "right": {
+                "upper": 0.029,
+                "middle": 0.015,
+                "lower": 0.057
+            }
+        }
+    },
+    "#F6BD7B": {
+        "views": {
+            "front": {
+                "upper": 0.038,
+                "middle": 0.077,
+                "lower": 0.041
+            },
+            "back": {
+                "upper": 0.029,
+                "middle": 0.052,
+                "lower": 0.029
+            },
+            "left": {
+                "upper": 0.039,
+                "middle": 0.07,
+                "lower": 0.019
+            },
+            "right": {
+                "upper": 0.039,
+                "middle": 0.08,
+                "lower": 0.033
+            }
+        }
+    },
+    "#ACD5FF": {
+        "views": {
+            "front": {
+                "upper": 0.019,
+                "middle": 0.014
+            }
+        }
+    },
+    "#D9A568": {
+        "views": {
+            "front": {
+                "upper": 0.028,
+                "middle": 0.063,
+                "lower": 0.03
+            },
+            "back": {
+                "upper": 0.029,
+                "middle": 0.037,
+                "lower": 0.029
+            },
+            "left": {
+                "upper": 0.029,
+                "middle": 0.06,
+                "lower": 0.019
+            },
+            "right": {
+                "upper": 0.029,
+                "middle": 0.07,
+                "lower": 0.033
+            }
+        }
+    },
+    "#E78751": {
+        "views": {
+            "front": {
+                "upper": 0.047,
+                "lower": 0.011
+            },
+            "back": {
+                "upper": 0.049
+            },
+            "left": {
+                "upper": 0.039,
+                "lower": 0.019
+            },
+            "right": {
+                "upper": 0.039,
+                "lower": 0.019
+            }
+        }
+    },
+    "#AF7B38": {
+        "views": {
+            "front": {
+                "upper": 0.038,
+                "middle": 0.056
+            },
+            "back": {
+                "upper": 0.02,
+                "middle": 0.044
+            },
+            "left": {
+                "upper": 0.02,
+                "middle": 0.02
+            },
+            "right": {
+                "upper": 0.02,
+                "middle": 0.04
+            }
+        }
+    },
+    "#BD5B39": {
+        "views": {
+            "front": {
+                "upper": 0.094
+            },
+            "back": {
+                "upper": 0.108
+            },
+            "left": {
+                "upper": 0.078
+            },
+            "right": {
+                "upper": 0.078
+            }
+        }
+    },
+    "#944118": {
+        "views": {
+            "front": {
+                "upper": 0.085
+            },
+            "back": {
+                "upper": 0.118
+            },
+            "left": {
+                "upper": 0.108
+            },
+            "right": {
+                "upper": 0.108
+            }
+        }
+    },
+    "#2073EE": {
+        "views": {
+            "front": {
+                "upper": 0.019,
+                "middle": 0.14,
+                "lower": 0.079
+            },
+            "back": {
+                "upper": 0.039,
+                "middle": 0.144,
+                "lower": 0.089
+            },
+            "left": {
+                "upper": 0.02,
+                "middle": 0.06,
+                "lower": 0.033
+            },
+            "right": {
+                "upper": 0.02,
+                "middle": 0.06,
+                "lower": 0.033
+            }
+        }
+    },
+    "#5A2000": {
+        "views": {
+            "front": {
+                "upper": 0.104,
+                "middle": 0.047,
+                "lower": 0.065
+            },
+            "back": {
+                "upper": 0.196,
+                "middle": 0.147,
+                "lower": 0.084
+            },
+            "left": {
+                "upper": 0.118,
+                "middle": 0.05,
+                "lower": 0.019
+            },
+            "right": {
+                "upper": 0.118,
+                "middle": 0.05,
+                "lower": 0.019
+            }
+        }
+    },
+    "#311800": {
+        "views": {
+            "front": {
+                "upper": 0.075,
+                "middle": 0.166,
+                "lower": 0.147
+            },
+            "back": {
+                "upper": 0.078,
+                "middle": 0.145,
+                "lower": 0.142
+            },
+            "left": {
+                "upper": 0.059,
+                "middle": 0.167,
+                "lower": 0.217
+            },
+            "right": {
+                "upper": 0.059,
+                "middle": 0.167,
+                "lower": 0.217
+            }
+        }
+    },
+    "#310800": {
+        "views": {
+            "front": {
+                "upper": 0.358,
+                "middle": 0.066,
+                "lower": 0.109
+            },
+            "back": {
+                "upper": 0.255,
+                "middle": 0.041,
+                "lower": 0.105
+            },
+            "left": {
+                "upper": 0.343,
+                "middle": 0.15,
+                "lower": 0.151
+            },
+            "right": {
+                "upper": 0.343,
+                "middle": 0.15,
+                "lower": 0.151
+            }
+        }
+    },
+    "#00207B": {
+        "views": {
+            "front": {
+                "upper": 0.019,
+                "middle": 0.056
+            },
+            "back": {
+                "middle": 0.044
+            },
+            "left": {
+                "middle": 0.12,
+                "lower": 0.066
+            },
+            "right": {
+                "middle": 0.12,
+                "lower": 0.066
+            }
+        }
+    },
+    "#000000": {
+        "views": {
+            "front": {
+                "upper": 0.038,
+                "middle": 0.028,
+                "lower": 0.087
+            },
+            "back": {
+                "lower": 0.084
+            },
+            "left": {
+                "upper": 0.02,
+                "middle": 0.02,
+                "lower": 0.075
+            },
+            "right": {
+                "upper": 0.02,
+                "middle": 0.02,
+                "lower": 0.075
+            }
+        }
+    },
+    "#6AC5FF": {
+        "views": {
+            "front": {
+                "middle": 0.028,
+                "lower": 0.016
+            },
+            "back": {
+                "middle": 0.015,
+                "lower": 0.016
+            },
+            "left": {
+                "lower": 0.014
+            },
+            "right": {
+                "lower": 0.014
+            }
+        }
+    },
+    "#4AACFF": {
+        "views": {
+            "front": {
+                "middle": 0.028,
+                "lower": 0.054
+            },
+            "back": {
+                "middle": 0.029,
+                "lower": 0.032
+            },
+            "left": {
+                "middle": 0.04,
+                "lower": 0.019
+            },
+            "right": {
+                "middle": 0.04,
+                "lower": 0.019
+            }
+        }
+    },
+    "#414141": {
+        "views": {
+            "front": {
+                "middle": 0.021,
+                "lower": 0.074
+            },
+            "back": {
+                "middle": 0.022,
+                "lower": 0.071
+            },
+            "left": {
+                "middle": 0.02,
+                "lower": 0.071
+            },
+            "right": {
+                "lower": 0.057
+            }
+        }
+    },
+    "#1D3AAD": {
+        "views": {
+            "front": {
+                "middle": 0.063
+            },
+            "back": {
+                "middle": 0.118
+            }
+        }
+    },
+    "#272935": {
+        "views": {
+            "front": {
+                "middle": 0.035,
+                "lower": 0.074
+            },
+            "back": {
+                "middle": 0.037,
+                "lower": 0.092
+            },
+            "left": {
+                "middle": 0.04,
+                "lower": 0.052
+            },
+            "right": {
+                "lower": 0.038
+            }
+        }
+    },
+    "#181818": {
+        "views": {
+            "front": {
+                "middle": 0.049,
+                "lower": 0.06
+            },
+            "back": {
+                "middle": 0.052,
+                "lower": 0.058
+            },
+            "left": {
+                "middle": 0.02,
+                "lower": 0.038
+            },
+            "right": {
+                "middle": 0.02,
+                "lower": 0.038
+            }
+        }
+    },
+    "#8BD5FF": {
+        "views": {
+            "front": {
+                "lower": 0.087
+            },
+            "back": {
+                "upper": 0.049,
+                "middle": 0.033,
+                "lower": 0.063
+            },
+            "left": {
+                "upper": 0.069,
+                "middle": 0.1,
+                "lower": 0.132
+            },
+            "right": {
+                "upper": 0.069,
+                "middle": 0.1,
+                "lower": 0.132
+            }
+        }
+    },
+    "#E62931": {
+        "views": {
+            "back": {
+                "middle": 0.015
+            }
+        }
+    },
+    "#4953AB": {
+        "views": {
+            "back": {
+                "lower": 0.021
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "character_type": {
+        "analysis": "Full Sheet Observation, because it provides a consistent silhouette across all views and describes the overall proportions and lack of fantasy features.",
+        "conclusion": "The character is a humanoid with a slender torso, shoulder width similar to hip width, and a slightly narrowing waist. The silhouette is flat in the chest and overall proportions are elongated, with no fantasy features such as horns, wings, or fur."
+    },
+    "skin_tone": {
+        "analysis": "Full Sheet Observation, because it explicitly states the skin tone as pale, white, or cream on all exposed areas, and this is consistent with the position observations.",
+        "conclusion": "The character has a pale, white, or cream skin tone visible on the face, neck, hands, arms, legs, and feet."
+    },
+    "body_features": {
+        "analysis": "Position Observations, because they consistently report no wings, horns, tail, scales, or fur visible in all views.",
+        "conclusion": "No anatomical body features such as wings, horns, tail, scales, or fur are present on the character."
+    },
+    "body": {
+        "analysis": "Full Sheet Observation, because it describes the shirt and sleeves consistently across all views, and the position observations confirm the color and pattern.",
+        "conclusion": "The character wears a blue and white checkered shirt with brown trim and white and blue checkered sleeves."
+    },
+    "extra_armor": {
+        "analysis": "Full Sheet Observation, because it lists the brown belt, black arm guards, and white and blue checkered sleeves as armor items visible in all views, and the position observations confirm these details.",
+        "conclusion": "The character wears a brown belt, black arm guards, and white and blue checkered sleeves as extra armor."
+    },
+    "head": {
+        "analysis": "Full Sheet Observation, because it describes the hair and lack of headgear consistently across all views, and the position observations confirm the brown hair and absence of headgear.",
+        "conclusion": "The character has brown hair with bangs and no headgear or facial hair."
+    },
+    "eyes": {
+        "analysis": "Full Sheet Observation, because it confirms the blue irises with black pupils are visible in all views, and the position observations support this.",
+        "conclusion": "The character has blue irises with black pupils."
+    },
+    "lower": {
+        "analysis": "Full Sheet Observation, because it describes the white pants with black trim and brown belt consistently across all views, and the position observations confirm the color and trim.",
+        "conclusion": "The character wears white pants with black trim and brown belt."
+    },
+    "equipment": {
+        "analysis": "Position Observations, because they describe the arm guards in detail on the left and right views, and the full sheet observation confirms no weapons or held objects are visible.",
+        "conclusion": "The character wears blue and white striped arm guards with red stripes on the wrist and red tips on the right arm."
+    }
+}

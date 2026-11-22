@@ -1,34 +1,18 @@
-/* ---------- ISLAND ----------
- * Buttons on the island open pixel-style windows with pages.
- *
- * HTML contract (see island-slide.html):
- *   <button class="island-button" data-window="upscale" ...>
- *   <div class="pw-backdrop" hidden>
- *     <div class="pw-window" id="upscale">
- *       <h3 class="pw-title">...</h3>
- *       <div class="pw-page">page 1</div>
- *       <div class="pw-page">page 2</div>     (any number of pages)
- *     </div>
- *   </div>
- *
- * Keys while a window is open:  ← → change page   Esc close
- * (the deck does NOT change slide while a window is open)
- */
+/* ---------- ISLAND ----------*/
 
 const files = window.SLIDES || [];
 const pageNum = files.findIndex(slide => slide.includes('data-handler'));
 
 function setupIsland(island) {
-  if (island.dataset.ready) return;         // already set up
+  if (island.dataset.ready) return;         
   island.dataset.ready = 'true';
 
   const slide = island.closest('section') || document;
   const backdrop = slide.querySelector('.pw-backdrop');
   if (!backdrop) return console.warn('island.js: no .pw-backdrop found');
 
-  let current = null;     // { win, pages, index, opener }
+  let current = null;     
 
-  /* ----- build the close button and page numeration in every window ----- */
   backdrop.querySelectorAll('.pw-window').forEach((win, index) => {
     win.setAttribute('role', 'dialog');
     win.setAttribute('aria-modal', 'true');

@@ -6,6 +6,7 @@ import { renderSnapDisplay } from "./post-processing.js";
 import { renderMaskDisplay } from "./mask.js";
 import { renderCharts } from "./charts.js";
 import { renderVideoSpeed } from "./video.js";
+import { renderFilePeek } from "./captioner.js";
 
 (function () {
   'use strict';
@@ -36,8 +37,7 @@ import { renderVideoSpeed } from "./video.js";
     return cache.get(path);
   }
 
-  // Downloads a slide's HTML and starts downloading the images it uses,
-  // so they are already in the browser cache when the slide is shown.
+
   async function prefetch(index) {
     if (index < 0 || index >= files.length) return;
     try {
@@ -51,7 +51,7 @@ import { renderVideoSpeed } from "./video.js";
         img.decoding = 'async';
         img.src = src;
       });
-    } catch { /* not important: the slide loads normally when shown */ }
+    } catch {}
   }
 
 
@@ -97,7 +97,7 @@ import { renderVideoSpeed } from "./video.js";
     stage.replaceChildren(slide);
     current = index;
 
-    // scripts inserted with innerHTML don't run: re-create them so they do
+   
     wrapper.querySelectorAll('script').forEach((old) => {
       const s = document.createElement('script');
       [...old.attributes].forEach((a) => s.setAttribute(a.name, a.value));
@@ -105,7 +105,7 @@ import { renderVideoSpeed } from "./video.js";
       slide.appendChild(s);
     });
 
-    // If going backwards, show all fragments so the slide appears complete
+   
     if (direction < 0) slide.querySelectorAll('.fragment').forEach((f) => f.classList.add('visible'));
 
     updateChrome(slide);
@@ -113,7 +113,7 @@ import { renderVideoSpeed } from "./video.js";
     history.replaceState(null, '', `#${index + 1}`);
     stage.dispatchEvent(new CustomEvent('slide:enter', { detail: { index, slide } }));
 
-    // get the neighbours ready (HTML + images) while this slide is shown
+    
     prefetch(index + 1);
     prefetch(index - 1);
 
@@ -128,6 +128,7 @@ import { renderVideoSpeed } from "./video.js";
     renderVideoSpeed();
     renderCharts();
     renderSnapDisplay();
+    renderFilePeek()
   }
 
   function updateChrome(slide) {

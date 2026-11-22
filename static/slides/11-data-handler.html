@@ -353,231 +353,78 @@
         </div>
       </div>
 
-      <!-- Paste these three pages inside <div class="pw-window" id="captioner">,
-     right after your first page (the pipeline overview). -->
-
       <!-- ===================== PAGE 2: VIEW EXTRACTION ===================== -->
       <div class="pw-page">
-        <p class="title-large center no-margin-top no-margin-bottom">1. View Extraction</p>
-
-        <div class="cp-stage">
-          <div class="cp-diagram">
-
-            <svg class="cp-wires" viewBox="0 0 1600 700" aria-hidden="true">
-              <defs>
-                <marker id="cp-arrow-1" viewBox="0 0 10 10" refX="7" refY="5"
-                        markerWidth="4" markerHeight="4" orient="auto">
-                  <path d="M0,0 L10,5 L0,10 z"/>
-                </marker>
-              </defs>
-              <!-- sprite sheet → extractor.py -->
-              <path pathLength="1" style="--i:1" marker-end="url(#cp-arrow-1)" d="M200,350 L200,420"/>
-              <!-- extractor.py → crops (straight) and → full sheet (curve up) -->
-              <path pathLength="1" style="--i:3" marker-end="url(#cp-arrow-1)" d="M285,505 L500,505"/>
-              <path pathLength="1" style="--i:3" marker-end="url(#cp-arrow-1)" d="M390,505 C450,505 440,185 500,185"/>
-              <!-- both outputs → View Pass -->
-              <path pathLength="1" style="--i:6" d="M1215,185 C1290,185 1270,365 1340,365"/>
-              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-1)" d="M1215,525 C1290,525 1270,365 1340,365"/>
-            </svg>
-
-            <figure class="cp-el cp-fig" style="--x:70; --y:40; --w:260; --h:300; --i:0">
-              <img src="images/dataset_captioner/776.png" alt="Sprite sheet">
-              <figcaption>Sprite sheet</figcaption>
-            </figure>
-
-            <figure class="cp-el cp-fig" style="--x:130; --y:435; --w:140; --h:200; --i:2; --fs:22">
-              <img src="images/dataset_captioner/python.png" alt="">
-              <figcaption class="cp-code">extractor.py</figcaption>
-            </figure>
-
-            <div class="cp-el cp-bundle" style="--x:515; --y:60; --w:700; --h:250; --i:4">
-              <p class="cp-bundle-title no-margin-top no-margin-bottom">Full sheet + prompt</p>
-              <div class="cp-bundle-row">
-                <img src="images/dataset_captioner/776.png" alt="Sprite sheet completo">
-                <span class="cp-plus">+</span>
-                <img src="images/text.png" alt="Prompt" style="height: 55%;">
-              </div>
-            </div>
-
-            <div class="cp-el cp-bundle" style="--x:515; --y:380; --w:700; --h:290; --i:5">
-              <p class="cp-bundle-title no-margin-top no-margin-bottom">Position crops + prompts</p>
-              <div class="cp-bundle-row">
-                <div class="cp-pair">
-                  <img src="images/dataset_captioner/crop_front.png" alt="Frente">
-                  <img src="images/text.png" alt="Prompt">
-                </div>
-                <div class="cp-pair">
-                  <img src="images/dataset_captioner/crop_back.png" alt="Costas">
-                  <img src="images/text.png" alt="Prompt">
-                </div>
-                <div class="cp-pair">
-                  <img src="images/dataset_captioner/crop_left.png" alt="Esquerda">
-                  <img src="images/text.png" alt="Prompt">
-                </div>
-                <div class="cp-pair">
-                  <img src="images/dataset_captioner/crop_right.png" alt="Direita">
-                  <img src="images/text.png" alt="Prompt">
-                </div>
-              </div>
-            </div>
-
-            <img class="cp-el cp-img" style="--x:1345; --y:294; --w:200; --h:142; --i:7"
-                 src="images/dataset_captioner/view-pass-module.png" alt="Próxima etapa: View Pass">
-          </div>
+        <div class="center">
+          <p class="title-medium no-margin-top">View Extraction</p>
         </div>
-      </div>
+        <div class="figure justify-center middle step-frame" style="--ratio: 1600 / 700;">
+            <img class="base-image" src="images/dataset_captioner/view-extraction.png" alt="">
 
-
-      <!-- ======================== PAGE 3: VIEW PASS ======================== -->
-      <div class="pw-page">
-        <p class="title-large center no-margin-top no-margin-bottom">2. View Pass</p>
-
-        <div class="cp-stage">
-          <div class="cp-diagram">
-
-            <svg class="cp-wires" viewBox="0 0 1600 700" aria-hidden="true">
-              <defs>
-                <marker id="cp-arrow-2" viewBox="0 0 10 10" refX="7" refY="5"
-                        markerWidth="4" markerHeight="4" orient="auto">
-                  <path d="M0,0 L10,5 L0,10 z"/>
-                </marker>
-              </defs>
-              <!-- images → SigLIP-2, prompts → Text Encoder -->
-              <path pathLength="1" style="--i:2" marker-end="url(#cp-arrow-2)" d="M190,165 L290,165"/>
-              <path pathLength="1" style="--i:2" marker-end="url(#cp-arrow-2)" d="M175,385 L290,385"/>
-              <!-- encoders → fusion layer -->
-              <path pathLength="1" style="--i:3" class="thin" marker-end="url(#cp-arrow-2)" d="M530,165 C640,165 740,150 740,195"/>
-              <path pathLength="1" style="--i:3" class="thin" marker-end="url(#cp-arrow-2)" d="M530,385 C640,385 740,395 740,345"/>
-              <!-- fusion → Positions / Spritesheet -->
-              <path pathLength="1" style="--i:4" marker-end="url(#cp-arrow-2)" d="M860,270 L950,270"/>
-              <!-- palette row -->
-              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-2)" d="M390,585 L430,585"/>
-              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-2)" d="M570,585 L612,585"/>
-              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-2)" d="M815,585 L858,585"/>
-              <!-- formatter.py → Pallete file -->
-              <path pathLength="1" style="--i:7" marker-end="url(#cp-arrow-2)" d="M1000,585 C1150,585 1320,585 1320,358"/>
-              <!-- files → Language Pass -->
-              <path pathLength="1" style="--i:8" marker-end="url(#cp-arrow-2)" d="M1395,270 L1440,270"/>
-            </svg>
-
-            <!-- inputs (from the View Extraction) -->
-            <figure class="cp-el cp-fig" style="--x:40; --y:95; --w:140; --h:180; --i:0; --fs:22">
-              <img src="images/dataset_captioner/776.png" alt="">
-              <figcaption>Imagens</figcaption>
-            </figure>
-            <figure class="cp-el cp-fig" style="--x:65; --y:335; --w:100; --h:140; --i:0; --fs:22">
+            <button class="file" data-window="background" data-file="" style="--x: 90%; --y: 30%; --size: 15%">
               <img src="images/text.png" alt="">
-              <figcaption>Prompts</figcaption>
-            </figure>
+            </button>
 
-            <!-- qwen3-vl -->
-            <div class="cp-el cp-group" style="--x:250; --y:45; --w:650; --h:445; --i:1">
-              <span class="cp-tag">qwen3-vl:8b-instruct</span>
-            </div>
-            <div class="cp-el cp-block" style="--x:300; --y:110; --w:230; --h:110; --i:2; --fs:30">SigLIP-2</div>
-            <div class="cp-el cp-block" style="--x:300; --y:330; --w:230; --h:110; --i:2">Text Encoder</div>
-            <div class="cp-el cp-block" style="--x:620; --y:205; --w:240; --h:130; --i:3">Multimodal fusion layer</div>
+            <button class="file" data-window="background" data-file="" style="--x: 91%; --y: 83%; --size: 10%">
+              <img src="images/text.png" alt="">
+            </button>
 
-            <!-- outputs -->
-            <img class="cp-el cp-img" style="--x:960; --y:200; --w:130; --h:142; --i:5"
-                 src="images/dataset_captioner/positions.png" alt="Positions">
-            <img class="cp-el cp-img" style="--x:1105; --y:200; --w:130; --h:142; --i:5"
-                 src="images/dataset_captioner/spritesheet.png" alt="Spritesheet">
-            <img class="cp-el cp-img" style="--x:1255; --y:200; --w:130; --h:142; --i:7"
-                 src="images/dataset_captioner/pallete.png" alt="Pallete">
+            <button class="file" data-window="background" data-file="" style="--x: 85%; --y: 83%; --size: 10%">
+              <img src="images/text.png" alt="">
+            </button>
 
-            <!-- palette row -->
-            <img class="cp-el cp-img" style="--x:290; --y:535; --w:90; --h:100; --i:6"
-                 src="images/dataset_captioner/776.png" alt="Sprite sheet">
-            <figure class="cp-el cp-fig" style="--x:420; --y:525; --w:170; --h:165; --i:6; --fs:20">
-              <img src="images/dataset_captioner/python.png" alt="">
-              <figcaption class="cp-code">pallete_extractor.py</figcaption>
-            </figure>
-            <div class="cp-el cp-swatches" style="--x:625; --y:565; --w:180; --h:40; --i:6">
-              <span style="--sw:#f2c79a"></span>
-              <span style="--sw:#9fd4f2"></span>
-              <span style="--sw:#5aa0e6"></span>
-              <span style="--sw:#2f6fd6"></span>
-              <span style="--sw:#1d3f9a"></span>
-            </div>
-            <figure class="cp-el cp-fig" style="--x:870; --y:525; --w:120; --h:165; --i:6; --fs:20">
-              <img src="images/dataset_captioner/python.png" alt="">
-              <figcaption class="cp-code">formatter.py</figcaption>
-            </figure>
+            <button class="file" data-window="background" data-file="" style="--x: 78%; --y: 83%; --size: 10%">
+              <img src="images/text.png" alt="">
+            </button>
 
-            <img class="cp-el cp-img" style="--x:1450; --y:219; --w:145; --h:102; --i:8"
-                 src="images/dataset_captioner/language-pass-module.png" alt="Próxima etapa: Language Pass">
-          </div>
+            <button class="file" data-window="background" data-file="" style="--x: 71%; --y: 83%; --size: 10%">
+              <img src="images/text.png" alt="">
+            </button>
         </div>
       </div>
 
 
-      <!-- ====================== PAGE 4: LANGUAGE PASS ====================== -->
+      <!-- ===================== PAGE 3: VIEW PASS ===================== -->
       <div class="pw-page">
-        <p class="title-large center no-margin-top no-margin-bottom">3. Language Pass</p>
+        <div class="center">
+          <p class="title-medium no-margin-top">View Pass</p>
+        </div>
+        <div class="figure justify-center middle step-frame" style="--ratio: 2000 / 900;">
+            <img class="base-image" src="images/dataset_captioner/view-pass.png" alt="">
 
-        <div class="cp-stage">
-          <div class="cp-diagram">
+            <button class="file" data-window="background" data-file="data/captioner/color_profile.json" style="--x: 70%; --y: 25%; --size: 8%">
+              <img src="images/dataset_captioner/pallete.png" alt="">
+            </button>
 
-            <svg class="cp-wires" viewBox="0 0 1600 700" aria-hidden="true">
-              <defs>
-                <marker id="cp-arrow-3" viewBox="0 0 10 10" refX="7" refY="5"
-                        markerWidth="4" markerHeight="4" orient="auto">
-                  <path d="M0,0 L10,5 L0,10 z"/>
-                </marker>
-              </defs>
-              <!-- three files → Synthesizer -->
-              <path pathLength="1" style="--i:1" d="M180,105 C240,105 240,300 295,300"/>
-              <path pathLength="1" style="--i:1" d="M180,455 C240,455 240,300 295,300"/>
-              <path pathLength="1" style="--i:1" marker-end="url(#cp-arrow-3)" d="M180,280 C240,280 240,300 295,300"/>
-              <!-- Synthesizer → Detailed → Compressor → Condensed → editor.py -->
-              <path pathLength="1" style="--i:3" marker-end="url(#cp-arrow-3)" d="M495,300 L585,300"/>
-              <path pathLength="1" style="--i:4" marker-end="url(#cp-arrow-3)" d="M755,300 L825,300"/>
-              <path pathLength="1" style="--i:5" marker-end="url(#cp-arrow-3)" d="M1025,300 L1110,300"/>
-              <path pathLength="1" style="--i:6" marker-end="url(#cp-arrow-3)" d="M1280,300 L1337,300"/>
-              <!-- editor.py → final caption -->
-              <path pathLength="1" style="--i:7" marker-end="url(#cp-arrow-3)" d="M1410,425 L1410,482"/>
-            </svg>
+            <button class="file" data-window="background" data-file="data/captioner/positions.json" style="--x: 80%; --y: 25%; --size: 8%">
+              <img src="images/dataset_captioner/positions.png" alt="">
+            </button>
 
-            <!-- inputs (from the View Pass) -->
-            <img class="cp-el cp-img" style="--x:50; --y:40;  --w:120; --h:130; --i:0"
-                 src="images/dataset_captioner/positions.png" alt="Positions">
-            <img class="cp-el cp-img" style="--x:50; --y:215; --w:120; --h:130; --i:0"
-                 src="images/dataset_captioner/spritesheet.png" alt="Spritesheet">
-            <img class="cp-el cp-img" style="--x:50; --y:390; --w:120; --h:130; --i:0"
-                 src="images/dataset_captioner/pallete.png" alt="Pallete">
-
-            <!-- qwen3 · Synthesizer -->
-            <div class="cp-el cp-group lm" style="--x:270; --y:70; --w:260; --h:460; --i:2">
-              <span class="cp-tag">qwen3:14b</span>
-            </div>
-            <div class="cp-el cp-block llm" style="--x:305; --y:235; --w:190; --h:130; --i:2">Synthesizer</div>
-
-            <img class="cp-el cp-img" style="--x:595; --y:232; --w:150; --h:136; --i:3"
-                 src="images/dataset_captioner/detailed.png" alt="Legenda detalhada">
-
-            <!-- qwen3 · Compressor -->
-            <div class="cp-el cp-group lm" style="--x:800; --y:70; --w:260; --h:460; --i:4">
-              <span class="cp-tag">qwen3:14b</span>
-            </div>
-            <div class="cp-el cp-block llm" style="--x:835; --y:235; --w:190; --h:130; --i:4">Compressor</div>
-
-            <img class="cp-el cp-img" style="--x:1120; --y:226; --w:150; --h:148; --i:5"
-                 src="images/dataset_captioner/condensed.png" alt="Legenda condensada">
-
-            <figure class="cp-el cp-fig" style="--x:1345; --y:230; --w:130; --h:185; --i:6; --fs:22">
-              <img src="images/dataset_captioner/python.png" alt="">
-              <figcaption class="cp-code">editor.py</figcaption>
-            </figure>
-
-            <div class="cp-el cp-caption" style="--x:1170; --y:492; --w:420; --h:140; --i:7; --fs:26">
-              pxchar, pixel art sprite sheet, ...
-            </div>
-            <p class="cp-el cp-label" style="--x:1170; --y:648; --w:420; --h:40; --i:7">Legenda final</p>
-          </div>
+            <button class="file" data-window="background" data-file="data/captioner/fullview.json" style="--x: 90%; --y: 25%; --size: 8%">
+              <img src="images/dataset_captioner/spritesheet.png" alt="">
+            </button>
         </div>
       </div>
-    </div>
+
+      <!-- ===================== PAGE 5: LANGUAGE PASS ===================== -->
+      <div class="pw-page">
+        <div class="center">
+          <p class="title-medium no-margin-top">Language Pass</p>
+        </div>
+        <div class="figure justify-center middle step-frame" style="--ratio: 3000 / 800;">
+            <img class="base-image" src="images/dataset_captioner/language-pass.png" alt="">
+            
+            <button class="file" data-window="background" data-file="data/captioner/synthesis.json" style="--x: 40%; --y: 33%; --size: 12%">
+              <img src="images/dataset_captioner/detailed.png" alt="">
+            </button>
+
+            <button class="file" data-window="background" data-file="data/captioner/compressed.json" style="--x: 62%; --y: 33%; --size: 12%">
+              <img src="images/dataset_captioner/condensed.png" alt="">
+            </button>
+
+
+        </div>
+      </div>
 
   </div>
 </section>

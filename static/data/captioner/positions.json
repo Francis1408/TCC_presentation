@@ -1,0 +1,247 @@
+{
+    "front": {
+        "position": "front",
+        "observations": {
+            "silhouette": {
+                "value": "broad shoulder width, waist narrows, chest outline curves out",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "pixel blocks show wide shoulders and curved chest contour"
+            },
+            "skin_tone": {
+                "value": "pale skin on face, neck, and hands",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "pale pixels continue unbroken from face to neck and hands"
+            },
+            "head": {
+                "value": "brown hair, no headgear, no facial hair",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown pixel blocks form hair above the face"
+            },
+            "eyes": {
+                "value": "blue irises with black pupils",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue and black pixel blocks form eye shape"
+            },
+            "body_features": {
+                "value": [],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "no wings, horns, tail, scales, or fur visible"
+            },
+            "body": {
+                "value": "blue sleeveless top with white trim",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue pixels cover torso with white pixel trim"
+            },
+            "extra_armor": {
+                "value": [
+                    "brown belt with yellow buckle"
+                ],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown pixel block with yellow pixel buckle at waist"
+            },
+            "lower": {
+                "value": "blue pants with white trim, black boots",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue and white pixels form pants, black pixels form boots"
+            },
+            "equipment": {
+                "value": [],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "no weapons or held objects visible"
+            }
+        }
+    },
+    "back": {
+        "position": "back",
+        "observations": {
+            "silhouette": {
+                "value": "broad shoulders, waist narrows, chest outline flat",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "pixel blocks form wide shoulder area, waistline dips, chest is flat without curve"
+            },
+            "skin_tone": {
+                "value": "brown skin on back of head and arms",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown pixels visible on scalp and upper arms behind clothing"
+            },
+            "head": {
+                "value": "brown hair with blue and white headband",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown hair pixels above blue and white checkered headband"
+            },
+            "eyes": {
+                "value": "UNKNOWN",
+                "visibility": "NOT_VISIBLE",
+                "evidence_quality": "not_applicable",
+                "evidence": "eyes not visible from back view"
+            },
+            "body_features": {
+                "value": [],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "no wings, horns, tail, scales, or fur visible"
+            },
+            "body": {
+                "value": "blue sleeveless top with white trim and red belt",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue pixel blocks form sleeveless torso with white and red accents"
+            },
+            "extra_armor": {
+                "value": [
+                    "brown belt",
+                    "black arm guards"
+                ],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown belt across waist, black pixel blocks on forearms"
+            },
+            "lower": {
+                "value": "black shorts with gray trim",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "black pixel blocks for shorts with gray trim at bottom"
+            },
+            "equipment": {
+                "value": [],
+                "visibility": "NOT_VISIBLE",
+                "evidence_quality": "not_applicable",
+                "evidence": "no weapons or held objects visible from back"
+            }
+        }
+    },
+    "left": {
+        "position": "left",
+        "observations": {
+            "silhouette": {
+                "value": "shoulder width slightly wider than hip width, waist narrows, chest outline curves out",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "pixelated outline shows shoulder broader than hip, waist pixel block is narrower than torso, chest pixels bulge outward"
+            },
+            "skin_tone": {
+                "value": "light brown skin on face, neck, and visible arm",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "pixels forming face and neck show consistent light brown tone without seam boundaries"
+            },
+            "head": {
+                "value": "brown hair with bangs, visible left ear",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown pixel blocks form hair covering head and left ear is visible as a small rounded shape"
+            },
+            "eyes": {
+                "value": "blue irises with black pupils",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "left eye shows blue pixel block with black pixel pupil centered"
+            },
+            "body_features": {
+                "value": [],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "no horns, tusks, wings, tail, scales, or fur visible in this pixel view"
+            },
+            "body": {
+                "value": "blue and white patterned shirt with brown trim",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue and white pixel blocks form the main torso covering with brown pixel trim along edges"
+            },
+            "extra_armor": {
+                "value": [],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "no pauldrons, bracers, gauntlets, belts, sashes, gorgets, or cloaks visible"
+            },
+            "lower": {
+                "value": "brown pants with black belt and light blue shoes",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown pixel blocks form pants, black pixel block forms belt, light blue pixels form shoes"
+            },
+            "equipment": {
+                "value": [
+                    "blue and white striped arm guard with red stripe on wrist"
+                ],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue and white pixel blocks form arm guard on left arm with red pixel stripe at wrist"
+            }
+        }
+    },
+    "right": {
+        "position": "right",
+        "observations": {
+            "silhouette": {
+                "value": "torso slightly wider than hips, waist narrows, chest outline curves outward",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "pixel blocks form a curved chest and narrowing waist"
+            },
+            "skin_tone": {
+                "value": "light brown skin on face, neck, and arms",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "light brown pixels on face and arms with no visible garment boundary"
+            },
+            "head": {
+                "value": "brown hair with light blue streaks, visible right ear",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown hair pixels and a distinct right ear shape"
+            },
+            "eyes": {
+                "value": "blue irises with black pupils",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue and black pixel blocks forming eye shape"
+            },
+            "body_features": {
+                "value": [],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "no horns, wings, tail, or other features visible"
+            },
+            "body": {
+                "value": "blue and white patterned top with brown trim",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue and white pixel blocks covering torso and arms"
+            },
+            "extra_armor": {
+                "value": [],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "no pauldrons, bracers, or belts visible"
+            },
+            "lower": {
+                "value": "brown pants with black belt and white trim",
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "brown pixel blocks for pants and black belt pixels"
+            },
+            "equipment": {
+                "value": [
+                    "blue and white striped arm guard with red tip"
+                ],
+                "visibility": "VISIBLE",
+                "evidence_quality": "clear",
+                "evidence": "blue, white, and red pixel blocks forming arm guard"
+            }
+        }
+    }
+}

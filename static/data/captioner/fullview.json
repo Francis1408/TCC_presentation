@@ -1,0 +1,63 @@
+{
+    "position": "full_sheet",
+    "observations": {
+        "silhouette": {
+            "value": "slender torso, shoulder width similar to hip width, waist slightly narrowing, chest outline flat, overall proportions elongated",
+            "visibility": "VISIBLE",
+            "evidence_quality": "clear",
+            "evidence": "all four views show consistent slender proportions"
+        },
+        "skin_tone": {
+            "value": "pale / white / cream on face, neck, hands, arms, legs, feet",
+            "visibility": "VISIBLE",
+            "evidence_quality": "clear",
+            "evidence": "all four views show pale skin on exposed areas"
+        },
+        "head": {
+            "value": "brown hair with bangs, no headgear, no facial hair, no ears visible",
+            "visibility": "VISIBLE",
+            "evidence_quality": "clear",
+            "evidence": "all four views show brown hair with bangs"
+        },
+        "eyes": {
+            "value": "blue irises with black pupils",
+            "visibility": "VISIBLE",
+            "evidence_quality": "clear",
+            "evidence": "all four views show blue irises with black pupils"
+        },
+        "body_features": {
+            "value": [],
+            "visibility": "NOT_VISIBLE",
+            "evidence_quality": "not_applicable",
+            "evidence": "no views show wings, tail, horns, tusks, scales, fur, or extra limbs"
+        },
+        "body": {
+            "value": "blue and white checkered shirt with brown belt",
+            "visibility": "VISIBLE",
+            "evidence_quality": "clear",
+            "evidence": "all four views show blue and white checkered shirt with brown belt"
+        },
+        "extra_armor": {
+            "value": [
+                "brown belt",
+                "black arm guards",
+                "white and blue checkered sleeves"
+            ],
+            "visibility": "VISIBLE",
+            "evidence_quality": "clear",
+            "evidence": "front view shows brown belt, side views show black arm guards, all views show white and blue checkered sleeves"
+        },
+        "lower": {
+            "value": "white pants with black trim and brown belt",
+            "visibility": "VISIBLE",
+            "evidence_quality": "clear",
+            "evidence": "all four views show white pants with black trim and brown belt"
+        },
+        "equipment": {
+            "value": [],
+            "visibility": "NOT_VISIBLE",
+            "evidence_quality": "not_applicable",
+            "evidence": "no views show weapons or held objects"
+        }
+    }
+}
