@@ -146,13 +146,25 @@ h1, h2{
 }
 .deck-counter { font-variant-numeric: tabular-nums; color: var(--text); }
 
-.capsule-bar {
+.capsule-bar, .secret-capsule-bar {
   --capsule-h: 30px;
 
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0;                         
+}
+
+.secret-capsule-bar, .secret-icon {
+  display: none;
+}
+
+.secret-capsule-bar.visible, .secret-icon.visible {
+  display: flex;
+}
+
+.capsule-bar.hidden, .normal-icon.hidden {
+  display: none;
 }
 
 .deck-footer .capsule {

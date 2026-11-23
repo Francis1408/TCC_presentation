@@ -12,6 +12,11 @@ import { renderFilePeek } from "./captioner.js";
   'use strict';
 
   const files = window.SLIDES || [];
+  const secretFiles = window.SECRET || [];
+  const totalSlides = secretFiles.length + files.length
+  let slidesToRender = files
+  let isInSecret = false;
+
   const cache = new Map();          // path -> Promise<html string>
   const warmed = new Set();         // image URLs already requested
   let current = -1;
@@ -21,11 +26,12 @@ import { renderFilePeek } from "./captioner.js";
   const titleEl = $('slide-title');
   const currentEl = $('slide-current');
   let capsuleFills = [];            // one fill <img> per slide (filled up to the current slide)
+  let secretCapsuleFills = [];
 
 
   /* ---------- Loading ---------- */
   function load(index) {
-    const path = files[index];
+    const path = slidesToRender[index];
     if (!cache.has(path)) {
       const promise = fetch(path).then((res) => {
         if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
@@ -39,7 +45,7 @@ import { renderFilePeek } from "./captioner.js";
 
 
   async function prefetch(index) {
-    if (index < 0 || index >= files.length) return;
+    if (index < 0 || index >= slidesToRender.length) return;
     try {
       const html = await load(index);
       const doc = new DOMParser().parseFromString(html, 'text/html');   // inert: runs nothing, loads nothing
@@ -67,15 +73,29 @@ import { renderFilePeek } from "./captioner.js";
       stage.innerHTML = '<div class="slide"><div class="slide-error">No slides listed in js/slides.config.js</div></div>';
       return;
     }
-    index = Math.max(0, Math.min(files.length - 1, index));
+
+    index = Math.max(0, Math.min(totalSlides - 1, index));
     if (index === current) return;
 
+    let renderIndex = index
+
+    // Switch between slides
+    if(index > files.length - 1) {
+      slidesToRender = secretFiles;
+      isInSecret = true;
+      renderIndex = index - files.length;
+    }
+    else {
+      slidesToRender = files;
+      isInSecret = false;
+    }
+    
     let html;
     try {
-      html = await load(index);
+      html = await load(renderIndex);
     } catch (err) {
       html = `<div class="slide-error">
-        <strong>Could not load ${files[index]}</strong><br>${err.message}<br><br>
+        <strong>Could not load ${slidesToRender[renderIndex]}</strong><br>${err.message}<br><br>
         Slides are loaded with fetch(), so open the deck through a local server
         (e.g. <code>npx serve</code> or <code>python -m http.server</code>), not by double-clicking index.html.
       </div>`;
@@ -114,8 +134,8 @@ import { renderFilePeek } from "./captioner.js";
     stage.dispatchEvent(new CustomEvent('slide:enter', { detail: { index, slide } }));
 
     
-    prefetch(index + 1);
-    prefetch(index - 1);
+    prefetch(renderIndex + 1);
+    prefetch(renderIndex - 1);
 
     renderIsland();
     renderLatentDisplay();
@@ -136,7 +156,14 @@ import { renderFilePeek } from "./captioner.js";
     if (currentEl) currentEl.textContent = n + 1;
 
     // capsules: filled up to (and including) the current slide, empty after it
-    capsuleFills.forEach((img, i) => img.classList.toggle('empty', i > n));
+    if(isInSecret) secretCapsuleFills.forEach((img, i) => img.classList.toggle('empty', i > n - files.length));
+    else capsuleFills.forEach((img, i) => img.classList.toggle('empty', i > n));
+
+    // the secret bar appears only on the secret slides
+    document.querySelector('.secret-capsule-bar')?.classList.toggle('visible', isInSecret);
+    document.querySelector('.secret-icon')?.classList.toggle('visible', isInSecret);
+    document.querySelector('.normal-icon')?.classList.toggle('hidden', isInSecret);
+    document.querySelector('.capsule-bar')?.classList.toggle('hidden', isInSecret);
 
     const t = slide.dataset.title || '';
     titleEl.textContent = t;
@@ -181,7 +208,6 @@ import { renderFilePeek } from "./captioner.js";
   });
 
   // Clicking inside an iframe steals keyboard focus. Clicking the header or
-  // footer gives it back to the deck so the arrows work again.
   document.querySelectorAll('.deck-header, .deck-footer').forEach((el) =>
     el.addEventListener('click', () => { document.activeElement?.blur(); window.focus(); })
   );
@@ -192,12 +218,11 @@ import { renderFilePeek } from "./captioner.js";
     if (!isNaN(n) && n !== current) show(n, n > current ? 1 : -1);
   });
 
-  // Public API, handy from slide scripts or the console
   window.deck = { next, prev, goTo: (n) => show(n - 1), get index() { return current + 1; }, total: files.length };
 
 
   /* ---------- Capsule progress bar ---------- */
-  function makeCapsule(base, fillSrc, index) {
+  function makeCapsule(base, fillSrc, index, isSecret) {
     const div = document.createElement('div');
     div.className = 'capsule';
     div.title = `Slide ${index + 1}`;
@@ -213,7 +238,7 @@ import { renderFilePeek } from "./captioner.js";
 
     div.append(outline, fillImg);
     div.addEventListener('click', () => show(index, index > current ? 1 : -1));
-    capsuleFills.push(fillImg);
+    isSecret ? secretCapsuleFills.push(fillImg) : capsuleFills.push(fillImg);
     return div;
   }
 
@@ -222,6 +247,7 @@ import { renderFilePeek } from "./captioner.js";
     if (!footer || files.length < 1) return;
 
     let row = footer.querySelector('.capsule-bar');
+    
     if (!row) {
       row = document.createElement('div');
       row.className = 'capsule-bar';
@@ -235,8 +261,28 @@ import { renderFilePeek } from "./captioner.js";
       let name = 'capsule';
       if (i === 0) name = 'capsule_start';
       else if (i === last) name = 'capsule_end';
-      row.append(makeCapsule(`images/${name}.png`, `images/${name}_fill.png`, i));
+      row.append(makeCapsule(`images/${name}.png`, `images/${name}_fill.png`, i, false));
     }
+
+    // Add secret rows
+    const lastSecret = secretFiles.length - 1;
+    secretCapsuleFills = [];
+
+    if (secretFiles.length > 0) {
+      let secretRow = document.createElement('div');
+      secretRow.className = 'secret-capsule-bar';
+      footer.append(secretRow);
+
+      for (let i = 0; i <= lastSecret; i++) {
+        let name = 'capsule';
+        let fill = 'secret'
+        if (i === 0) {name = 'capsule_start'; fill = 'secret_start';}
+        else if (i === lastSecret) {name = 'capsule_end'; fill = 'secret_end'}
+        secretRow.append(makeCapsule(`images/${name}.png`, `images/${fill}_fill.png`, files.length + i, true));
+      }
+    }
+
+
   }
 
 
