@@ -1,0 +1,68 @@
+<section data-title="Contextualização" class="column">
+
+  <div class="center">
+     <h2 class="heading">GrabCut</h2>
+  </div>
+
+  <div class="cols">
+
+    <!-- Column 1 -->
+    <div class="card">
+      <ul class="text-large">
+        <li>Retângulo inicial
+          <ul>
+            <li>Fora = Background</li>
+            <li>Dentro = Possível foreground</li>
+          </ul>
+        </li>
+        <li><mark class="highlighted">Gaussian Mixture Model(GMM)</mark>
+          <ul>
+            <li>Labeling dos pixels</li>
+            <li>Construção do grafo</li>
+          </ul>
+        </li>
+        <li>Grafo
+          <ul>
+            <li>Nodos = pixels</li>
+            <li>Arestas = probalidade do pixel ser fg ou bg</li>
+          </ul>
+        </li>
+        <li>Algoritmo Mincut</li>
+      </ul>
+      <div class="center">
+        <img class="img pixelated" style="box-shadow: none; width: 1000px;" src="images/grabcut/grabcut.png" alt="">
+      </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="card" style="display: grid; grid-template-columns: 1fr auto 1fr; justify-items: center; align-items: center; row-gap: 10px;">
+      <div class="center">
+        <img class="img img-xl pixelated" style="box-shadow: none;" src="images/grabcut/matrix-init.png" alt="">
+        <p class="text-large">Imagem com pixel separados</p>
+      </div>
+      <span></span>
+      <div class="center">
+        <img class="img img-xl pixelated" style="box-shadow: none;" src="images/grabcut/matrix-final.png" alt="">
+        <p class="text-large">Resultado da segmentação</p>
+      </div>
+
+
+      <img class="img img-sm rot-180 pixelated" src="images/arrow.png" alt="">
+      <span></span>
+      <img class="img img-sm pixelated" src="images/arrow.png" alt="">
+
+    
+      <div class="center">
+        <img class="img img-xl pixelated" style="box-shadow: none;" src="images/grabcut/segmentation.png" alt="">
+        <p class="text-large">Grafo</p>
+      </div>
+      <img class="img img-sm rot-90 pixelated" src="images/arrow.png" alt="">
+      <div class="center">
+        <img class="img img-xl pixelated" style="box-shadow: none;" src="images/grabcut/segmentation_final.png" alt="">
+        <p class="text-large">Corte</p>
+      </div>
+    </div>
+        
+
+  </div>
+</section>

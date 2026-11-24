@@ -406,6 +406,7 @@ h1, h2{
   padding: 24px;
 }
 
+
 .card.wild {
   background: var(--surface);
   border: 5px solid var(--border);
