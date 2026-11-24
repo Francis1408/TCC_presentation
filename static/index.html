@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="css/bulletin.css">
   <link rel="stylesheet" href="css/castle.css">
   <link rel="stylesheet" href="css/captioner.css">
+  <link rel="stylesheet" href="css/caption.css">
+  <link rel="stylesheet" href="css/lora.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 </head>
@@ -48,14 +50,18 @@
   <script type="module" src="js/island.js"></script>
   <!-- MathJax: inline \( ... \), display $$ ... $$ -->
   <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
-      },
-      svg: { fontCache: 'global' }
-    };
-  </script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      macros: {
+        C: ['\\overset{\\displaystyle\\color[RGB]{52,107,67}{#1}}{\\hphantom{-0.0}}', 1],
+        P: '\\hphantom{-}'
+      }
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
 </body>
 </html>

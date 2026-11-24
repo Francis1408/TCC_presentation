@@ -1,0 +1,93 @@
+/* ---------- arrows ---------- */
+.caption-prev, .caption-next {
+  flex: none;                          /* .cols must not squeeze them */
+  align-self: center;
+  width: clamp(64px, 6vw, 130px);      /* arrow size */
+  padding: 4px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.caption-prev img, .caption-next img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  image-rendering: pixelated;
+  transition: translate 120ms steps(2);
+}
+.caption-prev img { rotate: -90deg; }
+.caption-next img { rotate: 90deg; }
+.caption-prev:hover img { translate: -6px 0; }
+.caption-next:hover img { translate: 6px 0; }
+.caption-prev:focus-visible, .caption-next:focus-visible { outline: 2px dashed var(--accent); }
+
+/* ---------- card: text | image ---------- */
+.card.caption {
+  position: relative;                  /* the seal is placed on its corner */
+  display: flex;
+  align-items: center;                 /* text centred in the card's height */
+  gap: 4vw;
+  padding: 60px 50px 40px;
+}
+
+/* the caption: fills the space beside the image */
+.card.caption > p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(20px, 1.9vw, 46px);
+  line-height: 1.7;
+  text-align: left;
+  color: #000;
+}
+
+/* the sprite sheet */
+.card.caption > img {
+  flex: none;
+  width: clamp(320px, 36vw, 900px);
+  max-height: 70vh;
+  object-fit: contain;
+  image-rendering: pixelated;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* ---------- seal: a stamp on the top-left corner ---------- */
+.seal {
+  position: absolute;
+  top: -22px;
+  left: -22px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 12px;
+  background: #d9534f;
+  color: #fff;
+  border: 3px solid #14141c;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+  rotate: -6deg;
+  font-size: clamp(20px, 1.6vw, 36px);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.seal.good    { background: #5cb85c; }
+.seal.regular { background: #f0c040; color: #14141c; }
+.seal.bad     { background: #d9534f; }
+.seal p { margin: 0; font-size: inherit; color: inherit; }
+.seal img {
+  height: 1.4em;
+  width: auto;
+  box-shadow: none;                    
+  border-radius: 0;
+  image-rendering: pixelated;
+}
+
+/* ---------- highlighted words ---------- */
+.hl-good, .hl-bad {
+  padding: 0 0.2em;
+  font-weight: 700;
+}
+.hl-good { background: rgba(92, 184, 92, 0.35); color: #1e6b1e; }
+.hl-bad  { background: rgba(217, 83, 79, 0.30); color: #9b1c18; }

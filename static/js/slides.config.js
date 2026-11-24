@@ -38,7 +38,7 @@ window.SLIDES = [
 ];
 
 window.SECRET = [
-  'slides/26-end.html',
-  'slides/26-end.html',
-  'slides/26-end.html'
+  'slides/26-secret.html',
+  'slides/27-captions.html',
+  'slides/28-lora.html'
 ]

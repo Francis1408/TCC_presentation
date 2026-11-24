@@ -228,9 +228,9 @@ function positionMix(canvas, table, options = {}) {
  */
 
 const QUALITY = {
-  good:    { color: '#5cb85c', icon: 'images/happy.png' },
-  regular: { color: '#f0c040', icon: 'images/neutral.png' },
-  bad:     { color: '#d9534f', icon: 'images/sad.png' },
+  good:    { color: '#5cb85c', icon: 'images/good.png' },
+  regular: { color: '#f0c040', icon: 'images/regular.png' },
+  bad:     { color: '#d9534f', icon: 'images/bad.png' },
 };
 
 // loads an image; resolves to null if it can't be loaded

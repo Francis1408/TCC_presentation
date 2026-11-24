@@ -1,0 +1,148 @@
+<section data-title="Fine-tuning" class="column">
+
+  <!-- Row 1: title -->
+  <h2 class="heading">Low-Rank Adaptation (LoRA)</h2>
+
+  <!-- Row 2: top half (fills the free height) — the fragment covers exactly this area -->
+  <div class="fill eval-top">
+    
+    <div class="card lora" style="height: 100%; box-sizing: border-box;">
+      <div class="center">
+        <img class="pixelated lora-m" src="images/lora/y.png" alt="">
+        <p class="lora-y">\( \boldsymbol{y} \)</p>
+      </div>
+
+      <img class="pixelated lora-op" src="images/lora/equals.png" alt="">
+
+      <div class="center">
+        <img class="pixelated lora-m" src="images/lora/w0.png" alt="">
+        <p class="lora-w">\( \boldsymbol{W}_0 \)</p>
+      </div>
+
+      <div class="center">
+        <img class="pixelated lora-m" src="images/lora/x.png" alt="">
+        <p class="lora-x">\( \boldsymbol{x} \)</p>
+      </div>
+
+      <img class="pixelated lora-op" src="images/lora/plus.png" alt="">
+
+      
+      <div class="center">
+        <img class="pixelated lora-m" src="images/lora/wdelta.png" alt="">
+        <p class="lora-dw">\( \boldsymbol{W}_0 \)</p>
+      </div>
+
+      <div class="center">
+        <img class="pixelated lora-m" src="images/lora/x.png" alt="">
+        <p class="lora-x">\( \boldsymbol{x} \)</p>
+      </div>
+
+      <img class="pixelated lora-op rot-90 img img-xl" src="images/arrow.png" alt="">
+
+      <div class="center">
+        <img class="pixelated lora-m" src="images/lora/wprime.png" alt="">
+        <p class="lora-prime">\( \boldsymbol{W'} \)</p>
+      </div>
+
+      <div class="center">
+        <img class="pixelated lora-m" src="images/lora/x.png" alt="">
+        <p class="lora-x">\( \boldsymbol{x} \)</p>
+      </div>
+      
+    </div>
+
+    <div class="cap-edit fragment" style="padding: 0; background: none; border: 0; box-shadow: none;">
+      <div class="card lora" style="height: 100%; box-sizing: border-box;">
+        <div class="center">
+          <img class="pixelated lora-m" src="images/lora/y.png" alt="">
+          <p class="lora-y">\( \boldsymbol{y} \)</p>
+        </div>
+
+        <img class="pixelated lora-op" src="images/lora/equals.png" alt="">
+
+        <div class="center">
+          <img class="pixelated lora-m" src="images/lora/w0.png" alt="">
+          <p class="lora-w">\( \boldsymbol{W}_0 \)</p>
+        </div>
+
+        <div class="center">
+          <img class="pixelated lora-m" src="images/lora/x.png" alt="">
+          <p class="lora-x">\( \boldsymbol{x} \)</p>
+        </div>
+
+        <img class="pixelated lora-op" src="images/lora/plus.png" alt="">
+
+        <div class="lora-delta">
+          <div class="center">
+            <img class="pixelated lora-m" src="images/lora/b.png" alt="">
+            <p class="lora-b">\( \boldsymbol{B} \)</p>
+          </div>
+          <div class="center">
+            <img class="pixelated lora-a" style="rotate: 90deg;" src="images/lora/a.png" alt="">
+            <p class="lora-am">\( \boldsymbol{A} \)</p>
+          </div>
+          <div class="center">
+            <img class="pixelated lora-m" src="images/lora/x.png" alt="">
+            <p class="lora-x">\( \boldsymbol{x} \)</p>
+          </div>
+          <p class="lora-black">\( \class{lora-dw}{\Delta\boldsymbol{W}} = \class{lora-b}{\boldsymbol{B}}\class{lora-am}{\boldsymbol{A}} \)</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Row 3: bottom half (stays visible) -->
+  <div class="layout-2-1 fill">
+
+    <div class="card lg-margin-top center" style="font-size: 25px;">
+      $$
+      \begin{array}{c}
+      \begin{matrix}
+      \C{c_1} & \C{c_2} & \C{c_3} & \C{c_4} & \C{c_5} & \C{c_6}
+      \end{matrix} \\
+      \begin{bmatrix}
+      \P0.3 & \P0.1 & \P0.4 &  -0.2 & \P0.7 & \P0.1 \\
+      -0.4 & \P0.3 &  -0.1 & \P0.7 &  -0.5 &  -1.0 \\
+      \P0.1 &  -0.4 &  -0.3 &  -0.5 &  -0.2 & \P0.9 \\
+      \P0.5 & \P0.0 & \P0.5 &  -0.5 & \P1.0 & \P0.5 \\
+      -0.1 & \P0.4 & \P0.3 & \P0.5 & \P0.2 &  -0.9 \\
+      \P0.0 &  -0.2 &  -0.2 &  -0.2 &  -0.2 & \P0.4
+      \end{bmatrix}
+      \end{array}
+      =
+      \begin{array}{c}
+      \begin{matrix}
+      \C{c_1} & \C{c_2}
+      \end{matrix} \\
+      \begin{bmatrix}
+      \P0.3 & \P0.1 \\
+      -0.4 & \P0.3 \\
+      \P0.1 &  -0.4 \\
+      \P0.5 & \P0.0 \\
+      -0.1 & \P0.4 \\
+      \P0.0 &  -0.2
+      \end{bmatrix}
+      \end{array}
+      \begin{bmatrix}
+      \P1 & \P0 & \P1 &  -1 & \P2 & \P1 \\
+      \P0 & \P1 & \P1 & \P1 & \P1 &  -2
+      \end{bmatrix}
+      $$
+      <p class="text-large no-margin-top" style="color: hsl(32, 75%, 33%);">\( \text{Rank}\ r = 2 \)</p>
+    </div>
+
+    <div class="card lg-margin-top center" style="font-size: 50px; background-color: antiquewhite;">
+      <p>Modularidade</p>
+      <p class="lora-black">\(
+        \class{lora-y}{\boldsymbol{y}} =
+        \class{lora-w}{\boldsymbol{W}_0}\class{lora-x}{\boldsymbol{x}} +
+        \class{lora-b}{\boldsymbol{b}_1}\class{lora-am}{\boldsymbol{a}_1^{\top}}\class{lora-x}{\boldsymbol{x}} +
+        \class{lora-b}{\boldsymbol{b}_2}\class{lora-am}{\boldsymbol{a}_2^{\top}}\class{lora-x}{\boldsymbol{x}}
+      \)</p>
+    </div>
+
+
+  </div>
+    
+</section>

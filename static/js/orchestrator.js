@@ -7,6 +7,7 @@ import { renderMaskDisplay } from "./mask.js";
 import { renderCharts } from "./charts.js";
 import { renderVideoSpeed } from "./video.js";
 import { renderFilePeek } from "./captioner.js";
+import { renderCaptions } from "./captions.js";
 
 (function () {
   'use strict';
@@ -148,7 +149,8 @@ import { renderFilePeek } from "./captioner.js";
     renderVideoSpeed();
     renderCharts();
     renderSnapDisplay();
-    renderFilePeek()
+    renderFilePeek();
+    renderCaptions();
   }
 
   function updateChrome(slide) {

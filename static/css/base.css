@@ -406,6 +406,14 @@ h1, h2{
   padding: 24px;
 }
 
+.card.wild {
+  background: var(--surface);
+  border: 5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 10px 10px 10px #000000;
+}
+
 .card .accent { 
   color: var(--accent-2); 
   font-weight: 700;
@@ -427,7 +435,7 @@ h1, h2{
   border-radius: var(--radius);
 } */
 
-.card img:not([src*="images/arrow.png"], [src*="images/multiply.png"], [src*="images/arrow-reduced.png"], [src*="images/diffusion.png"], [src*="images/laurel.png"], [src*="images/trumpet.png"]) {
+.card img:not([src*="images/arrow.png"], [src*="images/multiply.png"], [src*="images/arrow-reduced.png"], [src*="images/diffusion.png"], [src*="images/laurel.png"], [src*="images/trumpet.png"], [src*="images/bad.png"], [src*="images/good.png"], [src*="images/regular.png"], [src*="images/lora/plus.png"], [src*="images/lora/equals.png"]) {
   box-shadow: 10px 10px 10px #000000;
   border-radius: var(--radius);
 }
