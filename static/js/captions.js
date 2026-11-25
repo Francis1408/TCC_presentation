@@ -28,7 +28,7 @@ const captions = [
         grade: 'good'
     },
     {
-        file: 'images/dataset_extra_captions/675.png',
+        file: 'images/dataset_extra_captions/679.png',
         caption: 'pxchar, pixel art sprite sheet, male humanoid, ' +
         'pale skin, <span class="hl-good">brown jacket with white inner lining and gold trim</span>, ' +
         'blue belt, spiky red hair, <span class="hl-good">gold goggles with black straps</span>, ' +

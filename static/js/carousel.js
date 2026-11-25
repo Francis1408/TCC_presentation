@@ -25,6 +25,8 @@ const MULTIPLE_IMAGE_SHOWS = {
     folder: 'dataset_results', seconds: 5 },
 
   'background-removal': { ids: ['snapped', 'snapped-rgba'], folder: 'dataset_bg_removal', seconds: 3 },
+  'sprite-seed': { ids: ['palette-snapped', 'palette-snapped-300', 'palette-snapped-1000', 'truth_rgba'],
+                   folder: 'dataset_seed', seconds: 3, metrics: 'data/seed' },
 };
 
 /* ---------- SHARED HELPERS ---------- */
@@ -169,10 +171,9 @@ async function buildSingleImageShow(elements, { folder, count, seconds, fade = 2
 export async function renderSingleImageShow() {
   for (const [name, config] of Object.entries(SINGLE_IMAGE_SHOWS)) {
     const ids = config.ids ?? [name];
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((el) => el && !el.dataset.ready);
-    if (!elements.length) continue;
+    const elements = ids.map((id) => document.getElementById(id));
+    // only when ALL of this show's divs are on the slide (ids can be shared between shows)
+    if (elements.some((el) => !el || el.dataset.ready)) continue;
     elements.forEach((el) => { el.dataset.ready = 'true'; });
 
     try {
@@ -189,39 +190,73 @@ export async function renderSingleImageShow() {
  * then the visible one fades out, swaps, and fades back in.
  */
 
+const metricsCache = new Map();   
+
+function loadMetrics(url) {
+  if (!metricsCache.has(url)) {
+    metricsCache.set(url, fetch(url)
+      .then((res) => (res.ok ? res.text() : null))
+      .then((text) => {
+        if (!text) return null;                       // no CSV for this id
+        const [header, ...lines] = text.trim().split(/\r?\n/);
+        const cols = header.split(',').map((c) => c.trim());
+        const at = (name) => cols.indexOf(name);
+        const table = {};
+        for (const line of lines) {
+          const cells = line.split(',');
+          const num = (cells[at('item')] || '').match(/\d+/)?.[0];
+          if (!num) continue;
+          table[num] = { lpips: Number(cells[at('LPIPS')]), mae: Number(cells[at('MAE')]) / 255 };
+        }
+        return table;
+      })
+      .catch(() => null));
+  }
+  return metricsCache.get(url);
+}
+
 function groupUrls(urls) {
-
   const groups = {};
-
   for (const url of urls) {
-
     const filename = url.split('/').pop().split('?')[0];
     const match = filename.match(/^(\d+)-(.+)\.png$/i);
     if (!match) continue;
-
-    const [, groupNum, id] = match;
-    (groups[groupNum] ??= {})[id] = url;
+    const [, groupNum, key] = match;
+    (groups[groupNum] ??= { num: groupNum })[key] = url;   // num: to find the metrics
   }
-
   return groups;
 }
 
-async function buildMultipleImageShow(elements, { seconds, fade = 250 }, groups) {
-  
+// file key of a div: data-key="snapped" → 263-snapped.png and snapped.csv (default: its id)
+const keyOf = (element) => element.dataset.key ?? element.id;
+
+async function buildMultipleImageShow(elements, { seconds, fade = 250 }, groups, metrics = {}) {
+
   let order = shuffle(Object.values(groups));
 
+  // "LPIPS 0.196 · MAE 0.073" for the group on screen (keeps its space when empty)
+  function setLabel(label, table, group) {
+    if (!label) return;
+    const m = table?.[group.num];
+    label.textContent = m ? `LPIPS ${m.lpips.toFixed(3)} · MAE ${m.mae.toFixed(3)}` : '';
+  }
+
   const imgs = elements.map((element) => {
-    element.classList.add('image-show');            // styles apply even if you forgot the class
+    element.classList.add('image-show');
     element.style.setProperty('--show-fade', `${fade}ms`);
     const img = document.createElement('img');
     img.alt = '';
-    img.src = order[0][element.id]; // Get the url from the matching div id
+    img.src = order[0][keyOf(element)];
     element.replaceChildren(img);
-    return {element, img};
+
+    // the <p class="show-metrics"> next to this div (same parent), if any
+    const label = element.parentElement?.querySelector('.show-metrics') ?? null;
+    const table = metrics[element.id];
+    setLabel(label, table, order[0]);
+    return { element, img, label, table };
   });
   if (order.length < 2) return;
 
-  // Hovering any of the divs pauses all of them
   let paused = false;
   for (const element of elements) {
     element.addEventListener('mouseenter', () => { paused = true; });
@@ -236,63 +271,66 @@ async function buildMultipleImageShow(elements, { seconds, fade = 250 }, groups)
     busy = true;
 
     index++;
-    if (index >= order.length) {           // went through all: reshuffle
-      index = 0;
+    if (index >= order.length) {
       const previous = order[order.length - 1];
       order = shuffle(Object.values(groups));
-      if (order[0] === previous) order.push(order.shift());   // avoid showing it twice in a row
+      if (order[0] === previous) order.push(order.shift());
       index = 0;
     }
 
     const group = order[index];
 
-    // 1. preload every image
     await Promise.all(
-        imgs.map(({ element }) => {
-          const url = group[element.id];
-          if (!url) return;
-          const preload = new Image();
-          preload.src = url;
-          return preload.decode().catch(() => {}); // broken image: show anyway
-        })
-      );
+      imgs.map(({ element }) => {
+        const url = group[keyOf(element)];
+        if (!url) return;
+        const preload = new Image();
+        preload.src = url;
+        return preload.decode().catch(() => {});
+      })
+    );
 
-    // 2. fade out, 3. swap, 4. fade in  (all divs together)
-    imgs.forEach(({ img }) => img.classList.add('hide'));
+    imgs.forEach(({ img, label }) => { img.classList.add('hide'); label?.classList.add('hide'); });
     await wait(fade);
-    imgs.forEach(({ element, img }) => {
-      const url = group[element.id];
-      if (url) img.src = url;              // keep the old image if this group lacks this id
+    imgs.forEach(({ element, img, label, table }) => {
+      const url = group[keyOf(element)];
+      if (url) img.src = url;
+      setLabel(label, table, group);        // values change together with the image
       img.classList.remove('hide');
+      label?.classList.remove('hide');
     });
 
     busy = false;
   }
 
   const timer = setInterval(() => {
-    // The slide was left (divs removed): stop the timer
     if (!elements.some((el) => document.contains(el))) return clearInterval(timer);
     next();
   }, seconds * 1000);
-
 }
 
 export async function renderMultipleImageShow() {
-
   for (const [name, config] of Object.entries(MULTIPLE_IMAGE_SHOWS)) {
     const ids = config.ids ?? [name];
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((el) => el && !el.dataset.ready);
-    if (!elements.length) continue;
+    const elements = ids.map((id) => document.getElementById(id));
+    // only when ALL of this show's divs are on the slide
+    if (elements.some((el) => !el || el.dataset.ready)) continue;
     elements.forEach((el) => { el.dataset.ready = 'true'; });
 
     try {
-      // All files (count would cut groups apart); groups are shuffled later
       const urls = await loadImageList(config.folder, null, false);
       const groups = groupUrls(urls);
       if (!Object.keys(groups).length) continue;
-      await buildMultipleImageShow(elements, config, groups);
+
+      // one CSV per div, named after its key (missing ones are skipped)
+      const metrics = {};
+      if (config.metrics) {
+        await Promise.all(elements.map(async (el) => {
+                    metrics[el.id] = await loadMetrics(`${config.metrics}/${el.dataset.csv ?? keyOf(el)}.csv`);
+        }));
+      }
+
+      await buildMultipleImageShow(elements, config, groups, metrics);
     } catch (err) {
       console.error(err);
     }

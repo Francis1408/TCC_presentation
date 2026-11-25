@@ -54,6 +54,7 @@
   width: 100%;
   height: var(--show-h);
   overflow: hidden;
+  position: relative;
 }
 
 .image-show > img {
@@ -64,6 +65,8 @@
   object-fit: contain;                
   image-rendering: pixelated;         
   transition: opacity var(--show-fade) steps(4);
+  box-shadow: none; 
+  border-radius: none;
 }
 .image-show > img.hide { opacity: 0; }
 
@@ -81,3 +84,12 @@
   height: auto;
   aspect-ratio: 1;
 }
+
+.show-metrics {
+  margin: 0.2em 0 0;
+  min-height: 1.4em;                         /* keeps its space while switching */
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(12px, 0.9vw, 20px);
+  transition: opacity var(--show-fade, 250ms);
+}
+.show-metrics.hide { opacity: 0; }

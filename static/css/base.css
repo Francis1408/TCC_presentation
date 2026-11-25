@@ -529,6 +529,7 @@ h1, h2{
 /* 8. RESULTS SHOWCASE ---------------------------------------------------------- */
 
 .eval-samples {
+  position: relative;
   display: flex;
   justify-content: center;
   gap: clamp(8px, 1vw, 16px);
