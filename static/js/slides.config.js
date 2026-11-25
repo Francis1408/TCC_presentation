@@ -35,6 +35,7 @@ window.SLIDES = [
   'slides/23-caption-relationship.html',
   'slides/24-future-works.html',
   'slides/25-end.html',
+  'slides/26-end-cover.html'
 ];
 
 window.SECRET = [

@@ -1,5 +1,5 @@
 
-<section data-title="Fine-tuning" class="column">
+<section data-title="Seeds" class="column">
 
   <div class="center">
      <h2 class="heading">Influência da seed</h2>
@@ -11,7 +11,7 @@
 
         <div>
           <div id="palette-snapped" data-csv="palette-snapped" class="image-show square" style="--show-h: 350px;"></div>
-          <p class="center text-large">Seed: 32</p>
+          <p class="center text-large">Seed: 42</p>
           <p class="center show-metrics"></p>
         </div>
 
@@ -37,8 +37,26 @@
   </div>
 
 
-  <div class="card" style="background-color: antiquewhite;">
-  <p>adasda</p>
+  <div class="card" style="background-color: antiquewhite; margin: 0 20%">
+    <figure class="table-figure">
+        <figcaption>Tabela 11 – Média de resultados por seed (30 imagens) </figcaption>
+        <table class="table-academic">
+          <thead style="font-size: 35px;">
+            <tr>
+              <th>Seed</th>
+              <th>LPIPS</th>
+              <th>MAE</th>
+              
+            </tr>
+          </thead>
+          <tbody style="font-size: 30px;">
+            <tr><td>42</td><td class="num">0.30256</td><td class="num">0.14246</td></tr>
+            <tr><td>300</td><td class="num">0.30200</td><td class="num">0.14470</td></tr>
+            <tr><td>1000</td><td class="num">0.30199</td><td class="num">0.14662</td></tr>
+          </tbody>
+        </table>
+        <p class="table-source" style="font-size: 20px;">Fonte: Do autor (2026).</p>
+      </figure>
   </div>
 
 </section>

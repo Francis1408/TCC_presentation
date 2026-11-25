@@ -87,9 +87,24 @@
 
 .show-metrics {
   margin: 0.2em 0 0;
-  min-height: 1.4em;                         /* keeps its space while switching */
+  min-height: 1.4em;                        
   font-family: var(--font-mono, monospace);
   font-size: clamp(12px, 0.9vw, 20px);
   transition: opacity var(--show-fade, 250ms);
 }
 .show-metrics.hide { opacity: 0; }
+
+
+.image-show.stack {
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 6px;
+  height: auto;
+  aspect-ratio: auto;           
+  overflow: visible;
+}
+.image-show.stack > img {
+  flex: none;
+  height: auto;
+  aspect-ratio: 1;
+}

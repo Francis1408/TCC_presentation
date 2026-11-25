@@ -3,18 +3,18 @@ let captionIndex = 0;
 const captions = [
     {
         file: 'images/dataset_extra_captions/2.png',
-        caption: 'pxchar, pixel art sprite sheet, male humanoid, pale skin, ' +
+        caption: 'pxchar, pixel art sprite sheet, male humanoid, <span class="hl-bad">pale skin</span>, ' +
         'gray sleeveless armor, gold pauldron, brown shoulder strap with yellow buckle, ' +
         'yellow trim on left shoulder armor, large helmet with visor, yellow accents, ' +
-        'dark gray body, white eyes, dark pupil, <span class="hl-bad">bare legs and feet</span>, <span class="hl-bad">pale skin</span>, ' +
-        'red-brown footwear, golden axe, golden and brown staff',
+        'dark gray body, <span class="hl-bad">white eyes</span>, <span class="hl-bad">dark pupil</span>, bare legs and feet</span>, <span class="hl-bad">pale skin</span>, ' +
+        '<span class="hl-bad">red-brown footwear</span>, <span class="hl-bad">golden axe</span>, <span class="hl-bad">golden and brown staff</span>',
         grade: 'bad'
     },
     {
         file: 'images/dataset_extra_captions/185.png',
         caption: 'pxchar, pixel art sprite sheet, humanoid, pale skin, ' +
-        'blue uniform with white trim on collar and cuffs, black tie, ' +
-        '<span class="hl-bad">purple bracer, purple gauntlet</span>, green short rounded hair, ' +
+        '<span class="hl-bad">blue uniform with white trim on collar and cuffs </span>, black tie, ' +
+        'purple bracer, purple gauntlet, <span class="hl-bad">green short</span>, rounded hair, ' +
         'purple headgear, visible ears, blue eyes, dark pupils, ' +
         '<span class="hl-bad">blue uniform with white trim on upper legs</span>, purple leggings, brown boots with white accents',
         grade: 'bad'
@@ -22,7 +22,7 @@ const captions = [
     {
         file: 'images/dataset_extra_captions/228.png',
         caption: 'pxchar, pixel art sprite sheet, humanoid, pale skin, ' +
-        '<span class="hl-good">green sleeveless tunic</span>, beige undershirt, brown belt, ' +
+        '<span class="hl-good">green sleeveless tunic</span>, <span class="hl-good">beige undershirt</span>, brown belt, ' +
         'brown arm guards, <span class="hl-good">short spiky purple hair</span>, blue eyes, ' +
         'black pupils, brown shorts with black trim, brown boots',
         grade: 'good'
@@ -39,17 +39,17 @@ const captions = [
         file: 'images/dataset_extra_captions/0.png',
         caption: 'pxchar, pixel art sprite sheet, humanoid, gray skin, ' +
         'gray armor, brown shoulder pads, brown belt with cream, ' +
-        '<span class="hl-bad">light gray, or white buckle</span>, dark gray shoulder armor, ' +
-        'helmet with visor, <span class="hl-good">black pigtails</span>, white eyes, black pupils, ' +
-        'gray armor on legs and feet, dark gray accents on knees and feet, black weapon',
+        '<span class="hl-good">light gray, or white buckle</span>, dark gray shoulder armor, ' +
+        'helmet with visor, <span class="hl-good">black pigtails</span>, <span class="hl-bad">white eyes</span>, <span class="hl-bad">black pupils</span>, ' +
+        '<span class="hl-bad">gray armor on legs and feet</span>, dark gray accents on knees and feet, black weapon',
         grade: 'regular'
     },
     {
         file: 'images/dataset_extra_captions/717.png',
         caption: 'pxchar, pixel art sprite sheet, humanoid female, pale skin, ' +
-        '<span class="hl-good">pink sleeveless dress with black trim</span>, black belt with silver buckle, ' +
+        '<span class="hl-good">pink sleeveless dress with black trim</span>, <span class="hl-bad">black belt with silver buckle</span>, ' +
         'blue hair, pink and purple headband, visible ears, yellow eyes, ' +
-        '<span class="hl-bad">white pupils</span>, pink and purple legs with black trim, <span class="hl-bad">brown with pink trim at waist and ankle</span>',
+        'white pupils, <span class="hl-bad">pink and purple legs with black trim</span>, brown with pink trim at waist and ankle',
         grade: 'regular'
     }
 ];
